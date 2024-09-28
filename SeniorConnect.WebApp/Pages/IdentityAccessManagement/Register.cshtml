@@ -6,20 +6,20 @@
 <header class="content-header">@ViewData["Title"]</header>
 <div class="form-container">
     <form method="POST">
-        <label @* asp-for="firstName" *@ >First Name:</label><br>
-        <input type="text" name="firstName" />
+        <label >First Name:</label>
+        <input asp-for="Registration.FirstName" />
 
-        <label for="lastName">Last Name:</label>
-        <input type="text" name="lastName" required><br><br>
+        <label>Last Name:</label>
+        <input asp-for="Registration.LastName" required>
 
-        <label for="email">Email:</label><br>
-        <input type="email" name="email" required><br><br>
+        <label for="email">Email:</label>
+        <input asp-for="Registration.EmailAddress" />
 
-        <label for="password">Password:</label><br>
-        <input type="password" name="password" required><br><br>
+        <label for="password">Password:</label>
+        <input asp-for="Registration.Password" />
 
-        <label for="confirmPassword">Confirm Password:</label><br>
-        <input type="password" name="confirmPassword" required><br><br>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input asp-for="Registration.ConfirmPassword" />
 
         <input type="submit" value="Submit">
         <button type="button" onclick="window.location.href='login.html'">Return to Login</button>
