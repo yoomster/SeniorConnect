@@ -19,6 +19,9 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
             {
                 return Page();
             }
+
+            // process data > DB SQL Server
+
             return RedirectToPage("Login");
         }
     }

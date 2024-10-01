@@ -5,23 +5,41 @@
 }
 <header class="content-header">@ViewData["Title"]</header>
 <div class="form-container">
-    <form method="POST">
+    <form method="post">
         <label >First Name:</label> 
-        <input asp-for="Registration.FirstName" /> <br></br>
+        <input asp-for="Registration.FirstName" /> 
+        <span asp-validation-for="Registration.FirstName" class="text-danger"></span> <br></br>
+
 
         <label>Last Name:</label>
-        <input asp-for="Registration.LastName" required> <br></br>
+        <span asp-validation-for="Registration.LastName"></span>
+        <input asp-for="Registration.LastName"> 
+        <span asp-validation-for="Registration.LastName" class="text-danger"></span> <br></br>
+
 
         <label>Email:</label>
-        <input asp-for="Registration.EmailAddress" /> <br></br>
+        <span asp-validation-for="Registration.EmailAddress"></span>
+        <input asp-for="Registration.EmailAddress" />         
+        <span asp-validation-for="Registration.EmailAddress" class="text-danger"></span> <br></br>
+
 
         <label>Password:</label>
-        <input asp-for="Registration.Password" /> <br></br>
+        <input asp-for="Registration.Password" />
+        <span asp-validation-for="Registration.Password" class="text-danger"></span> <br></br>
+
 
         <label>Confirm Password:</label>
-        <input asp-for="Registration.ConfirmPassword" /> <br></br>
+        <input asp-for="Registration.ConfirmPassword" />
+        <span asp-validation-for="Registration.ConfirmPassword" class="text-danger"></span> <br></br>
+
 
         <input type="submit" value="Submit">
         <button type="button" onclick="window.location.href='login.html'">Return to Login</button>
     </form>
 </div>
+
+
+@* ADD CLIENT SIDE VALIDATION, POSSIBLY BY ADDING JS... bestaande libraries
+@section Scripts{}
+ *@
+    
