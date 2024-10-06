@@ -6,7 +6,7 @@
 <header class="content-header">@ViewData["Title"]</header>
 <div class="form-container">
     <form method="post">
-        <label >First Name:</label> 
+        <label asp-for="Registration.FirstName">First Name:</label> 
         <input asp-for="Registration.FirstName" /> 
         <span asp-validation-for="Registration.FirstName" class="text-danger"></span> <br></br>
 
