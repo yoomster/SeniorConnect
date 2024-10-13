@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Users.sql" />
+    <Build Include="Activity.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SeniorConnect.SQLServerDB.refactorlog" />
