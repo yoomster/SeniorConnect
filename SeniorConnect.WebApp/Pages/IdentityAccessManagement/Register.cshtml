@@ -33,8 +33,11 @@
         <span asp-validation-for="Registration.ConfirmPassword" class="text-danger"></span> <br></br>
 
 
-        <input type="submit" value="Submit">
-        <button type="button" onclick="window.location.href='login.html'">Return to Login</button>
+        <input type="submit" value="Submit"> </<br /><br /> <br />
+
+        <label>Already registered? Please click the button to login</label> </br>
+        <button type="button" onclick="location.href='@Url.Page("/IdentityAccessManagement/Login")'">Return to Login</button>
+
     </form>
 </div>
 
