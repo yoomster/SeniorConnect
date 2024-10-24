@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreDomain
 {
-    public class MentorProgramModel
+    public class Participant
     {
     }
 }

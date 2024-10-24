@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreDomain
 {
-    public class ForumModel
+    public class Admin
     {
     }
 }

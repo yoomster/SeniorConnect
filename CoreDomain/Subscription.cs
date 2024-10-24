@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreDomain
 {
-    public class ActivityModel
+    public class Subscription
     {
-
     }
 }
