@@ -8,5 +8,8 @@ namespace CoreDomain
 {
     public class Event
     {
+        private readonly Guid _locationId;
+        private readonly Guid _EventCoordinatorId;
+        private readonly List<Guid> _participants;
     }
 }

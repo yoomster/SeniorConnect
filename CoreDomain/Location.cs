@@ -8,5 +8,7 @@ namespace CoreDomain
 {
     public class Location
     {
+        private readonly Guid _id;
+        private readonly List<Guid> _eventIds;
     }
 }
