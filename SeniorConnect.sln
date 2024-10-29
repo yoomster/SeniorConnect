@@ -5,9 +5,11 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeniorConnect.WebApp", "SeniorConnect.WebApp\SeniorConnect.WebApp.csproj", "{4EB07BB5-F4E7-475A-9DFB-C653E9131665}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreDomain", "CoreDomain\CoreDomain.csproj", "{55C320ED-0B6B-45C7-8E6F-9D388C8771F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeniorConnect.Domain", "CoreDomain\SeniorConnect.Domain.csproj", "{55C320ED-0B6B-45C7-8E6F-9D388C8771F4}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SeniorConnect.SQLServerDB", "SeniorConnect.SQLServerDB\SeniorConnect.SQLServerDB.sqlproj", "{B5995BD4-C3E3-4BB6-AC81-ECA6C178D367}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeniorConnect.Tests", "SeniosConnect.Tests\SeniorConnect.Tests.csproj", "{E1AFCF40-B798-43F7-829B-CB92CFAF9C6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{B5995BD4-C3E3-4BB6-AC81-ECA6C178D367}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5995BD4-C3E3-4BB6-AC81-ECA6C178D367}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B5995BD4-C3E3-4BB6-AC81-ECA6C178D367}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E1AFCF40-B798-43F7-829B-CB92CFAF9C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1AFCF40-B798-43F7-829B-CB92CFAF9C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1AFCF40-B798-43F7-829B-CB92CFAF9C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1AFCF40-B798-43F7-829B-CB92CFAF9C6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoreDomain\CoreDomain.csproj" />
+    <ProjectReference Include="..\CoreDomain\SeniorConnect.Domain.csproj" />
+    <ProjectReference Include="..\SeniorConnect.SQLServerDB\SeniorConnect.SQLServerDB.sqlproj" />
+    <ProjectReference Include="..\SeniosConnect.Tests\SeniorConnect.Tests.csproj" />
   </ItemGroup>
 
 </Project>
