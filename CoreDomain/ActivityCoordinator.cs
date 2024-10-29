@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CoreDomain
 {
-    public class EventCoordinator
+    public class ActivityCoordinator
     {
         private readonly Guid _id;
         private readonly Guid _userId;
-        private readonly List <Guid> _eventIds;
+        private readonly List <Guid> _activityIds;
 
     }
 }

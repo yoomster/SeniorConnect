@@ -11,7 +11,7 @@ namespace CoreDomain
         private readonly Guid _id;
         private readonly Guid _userId;
         private readonly Guid _subscriptionId;
-        private readonly List<Guid> _eventIds;
+        private readonly List<Guid> _activityIds;
 
     }
 }
