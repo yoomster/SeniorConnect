@@ -1,0 +1,21 @@
+﻿@page
+@model SeniorConnect.WebApp.Pages.IdentityAccessManagement.LoginModel
+@{
+    //https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-8.0&tabs=visual-studio
+    
+    ViewData["Title"] = "Login";
+}
+<header class="content-header">@ViewData["Title"]</header>
+<div class="form-container">
+    <form method="POST">
+        <label for="email">Email:</label>
+        <input />
+
+        <label for="password">Password:</label>
+        <input /> <br /> <br />
+
+        <label>Are you new here? Please click the button to register</label> </br>
+        <button type="button" onclick="location.href='@Url.Page("/IdentityAccessManagement/Register")'">Register</button>
+        
+    </form>
+</div>
