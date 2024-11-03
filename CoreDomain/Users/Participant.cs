@@ -18,5 +18,10 @@ namespace SeniorConnect.Domain.Users
             _id = id ?? Guid.NewGuid();
         }
 
+        public void AddActivityToList(Guid guid)
+        {
+            //verification needed?
+            _activityIds.Add(guid);
+        }
     }
 }
