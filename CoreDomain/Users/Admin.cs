@@ -12,8 +12,6 @@ namespace SeniorConnect.Domain.Users
         private readonly Guid _userId;
         private readonly Guid _subscriptionId;
 
-        public bool Dikkop { get; set; }
-
     }
     
 }
