@@ -10,6 +10,9 @@ namespace SeniorConnect.Domain.Activity
 {
     public class Activity
     {
+        private readonly DateOnly _date;
+        private readonly TimeOnly _startTime;
+        private readonly TimeOnly _endTime;
         private readonly Guid _id;
         private readonly int _maxParticipants;
         private readonly Guid _activityCoordinatorId;
@@ -18,21 +21,28 @@ namespace SeniorConnect.Domain.Activity
 
 
         public Activity(
+            DateOnly date,
+            TimeOnly startTime,
+            TimeOnly endTime,
             int maxParticipants,
             Guid activityCoordinatorId,
             Guid locationId,
             Guid? id = null )
         {
+            _date = date;
+            _startTime = startTime;
+            _endTime = endTime;
             _id = id ?? Guid.NewGuid();
             _maxParticipants = maxParticipants;
             _activityCoordinatorId = activityCoordinatorId;
             _locationId = locationId;
         }
 
-        //public Activity(int maxParticipants)
-        //{
-        //    _maxParticipants = maxParticipants;
-        //}
+        public void CancelReservation(Participant participant)
+        {
+            //check if allowed
+            //session time - current time <24h
+        }
 
 
 
@@ -42,7 +52,7 @@ namespace SeniorConnect.Domain.Activity
 
             if (_participants.Count() >= _maxParticipants)
             {
-                //The system displays a message indicating that the activity is full. 
+                //todo: he system displays a message indicating that the activity is full. 
                 throw new InvalidOperationException ("maximum participants reached");
             }
             else
