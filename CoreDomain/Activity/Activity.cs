@@ -40,8 +40,15 @@ namespace SeniorConnect.Domain.Activity
 
         public void CancelReservation(Participant participant)
         {
-            //check if allowed
-            //session time - current time <24h
+            var utcTimeNow = DateTime.UtcNow;
+            const int minHours = 24;
+            bool canNotCancel = (_date.ToDateTime(_startTime) - utcTimeNow).TotalHours < minHours;
+
+            if (canNotCancel)
+            {
+                //button for canceling reservation is disabled
+                throw new Exception("Cannot cancel reservation too close to session");
+            }
         }
 
 
