@@ -3,22 +3,34 @@
     public static class ActivityFactory
     {
         public static Activity CreateActivity(
-            DateOnly? date = null,
-            TimeOnly? startTime = null,
-            TimeOnly? endTime = null,
-            int maxParticipants = Activity.MaxParticipants,
-            Guid? activityCoordinatorId = null,
-            Guid? locationId = null,
-            Guid? id = null)
+            DateOnly dateOfActivity,
+            TimeOnly startTime,
+            TimeOnly endTime,
+            int maxParticipants,
+            Guid locationId,
+            Guid activityCoordinatorId
+            )
         {
-            return new Activity {
-            date ?? Activity.Date,
-            startTime ?? Activity.StartTime,
-            endTime ?? Activity.Activity.EndTime,
+            return new Activity(
+            dateOfActivity,
+            startTime,
+            endTime,
             maxParticipants,
-            ActivityCoordinatiorId
-            id: id ?? Activity.Id;
-            };
+            ActivityCoordinatorId.From(activityCoordinatorId),
+            LocationId.From(locationId)
+            );
         }
     }
+}
+
+public record struct LocationId(Guid Value)
+{
+    public static LocationId From(Guid value) =>
+        new LocationId(value);
+}
+
+public record struct ActivityCoordinatorId(Guid Value)
+{
+    public static ActivityCoordinatorId From(Guid value) =>
+        new ActivityCoordinatorId(value);
 }
