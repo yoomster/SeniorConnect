@@ -6,13 +6,17 @@ namespace SeniorConnect.Tests
 {
     public class ActivityTests
     {
-       
+
+        Activity activity = new Activity(1, Guid.NewGuid(), Guid.NewGuid());
+
+        Participant participant1 = new Participant(Guid.NewGuid());
+
+
         [Fact]
         public void ReserveSpot_ShouldFailReservation_WhenNoMoreRoom()
         {
             //Arrange
-            var activity = ActivityFactory.CreateActivity();
-                //new Activity(1, Guid.NewGuid(), Guid.NewGuid());
+            //var activity = ActivityFactory.CreateActivity();
 
             var participant1 = new Participant (Guid.NewGuid());
             var participant2 = new Participant(Guid.NewGuid());
@@ -32,7 +36,7 @@ namespace SeniorConnect.Tests
             //create activity
             //create participant
             //Reserve a spot 
-            var activity = new Activity(1, Guid.NewGuid(), Guid.NewGuid());
+            //var activity = new Activity(1, Guid.NewGuid(), Guid.NewGuid());
 
             var participant = new Participant(Guid.NewGuid());
 
