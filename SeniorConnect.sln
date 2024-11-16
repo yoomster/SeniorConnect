@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeniorConnect.Domain", "Cor
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SeniorConnect.SQLServerDB", "SeniorConnect.SQLServerDB\SeniorConnect.SQLServerDB.sqlproj", "{B5995BD4-C3E3-4BB6-AC81-ECA6C178D367}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeniorConnect.Tests", "SeniosConnect.Tests\SeniorConnect.Tests.csproj", "{E1AFCF40-B798-43F7-829B-CB92CFAF9C6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeniorConnect.Tests", "SeniosConnect.Tests\SeniorConnect.Tests.csproj", "{E1AFCF40-B798-43F7-829B-CB92CFAF9C6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeniorConnect.DataAccesLibrary", "SeniorConnect.DataAccesLibrary\SeniorConnect.DataAccesLibrary.csproj", "{9384C7BC-BC58-4C8E-92C3-7DE24FFC2217}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{E1AFCF40-B798-43F7-829B-CB92CFAF9C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1AFCF40-B798-43F7-829B-CB92CFAF9C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1AFCF40-B798-43F7-829B-CB92CFAF9C6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9384C7BC-BC58-4C8E-92C3-7DE24FFC2217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9384C7BC-BC58-4C8E-92C3-7DE24FFC2217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9384C7BC-BC58-4C8E-92C3-7DE24FFC2217}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9384C7BC-BC58-4C8E-92C3-7DE24FFC2217}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

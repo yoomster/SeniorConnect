@@ -4,12 +4,12 @@ namespace SeniorConnect.Domain.Activity;
 
 public class Activity
 {
+    private readonly Guid _id;
     private readonly string _name;
     private readonly string _description;
     private readonly DateOnly _date;
     private readonly TimeOnly _startTime;
     private readonly TimeOnly _endTime;
-    private readonly Guid _id;
     private readonly int _maxParticipants;
     private readonly ActivityCoordinatorId _activityCoordinatorId;
     private readonly List<Participant> _participants = new();
