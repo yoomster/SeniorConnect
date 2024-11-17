@@ -7,8 +7,8 @@
             TimeOnly startTime,
             TimeOnly endTime,
             int maxParticipants,
-            Guid locationId,
-            Guid activityCoordinatorId
+            int locationId,
+            int activityCoordinatorId
             )
         {
             return new Activity(
@@ -23,14 +23,14 @@
     }
 }
 
-public record struct LocationId(Guid Value)
+public record struct LocationId(int Value)
 {
-    public static LocationId From(Guid value) =>
+    public static LocationId From(int value) =>
         new LocationId(value);
 }
 
-public record struct ActivityCoordinatorId(Guid Value)
+public record struct ActivityCoordinatorId(int Value)
 {
-    public static ActivityCoordinatorId From(Guid value) =>
+    public static ActivityCoordinatorId From(int value) =>
         new ActivityCoordinatorId(value);
 }

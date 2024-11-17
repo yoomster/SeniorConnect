@@ -8,20 +8,15 @@ namespace SeniorConnect.Domain.Users
 {
     public class Participant
     {
-        private readonly Guid _id;
-        private readonly Guid _userId;
-        private readonly Guid _subscriptionId;
-        private readonly List<Guid> _activityIds = new();
+        private readonly int _id;
+        private readonly int _userId;
+        private readonly int _subscriptionId;
+        private readonly List<int> _activityIds = new();
 
-        public Participant(Guid? id = null)
+        public void AddActivityToList (int id)
         {
-            _id = id ?? Guid.NewGuid();
-        }
-
-        public void AddActivityToList(Guid guid)
-        {
-            //verification needed?
-            _activityIds.Add(guid);
+            //verification needed
+            _activityIds.Add(id);
         }
     }
 }

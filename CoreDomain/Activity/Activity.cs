@@ -4,7 +4,7 @@ namespace SeniorConnect.Domain.Activity;
 
 public class Activity
 {
-    private readonly Guid _id;
+    private readonly int _id;
     private readonly string _name;
     private readonly string _description;
     private readonly DateOnly _date;
@@ -42,8 +42,6 @@ public class Activity
 
     public void ReserveSpot(Participant participant)
     {
-        //bool isFullyBooked;
-
         if (_participants.Count() >= _maxParticipants)
         {
             //todo: he system displays a message indicating that the activity is full. 

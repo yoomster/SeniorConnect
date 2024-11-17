@@ -8,7 +8,7 @@ namespace CoreDomain.Users;
 
 public class User
 {
-    private readonly Guid _id;
+    public int Id;
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
     public required string Email { get; set; }

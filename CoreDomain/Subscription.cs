@@ -8,7 +8,7 @@ namespace CoreDomain
 {
     public class Subscription
     {
-        private readonly Guid _id;
+        private readonly int _id;
 
     }
 }
