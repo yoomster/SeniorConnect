@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Activity]
 (
-	[ActivityId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+	[ActivityId] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Name] NVARCHAR(50) NOT NULL, 
     [Description] NVARCHAR(500) NULL, 
     [Date] DATE NOT NULL, 
