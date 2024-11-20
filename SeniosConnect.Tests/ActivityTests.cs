@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using FluentAssertions.Common;
 using SeniorConnect.Domain.Activity;
 using SeniorConnect.Domain.Users;
 
@@ -6,14 +7,26 @@ namespace SeniorConnect.Tests
 {
     public class ActivityTests
     {
+
+        //Activity activity = new Activity();
+
+        Participant participant1 = new Participant();
+
         [Fact]
         public void ReserveSpot_ShouldFailReservation_WhenNoMoreRoom()
         {
             //Arrange
-            var activity = ActivityFactory.CreateActivity(maxParticipants: 1);
+            var dateOfActivity = DateOnly.Parse("2024-12-01");
+            var startTime = TimeOnly.Parse("10:00");
+            var endTime = TimeOnly.Parse("12:00");
+            int maxParticipants = 1;  
+            int locationId = 100;
+            int activityCoordinatorId = 200;
 
-            var participant1 = new Participant(id: Guid.NewGuid());
-            var participant2 = new Participant(id: Guid.NewGuid());
+            var activity = ActivityFactory.CreateActivity(dateOfActivity, startTime, endTime, maxParticipants, locationId, activityCoordinatorId);
+
+            var participant1 = new Participant();
+            var participant2 = new Participant();
 
             //Act
             activity.ReserveSpot(participant1);
@@ -35,7 +48,7 @@ namespace SeniorConnect.Tests
                 startTime: TimeOnly.Parse("22:00"),
                 endTime: TimeOnly.Parse("23:00"));
 
-            var participant = new Participant(Guid.NewGuid());
+            var participant = new Participant();
 
             activity.ReserveSpot(participant);
 

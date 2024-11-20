@@ -8,9 +8,9 @@ namespace SeniorConnect.Domain.Activity
 {
     public class ActivityCoordinator
     {
-        private readonly Guid _id;
-        private readonly Guid _userId;
-        private readonly List<Guid> _activityIds = new();
+        private readonly int _id;
+        private readonly int _userId;
+        private readonly List<int> _activityIds = new();
 
     }
 }
