@@ -6,16 +6,14 @@ namespace SeniorConnect.Tests
 {
     public class ActivityTests
     {
-       
         [Fact]
         public void ReserveSpot_ShouldFailReservation_WhenNoMoreRoom()
         {
             //Arrange
-            var activity = ActivityFactory.CreateActivity();
-                //new Activity(1, Guid.NewGuid(), Guid.NewGuid());
+            var activity = ActivityFactory.CreateActivity(maxParticipants: 1);
 
-            var participant1 = new Participant (Guid.NewGuid());
-            var participant2 = new Participant(Guid.NewGuid());
+            var participant1 = new Participant(id: Guid.NewGuid());
+            var participant2 = new Participant(id: Guid.NewGuid());
 
             //Act
             activity.ReserveSpot(participant1);
@@ -32,16 +30,27 @@ namespace SeniorConnect.Tests
             //create activity
             //create participant
             //Reserve a spot 
-            var activity = new Activity(1, Guid.NewGuid(), Guid.NewGuid());
+            var activity = ActivityFactory.CreateActivity(
+                date: DateOnly.FromDateTime(DateTime.UtcNow),
+                startTime: TimeOnly.Parse("22:00"),
+                endTime: TimeOnly.Parse("23:00"));
 
             var participant = new Participant(Guid.NewGuid());
 
+            activity.ReserveSpot(participant);
+
+            //set a test date to the same date as the activity
+            var cancelationDateTime = DateTime.UtcNow.Date.Add(TimeOnly.Parse("12:00").ToTimeSpan());
+            //var cancelDateTime = activity.Date.ToDateTime(TimeOnly.MinValue - TimeOnly.Parse("5:00"));
+
             //Act
-            //cancel reservation within 24h of activity
+            //cancel reservation within 24h of activity, so on the same date
+            var action = () => activity.CancelReservation(participant);
 
 
             //Assert
             //Cancelation fails
+            action.Should().ThrowExactly<Exception>();
         }
     }
 }

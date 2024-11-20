@@ -49,6 +49,8 @@ namespace SeniorConnect.Domain.Activity
                 //button for canceling reservation is disabled
                 throw new Exception("Cannot cancel reservation too close to session");
             }
+
+            _participants.Remove(participant);
         }
 
 
