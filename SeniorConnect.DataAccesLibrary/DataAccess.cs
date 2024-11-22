@@ -49,9 +49,26 @@ namespace SeniorConnect.DataAccesLibrary
             return users;
         }
 
-        public void SaveData()
+        public void SaveUser()
         {
             // To implement: save functionality 
+
+            string query = "INSERT INTO [SeniorConnect].[dbo].[User] ([FirstName], [LastName], [Email], [Password])";
+
+            try
+            {
+                using (var connection = OpenSqlConnection(_connectionString))
+                using (var command = new SqlCommand(query, connection))
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("Error saving data: " + ex.Message);
+
+            }
         }
     }
 }
