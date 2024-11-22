@@ -3,46 +3,54 @@
 @{
     ViewData["Title"] = "Register";
 }
+
 <header class="content-header">@ViewData["Title"]</header>
+
 <div class="form-container">
-    <form method="post">
-        <label asp-for="Registration.FirstName">First Name:</label> 
-        <input asp-for="Registration.FirstName" /> 
-        <span asp-validation-for="Registration.FirstName" class="text-danger"></span> <br></br>
+    <form method="post" asp-antiforgery="true">
+        <div class="form-group">
+            <label asp-for="Registration.FirstName">First Name:</label>
+            <input asp-for="Registration.FirstName" class="form-control" />
+            <span asp-validation-for="Registration.FirstName" class="text-danger"></span>
+        </div>
 
+        <div class="form-group">
+            <label asp-for="Registration.LastName">Last Name:</label>
+            <input asp-for="Registration.LastName" class="form-control" />
+            <span asp-validation-for="Registration.LastName" class="text-danger"></span>
+        </div>
 
-        <label>Last Name:</label>
-        <span asp-validation-for="Registration.LastName"></span>
-        <input asp-for="Registration.LastName"> 
-        <span asp-validation-for="Registration.LastName" class="text-danger"></span> <br></br>
+        <div class="form-group">
+            <label asp-for="Registration.EmailAddress">Email:</label>
+            <input asp-for="Registration.EmailAddress" class="form-control" />
+            <span asp-validation-for="Registration.EmailAddress" class="text-danger"></span>
+        </div>
 
+        <div class="form-group">
+            <label asp-for="Registration.Password">Password:</label>
+            <input asp-for="Registration.Password" type="password" class="form-control" />
+            <span asp-validation-for="Registration.Password" class="text-danger"></span>
+        </div>
 
-        <label>Email:</label>
-        <span asp-validation-for="Registration.EmailAddress"></span>
-        <input asp-for="Registration.EmailAddress" />         
-        <span asp-validation-for="Registration.EmailAddress" class="text-danger"></span> <br></br>
+        <div class="form-group">
+            <label asp-for="Registration.ConfirmPassword">Confirm Password:</label>
+            <input asp-for="Registration.ConfirmPassword" type="password" class="form-control" />
+            <span asp-validation-for="Registration.ConfirmPassword" class="text-danger"></span>
+        </div>
 
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
 
-        <label>Password:</label>
-        <input asp-for="Registration.Password" />
-        <span asp-validation-for="Registration.Password" class="text-danger"></span> <br></br>
-
-
-        <label>Confirm Password:</label>
-        <input asp-for="Registration.ConfirmPassword" />
-        <span asp-validation-for="Registration.ConfirmPassword" class="text-danger"></span> <br></br>
-
-
-        <input type="submit" value="Submit"> </<br /><br /> <br />
-
-        <label>Already registered? Please click the button to login</label> </br>
-        <button type="button" onclick="location.href='@Url.Page("/IdentityAccessManagement/Login")'">Return to Login</button>
-
+        <div class="form-group">
+            <label>Already registered? Please click the button to login</label>
+            <button type="button" class="btn btn-link" onclick="location.href='@Url.Page("/IdentityAccessManagement/Login")'">Return to Login</button>
+        </div>
     </form>
 </div>
 
-
-@* ADD CLIENT SIDE VALIDATION, POSSIBLY BY ADDING JS... bestaande libraries
-@section Scripts{}
- *@
-    
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.11/dist/jquery.validate.unobtrusive.min.js"></script>
+}
