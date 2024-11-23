@@ -8,6 +8,8 @@ namespace SeniorConnect.WebApp.Pages.UserPages
     public class AllUsersModel : PageModel
     {
         private readonly DataAccess _dataAccess;
+        private readonly UserRepository _userRepository;
+
 
         public List<User> Users { get; set; } = new List<User>();
 
@@ -18,7 +20,7 @@ namespace SeniorConnect.WebApp.Pages.UserPages
 
         public void OnGet()
         {
-            Users = _dataAccess.GetAllUsers();
+            Users = _userRepository.GetAllUsersFromDB();
         }
     }
 }
