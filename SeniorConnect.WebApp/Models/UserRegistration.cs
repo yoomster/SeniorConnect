@@ -12,7 +12,7 @@ namespace SeniorConnect.WebApp.Models
 
         [Required(ErrorMessage = "Required field!")]
         [DataType(DataType.EmailAddress)]
-        public string EmailAddress { get; init; }
+        public string Email { get; init; }
 
         [Required(ErrorMessage = "Required field!")]
         [DataType(DataType.Password)]
