@@ -13,10 +13,10 @@ public class User
     public required string LastName { get; set; }
     public required string Email { get; set; }
     public required string Password { get; set; }
-    public DateOnly DateOfBirth { get; set; }
-    public char Gender { get; set; }
-    public string Iban { get; set; }
-    public DateOnly DateOfRegistration { get; set; } 
+    public DateOnly? DateOfBirth { get; set; }
+    public char? Gender { get; set; }
+    public string? Iban { get; set; }
+    public DateOnly DateOfRegistration { get; set; } = DateOnly.FromDateTime(DateTime.Now);
     public Address? Address { get; set; }
 }
 
