@@ -1,0 +1,21 @@
+﻿INSERT INTO [dbo].[User] ([FirstName], [LastName], [Email], [Password])
+VALUES 
+('John', 'Doe', 'john.doe@example.com', 'Password123'),
+('Jane', 'Smith', 'jane.smith@example.com', 'Password123'),
+('Michael', 'Johnson', 'michael.johnson@example.com', 'Password123'),
+('Emily', 'Williams', 'emily.williams@example.com', 'Password123'),
+('David', 'Brown', 'david.brown@example.com', 'Password123'),
+('Sarah', 'Davis', 'sarah.davis@example.com', 'Password123'),
+('Daniel', 'Miller', 'daniel.miller@example.com', 'Password123'),
+('Olivia', 'Wilson', 'olivia.wilson@example.com', 'Password123'),
+('Matthew', 'Moore', 'matthew.moore@example.com', 'Password123'),
+('Sophia', 'Taylor', 'sophia.taylor@example.com', 'Password123'),
+('Joshua', 'Anderson', 'joshua.anderson@example.com', 'Password123'),
+('Ava', 'Thomas', 'ava.thomas@example.com', 'Password123'),
+('James', 'Jackson', 'james.jackson@example.com', 'Password123'),
+('Isabella', 'White', 'isabella.white@example.com', 'Password123'),
+('Benjamin', 'Harris', 'benjamin.harris@example.com', 'Password123'),
+('Mia', 'Martin', 'mia.martin@example.com', 'Password123'),
+('Lucas', 'Thompson', 'lucas.thompson@example.com', 'Password123'),
+('Charlotte', 'Garcia', 'charlotte.garcia@example.com', 'Password123'),
+('Henry', 'Martinez', 'henry.martinez@example.com', 'Password123');

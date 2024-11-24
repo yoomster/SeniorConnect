@@ -58,18 +58,16 @@
     <Folder Include="Properties" />
     <Folder Include="dbo" />
     <Folder Include="dbo\Tables" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Activity.sql" />
-    <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\UserActivity.sql" />
     <Build Include="dbo\Tables\Address.sql" />
     <Build Include="dbo\Tables\UserAddress.sql" />
+    <Build Include="dbo\Tables\User.sql" />
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="SeniorConnect.SQLServerDB.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="SeniorConnect.SQLServerDB.publish.xml" />
+    <None Include="Scripts\InsertDummyUsers.sql" />
   </ItemGroup>
 </Project>
