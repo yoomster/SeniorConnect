@@ -23,9 +23,7 @@ namespace SeniorConnect.WebApp.Models
         [Compare("Password")]
         public string ConfirmPassword { get; init; }
 
-        public DateOnly DateOfBirth { get; set; }
-        public char Gender { get; set; } 
-        public string Origin { get; set; } // can be an enum too
-        public string IBAN { get; set; }
+       
+        
     }
 }
