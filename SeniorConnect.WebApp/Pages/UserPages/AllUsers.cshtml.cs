@@ -7,20 +7,23 @@ namespace SeniorConnect.WebApp.Pages.UserPages
 {
     public class AllUsersModel : PageModel
     {
-        private readonly DataAccess _dataAccess;
         private readonly UserRepository _userRepository;
+        public List<User> AllUsers { get; set; }
 
-
-        public List<User> Users { get; set; } = new List<User>();
-
-        public AllUsersModel(DataAccess dataAccess)
+        public AllUsersModel(UserRepository userRepository)
         {
-            _dataAccess = dataAccess;
+            _userRepository = userRepository;
         }
 
         public void OnGet()
         {
-            Users = _userRepository.GetAllUsersFromDB();
+            List<User> users = _userRepository.GetUsersV2();
+
+            foreach (var user in users)
+            {
+                Console.WriteLine($"User: {user.FirstName} {user.LastName}");
+            }
+            AllUsers = users;
         }
     }
 }
