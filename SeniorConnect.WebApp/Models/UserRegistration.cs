@@ -23,13 +23,9 @@ namespace SeniorConnect.WebApp.Models
         [Compare("Password")]
         public string ConfirmPassword { get; init; }
 
-        public DateTimeOffset DateOfBirth { get; set; }
-        public string Zipcode { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public string Gender { get; set; } // check if this is the best type
+        public DateOnly DateOfBirth { get; set; }
+        public char Gender { get; set; } 
         public string Origin { get; set; } // can be an enum too
-        public string IbanAccountNumber { get; set; }
-        public DateTimeOffset DateOfRegistration { get; set; }
+        public string IBAN { get; set; }
     }
 }
