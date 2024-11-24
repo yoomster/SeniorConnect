@@ -9,9 +9,15 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
     public class RegisterModel : PageModel
     {
         private readonly UserRepository _userRepository;
+        //UserRepository userRepo = new UserRepository();
 
         [BindProperty]
         public UserRegistration Registration { get; set; }
+
+        public RegisterModel(UserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
 
         public void OnGet()
         {
@@ -19,15 +25,14 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 
         public ActionResult OnPost()
         {
+            //validate the data
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-
-            return RedirectToPage("Login");
-
-            User user = new()
+            User newUser = new User
             {
                 FirstName = Registration.FirstName,
                 LastName = Registration.LastName,
@@ -35,9 +40,12 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
                 Password = Registration.Password
             };
 
+            //_userRepository.SaveUserToDB(newUser);
+
+
             try
             {
-                _userRepository.SaveUserToDB(user);
+                _userRepository.SaveUserToDB(newUser);
                 TempData["SuccessMessage"] = "User registered successfully!";
             }
             catch (Exception ex)
