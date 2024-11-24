@@ -14,7 +14,7 @@ namespace SeniorConnect.DataAccesLibrary
 
         public void SaveUserToDB(User user)
         {
-            string query = "INSERT INTO [SeniorConnect].[dbo].[User] ([FirstName], [LastName], [Email], [Password]) " +
+            string query = "INSERT INTO [SeniorConnect.SQLServerDB].[dbo].[User] ([FirstName], [LastName], [Email], [Password]) " +
                            "VALUES (@FirstName, @LastName, @Email, @Password)";
 
             try
@@ -42,7 +42,7 @@ namespace SeniorConnect.DataAccesLibrary
         {
             var users = new List<User>();
 
-            string query = "SELECT [Id], [FirstName], [LastName], [Email], [Password] FROM [dbo].[User]";
+            string query = "SELECT [Id], [FirstName], [LastName], [Email], [Password] FROM [SeniorConnect.SQLServerDB].[dbo].[User]";
 
             try
             {
