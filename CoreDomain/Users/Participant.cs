@@ -15,7 +15,7 @@ namespace SeniorConnect.Domain.Users
 
         public void AddActivityToList (int id)
         {
-            //verification needed
+            //validation needed
             _activityIds.Add(id);
         }
     }

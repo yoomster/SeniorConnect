@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ public class User
     public required string Email { get; set; }
     public required string Password { get; set; }
     public DateOnly? DateOfBirth { get; set; }
-    public char? Gender { get; set; }
+    public char? Gender { get; set; } = 'N';
     public string? Iban { get; set; }
     public DateOnly DateOfRegistration { get; set; } = DateOnly.FromDateTime(DateTime.Now);
     public Address? Address { get; set; }
