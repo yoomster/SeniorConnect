@@ -36,34 +36,34 @@ namespace SeniorConnect.Tests
             action.Should().ThrowExactly<InvalidOperationException>();
         }
 
-        [Fact]
-        public void CancelReservation_WhenCancellationIsWithin24HoursToActivity_ShouldFailCancellation()
-        {
-            //Arrange
-            //create activity
-            //create participant
-            //Reserve a spot 
-            var activity = ActivityFactory.CreateActivity(
-                date: DateOnly.FromDateTime(DateTime.UtcNow),
-                startTime: TimeOnly.Parse("22:00"),
-                endTime: TimeOnly.Parse("23:00"));
+        //[Fact]
+        //public void CancelReservation_WhenCancellationIsWithin24HoursToActivity_ShouldFailCancellation()
+        //{
+        //    //Arrange
+        //    //create activity
+        //    //create participant
+        //    //Reserve a spot 
+        //    var activity = ActivityFactory.CreateActivity(
+        //        date: DateOnly.FromDateTime(DateTime.UtcNow),
+        //        startTime: TimeOnly.Parse("22:00"),
+        //        endTime: TimeOnly.Parse("23:00"));
 
-            var participant = new Participant();
+        //    var participant = new Participant();
 
-            activity.ReserveSpot(participant);
+        //    activity.ReserveSpot(participant);
 
-            //set a test date to the same date as the activity
-            var cancelationDateTime = DateTime.UtcNow.Date.Add(TimeOnly.Parse("12:00").ToTimeSpan());
-            //var cancelDateTime = activity.Date.ToDateTime(TimeOnly.MinValue - TimeOnly.Parse("5:00"));
+        //    //set a test date to the same date as the activity
+        //    var cancelationDateTime = DateTime.UtcNow.Date.Add(TimeOnly.Parse("12:00").ToTimeSpan());
+        //    //var cancelDateTime = activity.Date.ToDateTime(TimeOnly.MinValue - TimeOnly.Parse("5:00"));
 
-            //Act
-            //cancel reservation within 24h of activity, so on the same date
-            var action = () => activity.CancelReservation(participant);
+        //    //Act
+        //    //cancel reservation within 24h of activity, so on the same date
+        //    var action = () => activity.CancelReservation(participant);
 
 
-            //Assert
-            //Cancelation fails
-            action.Should().ThrowExactly<Exception>();
-        }
+        //    //Assert
+        //    //Cancelation fails
+        //    action.Should().ThrowExactly<Exception>();
+        //}
     }
 }

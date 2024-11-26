@@ -10,12 +10,15 @@ namespace SeniorConnect.Domain.Users
 {
     public class IdentityAccessManager
     {
-        private readonly UserRegistration _userRegistration;
+        //private readonly UserRegistration _userRegistration;
 
-        public IdentityAccessManager(UserRegistration userRegistration)
-        {
-            _userRegistration = userRegistration;
-        }
+        //public IdentityAccessManager(UserRegistration userRegistration)
+        //{
+        //    _userRegistration = userRegistration;
+        //}
+
+        // THIS LAYER NEEDS TO KNOW ABOUT UI!!!!
+
         public User CreateUser()
         {
             User output = new()
@@ -25,7 +28,7 @@ namespace SeniorConnect.Domain.Users
                 Email = string.Empty,
                 Password = string.Empty,
                 DateOfBirth = DateOnly.FromDateTime(DateTime.Now),
-                Gender = ,
+                Gender = 'M',
                 DateOfRegistration = DateOnly.FromDateTime(DateTime.Now),
 
             };

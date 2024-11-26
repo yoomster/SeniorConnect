@@ -5,6 +5,7 @@ namespace SeniorConnect.DataAccesLibrary
 {
     public class UserRepository
     {
+        //creating, reading, updating, or deleting records
         private readonly DataAccess _dataAccess;
 
         public UserRepository(DataAccess dataAccess)

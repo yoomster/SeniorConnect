@@ -11,7 +11,7 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
         private readonly UserRepository _userRepository;
 
         [BindProperty]
-        public UserRegistration Registration { get; set; }
+        public UserDTO Registration { get; set; }
 
         public RegisterModel(UserRepository userRepository)
         {

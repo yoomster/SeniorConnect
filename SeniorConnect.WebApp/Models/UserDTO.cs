@@ -2,7 +2,7 @@
 
 namespace SeniorConnect.WebApp.Models
 {
-    public class UserRegistration
+    public class UserDTO
     {
         [Required(ErrorMessage = "Required field!")]
         public string FirstName { get; init; }
