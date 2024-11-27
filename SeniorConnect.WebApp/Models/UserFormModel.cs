@@ -2,8 +2,20 @@
 
 namespace SeniorConnect.WebApp.Models
 {
-    public class UserDTO
+    public class UserFormModel
     {
+        public UserFormModel()
+        {
+            
+        }
+        public UserFormModel(string firstName, string lastName, string email, string password)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Password = password;
+        }
+
         [Required(ErrorMessage = "Required field!")]
         public string FirstName { get; init; }
 
