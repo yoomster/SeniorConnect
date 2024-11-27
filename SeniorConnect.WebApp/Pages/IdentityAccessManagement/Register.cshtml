@@ -23,32 +23,32 @@ else if (TempData["ErrorMessage"] != null)
     <form method="post" asp-antiforgery="true">
         <div class="form-group">
             <label for="FirstName">First Name</label>
-            <input type="text" id="FirstName" class="form-control" asp-for="Registration.FirstName" />
-            <span asp-validation-for="Registration.FirstName" class="text-danger"></span>
+            <input type="text" id="FirstName" class="form-control" asp-for="UserFormModel.FirstName" />
+            <span asp-validation-for="UserFormModel.FirstName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="LastName">Last Name</label>
-            <input type="text" id="LastName" class="form-control" asp-for="Registration.LastName" />
-            <span asp-validation-for="Registration.LastName" class="text-danger"></span>
+            <input type="text" id="LastName" class="form-control" asp-for="UserFormModel.LastName" />
+            <span asp-validation-for="UserFormModel.LastName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="Email">Email</label>
-            <input type="email" id="Email" class="form-control" asp-for="Registration.Email" />
-            <span asp-validation-for="Registration.Email" class="text-danger"></span>
+            <input type="email" id="Email" class="form-control" asp-for="UserFormModel.Email" />
+            <span asp-validation-for="UserFormModel.Email" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="Password">Password</label>
-            <input type="password" id="Password" class="form-control" asp-for="Registration.Password" />
-            <span asp-validation-for="Registration.Password" class="text-danger"></span>
+            <input type="password" id="Password" class="form-control" asp-for="UserFormModel.Password" />
+            <span asp-validation-for="UserFormModel.Password" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="ConfirmPassword">Confirm Password</label>
-            <input type="password" id="ConfirmPassword" class="form-control" asp-for="Registration.ConfirmPassword" />
-            <span asp-validation-for="Registration.ConfirmPassword" class="text-danger"></span>
+            <input type="password" id="ConfirmPassword" class="form-control" asp-for="UserFormModel.ConfirmPassword" />
+            <span asp-validation-for="UserFormModel.ConfirmPassword" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-primary">Register</button>

@@ -3,17 +3,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SeniorConnect.WebApp.Models;
 using SeniorConnect.DataAccesLibrary;
 using CoreDomain.Users;
+using SeniorConnect.Domain.Contracts;
 
 namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 {
     public class RegisterModel : PageModel
     {
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
         [BindProperty]
-        public UserDTO Registration { get; set; }
+        public UserFormModel UserFormModel { get; set; }
 
-        public RegisterModel(UserRepository userRepository)
+        public RegisterModel(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
@@ -24,26 +25,23 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 
         public ActionResult OnPost()
         {
-            //validate the data
-
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            User newUser = new User
-            {
-                FirstName = Registration.FirstName,
-                LastName = Registration.LastName,
-                Email = Registration.Email,
-                Password = Registration.Password
-            };
-
-            //_userRepository.SaveUserToDB(newUser);
-
-
             try
             {
+                User newUser = new User
+                {
+                FirstName = UserFormModel.FirstName,
+                LastName = UserFormModel.LastName,
+                Email = UserFormModel.Email,
+                Password = UserFormModel.Password
+                };
+
+                //check for user with email
+
                 _userRepository.SaveUserToDB(newUser);
                 TempData["SuccessMessage"] = "User registered successfully!";
             }
