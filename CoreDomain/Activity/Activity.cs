@@ -1,9 +1,20 @@
 ﻿using SeniorConnect.Domain.Users;
+using System.Xml.Linq;
 
 namespace SeniorConnect.Domain.Activity;
 
 public class Activity
 {
+    //This allows the DAL to access the data it needs without violating encapsulation
+    public string Name => _name;
+    public string Description => _description;
+    public DateOnly Date => _date;
+    public TimeOnly StartTime => _startTime;
+    public TimeOnly EndTime => _endTime;
+    public int MaxParticipants => _maxParticipants;
+    public ActivityCoordinatorId ActivityCoordinatorId => _activityCoordinatorId;
+    public LocationId LocationId => _locationId;
+
     private readonly int _id;
     private readonly string _name;
     private readonly string _description;
@@ -15,9 +26,32 @@ public class Activity
     private readonly List<Participant> _participants = new();
     private readonly LocationId _locationId;
 
+    public Activity(
+        int id,
+        string name,
+        string description,
+        DateOnly date,
+        TimeOnly startTime,
+        TimeOnly endTime,
+        int maxParticipants)
+        //ActivityCoordinatorId activityCoordinatorId, 
+        //LocationId locationId)
+    {
+        _id = id;
+        _name = name;
+        _description = description;
+        _date = date;
+        _startTime = startTime;
+        _endTime = endTime;
+        _maxParticipants = maxParticipants;
+        //_activityCoordinatorId = activityCoordinatorId;
+        //_locationId = locationId;
+    }
 
     public Activity(
-        DateOnly dateOfActivity,
+        string name,
+        string description,
+        DateOnly date,
         TimeOnly startTime,
         TimeOnly endTime,
         int maxParticipants,
@@ -25,7 +59,9 @@ public class Activity
         LocationId locationId
         )
     {
-        _date = dateOfActivity;
+        _name = name;
+        _description = description;
+        _date = date;
         _startTime = startTime;
         _endTime = endTime;
         _maxParticipants = maxParticipants;
