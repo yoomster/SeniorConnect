@@ -1,12 +1,15 @@
 ﻿using CoreDomain.Users;
 using Microsoft.Data.SqlClient;
+using SeniorConnect.Domain.Contracts;
 
 namespace SeniorConnect.DataAccesLibrary
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         //creating, reading, updating, or deleting records
         private readonly DataAccess _dataAccess;
+
+        
 
         public UserRepository(DataAccess dataAccess)
         {
@@ -39,7 +42,7 @@ namespace SeniorConnect.DataAccesLibrary
         }
 
 
-        public List<User> GetUsersV2()
+        public List<User> GetUsers()
         {
             var users = new List<User>();
 
@@ -74,6 +77,12 @@ namespace SeniorConnect.DataAccesLibrary
 
             return users;
 
+        }
+
+        bool IUserRepository.IsDuplicateEmail(string email)
+        {
+            return true;
+            //     return Users.Any(u => u.Email == email);
         }
     }
 }

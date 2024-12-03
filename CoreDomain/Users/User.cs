@@ -19,6 +19,7 @@ public class User
     public string? Iban { get; set; }
     public DateOnly DateOfRegistration { get; set; } = DateOnly.FromDateTime(DateTime.Now);
     public Address? Address { get; set; }
+
 }
 
 public class Address
