@@ -3,21 +3,23 @@
     public static class ActivityFactory
     {
         public static Activity CreateActivity(
-            DateOnly dateOfActivity,
+            int id,
+            string name,
+            string description,
+            DateOnly date,
             TimeOnly startTime,
             TimeOnly endTime,
-            int maxParticipants,
-            int locationId,
-            int activityCoordinatorId
+            int maxParticipants
             )
         {
             return new Activity(
-            dateOfActivity,
+            id,
+            name,
+            description,
+            date,
             startTime,
             endTime,
-            maxParticipants,
-            ActivityCoordinatorId.From(activityCoordinatorId),
-            LocationId.From(locationId)
+            maxParticipants
             );
         }
     }
