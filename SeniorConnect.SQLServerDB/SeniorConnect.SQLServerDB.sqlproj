@@ -69,5 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\InsertDummyUsers.sql" />
+    <None Include="Scripts\InsertDummyActivities.sql" />
   </ItemGroup>
 </Project>
