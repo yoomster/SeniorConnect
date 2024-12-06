@@ -1,0 +1,16 @@
+﻿@page
+@model UpdatePersonDataModel
+@{
+}
+<h1>Change your personal data here</h1>
+
+<div class="form-container">
+    <form method="post" asp-antiforgery="true">
+        <div class="form-group">
+            <label for="FirstName">First Name</label>
+            <input type="text" id="FirstName" class="form-control" asp-for="UserFormModel.FirstName" />
+            <span asp-validation-for="UserFormModel.FirstName" class="text-danger"></span>
+        </div>
+
+     </form>
+</div>
