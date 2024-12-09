@@ -84,5 +84,10 @@ namespace SeniorConnect.DataAccesLibrary
             return true;
             //     return Users.Any(u => u.Email == email);
         }
+
+        public User UpdateUser(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

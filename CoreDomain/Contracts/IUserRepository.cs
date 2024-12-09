@@ -8,4 +8,5 @@ public interface IUserRepository
     public List<User> GetUsers();
 
     public bool IsDuplicateEmail(string email);
+    public User UpdateUser(User user);
 }
