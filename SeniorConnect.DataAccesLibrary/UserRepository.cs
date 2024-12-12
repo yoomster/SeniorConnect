@@ -85,9 +85,50 @@ namespace SeniorConnect.DataAccesLibrary
             //     return Users.Any(u => u.Email == email);
         }
 
-        public User UpdateUser(User user)
+        public void UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            string query = @"UPDATE [SeniorConnect.SQLServerDB].[dbo].[User] SET 
+                [FirstName] = @FirstName,
+                [LastName] = @LastName,
+                [Email] = @Email,
+                [Password] = @Password,
+                [DateOfBirth] = @DateOfBirth,
+                [Gender] = @Gender,
+                [Iban] = @Iban,
+                [DateOfRegistration] = @DateOfRegistration
+            WHERE [Id] = @Id";
+
+            try
+            {
+                using (var connection = _dataAccess.OpenSqlConnection())
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", user.Id);
+                    command.Parameters.AddWithValue("@FirstName", user.FirstName);
+                    command.Parameters.AddWithValue("@LastName", user.LastName);
+                    command.Parameters.AddWithValue("@Email", user.Email);
+                    command.Parameters.AddWithValue("@Password", HashPassword(user.Password));
+                    command.Parameters.AddWithValue("@DateOfBirth", (object?)user.DateOfBirth ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Gender", (object?)user.Gender ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Iban", (object?)user.Iban ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@DateOfRegistration", user.DateOfRegistration);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                // DEAL WITH THE EXCEPTION
+                Console.WriteLine("Error updating data: " + ex.Message);
+                throw; // Rethrow exception for higher-level handling if needed
+            }
         }
+
+        private string HashPassword(string password)
+        {
+            //impl. hashing logic
+            return password;
+        }
+
     }
 }
