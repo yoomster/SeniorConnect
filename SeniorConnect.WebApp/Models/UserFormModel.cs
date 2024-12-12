@@ -15,6 +15,7 @@ namespace SeniorConnect.WebApp.Models
             Email = email;
             Password = password;
         }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Required field!")]
         public string FirstName { get; init; }
@@ -35,7 +36,24 @@ namespace SeniorConnect.WebApp.Models
         [Compare("Password")]
         public string ConfirmPassword { get; init; }
 
-       
-        
+        public DateOnly DateOfBirth { get; set; }
+
+        public char? Gender { get; set; } = 'N';
+
+        [DataType(DataType.CreditCard)]
+        public string? Iban { get; set; }
+
+        public string? StreetName { get; set; }
+
+        public string? HouseNumber { get; set; }
+
+        [DataType(DataType.PostalCode)]
+        public string? Zipcode { get; set; }
+
+        public string? City { get; set; }
+
+        public string? Country { get; set; }
+
+
     }
 }
