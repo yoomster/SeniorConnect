@@ -6,7 +6,6 @@ public interface IUserRepository
 {
     public void SaveUserToDB(User user);
     public List<User> GetUsers();
-
     public bool IsDuplicateEmail(string email);
-    public User UpdateUser(User user);
+    public void UpdateUser(User user);
 }
