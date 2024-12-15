@@ -13,16 +13,24 @@ namespace SeniorConnect.DataAccesLibrary
             _connectionString = configuration.GetConnectionString("Default");
         }
 
-        private static SqlConnection OpenSqlConnection(string connectionString)
+        private async Task<SqlConnection> OpenSqlConnectionAsync(string connectionString)
         {
             var connection = new SqlConnection(connectionString);
-            connection.Open();
-            return connection;
+            try
+            {
+                await connection.OpenAsync(); 
+                return connection;
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception and handle it as needed
+                throw new Exception("Error opening database connection", ex);
+            }
         }
 
-        public SqlConnection OpenSqlConnection()
+        public async Task<SqlConnection> OpenSqlConnectionAsync()
         {
-            return OpenSqlConnection(_connectionString);
+            return await OpenSqlConnectionAsync(_connectionString);
         }
     }
 }
