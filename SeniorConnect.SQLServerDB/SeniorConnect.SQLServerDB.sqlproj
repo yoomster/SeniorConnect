@@ -64,9 +64,14 @@
     <Build Include="dbo\Tables\Activity.sql" />
     <Build Include="dbo\Tables\UserActivity.sql" />
     <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Tables\Address.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\InsertDummyUsers.sql" />
     <None Include="Scripts\InsertDummyActivities.sql" />
+    <None Include="Scripts\InsertUserActivity.sql" />
+    <None Include="Scripts\AllActiviesPerUser.sql" />
+    <None Include="Scripts\AllUsersPerActivity.sql" />
+    <None Include="Scripts\InsertUserAddresses.sql" />
   </ItemGroup>
 </Project>

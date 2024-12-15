@@ -3,7 +3,7 @@
 VALUES
 ('Classic Movie Screening', 
  'Enjoy a screening of a classic movie with light refreshments and a nostalgic atmosphere.', 
- '2024-12-15', '14:00:00', '16:30:00', 50),
+ '2024-12-15', '14:00:00', '16:30:00', 30),
 ('Historical Walking Tour', 
  'A leisurely guided tour of the city\'s historical landmarks, complete with stories and anecdotes.', 
  '2024-12-20', '10:00:00', '12:30:00', 30),
