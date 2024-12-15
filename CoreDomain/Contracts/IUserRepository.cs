@@ -4,8 +4,9 @@ namespace SeniorConnect.Domain.Contracts;
 
 public interface IUserRepository
 {
-    public void SaveUserToDB(User user);
-    public List<User> GetUsers();
+    public Task SaveUserToDBAsync(User user);
+    public Task<List<User>> GetUsersAsync();
     public bool IsDuplicateEmail(string email);
-    public void UpdateUser(User user);
+    public Task UpdateUserAsync(User user);
 }
+

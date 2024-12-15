@@ -9,52 +9,68 @@ namespace SeniorConnect.DataAccesLibrary
         //creating, reading, updating, or deleting records
         private readonly DataAccess _dataAccess;
 
-        
-
         public UserRepository(DataAccess dataAccess)
         {
             _dataAccess = dataAccess;
         }
 
-        public void SaveUserToDB(User user)
+        public async Task SaveUserToDBAsync(User user)
         {
-            string query = "INSERT INTO [SeniorConnect.SQLServerDB].[dbo].[User] ([FirstName], [LastName], [Email], [Password]) " +
-                           "VALUES (@FirstName, @LastName, @Email, @Password)";
+            string query = @"INSERT INTO [dbo].[User] 
+                ([FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Iban], [DateOfRegistration], [StreetName], [HouseNumber], [Zipcode], [City], [Country]) 
+                VALUES 
+                (@FirstName, @LastName, @Email, @Password, @DateOfBirth, @Gender, @Iban, @DateOfRegistration, @StreetName, @HouseNumber, @Zipcode, @City, @Country)";
 
             try
             {
-                using (var connection = _dataAccess.OpenSqlConnection())
+                using (var connection = await _dataAccess.OpenSqlConnectionAsync())
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@FirstName", user.FirstName);
                     command.Parameters.AddWithValue("@LastName", user.LastName);
                     command.Parameters.AddWithValue("@Email", user.Email);
-                    command.Parameters.AddWithValue("@Password", user.Password);  // password hash needed?
+                    //command.Parameters.AddWithValue("@Password", HashPassword(user.Password));
+                    command.Parameters.AddWithValue("@DateOfBirth", user.DateOfBirth);
+                    command.Parameters.AddWithValue("@Gender", (object?)user.Gender ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Iban", (object?)user.Iban ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@DateOfRegistration", DateTime.UtcNow);
 
-                    command.ExecuteNonQuery();
+                    //command.Parameters.AddWithValue("@StreetName", user.StreetName);
+                    //command.Parameters.AddWithValue("@HouseNumber", user.HouseNumber);
+                    //command.Parameters.AddWithValue("@Zipcode", user.Zipcode);
+                    //command.Parameters.AddWithValue("@City", user.City);
+                    //command.Parameters.AddWithValue("@Country", user.Country);
+
+                    await command.ExecuteNonQueryAsync();
                 }
             }
             catch (Exception ex)
             {
-                // change to handle error!!!
-                Console.WriteLine("Error saving data: " + ex.Message);
+                LogError("Error saving user to database", ex);
+                throw;
             }
         }
 
+        private void LogError(string message, Exception ex)
+        {
+            //change to handle error!!! + log it?
+            Console.WriteLine($"{message}: {ex.Message}");
+        }
 
-        public List<User> GetUsers()
+        public async Task<List<User>> GetUsersAsync()
         {
             var users = new List<User>();
-
-            string query = "SELECT [Id], [FirstName], [LastName], [Email], [Password] FROM [SeniorConnect.SQLServerDB].[dbo].[User]";
+            string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Iban], [DateOfRegistration], 
+                     [StreetName], [HouseNumber], [Zipcode], [City], [Country] 
+                     FROM [dbo].[User]";
 
             try
             {
-                using (var connection = _dataAccess.OpenSqlConnection())
+                using (var connection = await _dataAccess.OpenSqlConnectionAsync())
                 using (var command = new SqlCommand(query, connection))
-                using (var reader = command.ExecuteReader())
+                using (var reader = await command.ExecuteReaderAsync())
                 {
-                    while (reader.Read())
+                    while (await reader.ReadAsync())
                     {
                         var user = new User
                         {
@@ -62,7 +78,11 @@ namespace SeniorConnect.DataAccesLibrary
                             FirstName = reader.GetString(1),
                             LastName = reader.GetString(2),
                             Email = reader.GetString(3),
-                            Password = reader.GetString(4)
+                            Password = reader.GetString(4),
+                            DateOfBirth = reader.IsDBNull(5) ? (DateOnly?)null : DateOnly.FromDateTime(reader.GetDateTime(5)),
+                            Gender = reader.IsDBNull(6) ? (char?)null : reader.GetString(6)[0],
+                            Iban = reader.IsDBNull(7) ? null : reader.GetString(7),
+                            DateOfRegistration = reader.IsDBNull(8) ? (DateOnly?)null : DateOnly.FromDateTime(reader.GetDateTime(8))
                         };
 
                         users.Add(user);
@@ -71,13 +91,51 @@ namespace SeniorConnect.DataAccesLibrary
             }
             catch (Exception ex)
             {
-                // change to handle error!!!
                 Console.WriteLine("Error loading data: " + ex.Message);
             }
 
             return users;
-
         }
+
+
+        public async Task UpdateUserAsync(User user)
+        {
+            string query = @"UPDATE [dbo].[User] SET 
+                [FirstName] = @FirstName,
+                [LastName] = @LastName,
+                [Email] = @Email,
+                [Password] = @Password,
+                [DateOfBirth] = @DateOfBirth,
+                [Gender] = @Gender,
+                [Iban] = @Iban,
+            WHERE [Id] = @Id";
+
+            try
+            {
+                using (var connection = await _dataAccess.OpenSqlConnectionAsync())
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", user.Id);
+                    command.Parameters.AddWithValue("@FirstName", user.FirstName);
+                    command.Parameters.AddWithValue("@LastName", user.LastName);
+                    command.Parameters.AddWithValue("@Email", user.Email);
+                    command.Parameters.AddWithValue("@Password", HashPassword(user.Password));
+                    command.Parameters.AddWithValue("@DateOfBirth", (object?)user.DateOfBirth ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Gender", (object?)user.Gender ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Iban", (object?)user.Iban ?? DBNull.Value);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError("Error updating user to database", ex);
+                throw;
+            }
+        }
+
+
+
 
         bool IUserRepository.IsDuplicateEmail(string email)
         {

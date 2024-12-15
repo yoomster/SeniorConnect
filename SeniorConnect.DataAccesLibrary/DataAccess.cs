@@ -16,17 +16,11 @@ namespace SeniorConnect.DataAccesLibrary
         private async Task<SqlConnection> OpenSqlConnectionAsync(string connectionString)
         {
             var connection = new SqlConnection(connectionString);
-            try
-            {
-                await connection.OpenAsync(); 
-                return connection;
-            }
-            catch (SqlException ex)
-            {
-                // Log the exception and handle it as needed
-                throw new Exception("Error opening database connection", ex);
-            }
+            await connection.OpenAsync(); 
+            return connection;
+
         }
+
 
         public async Task<SqlConnection> OpenSqlConnectionAsync()
         {
