@@ -9,7 +9,6 @@
     --1 for TRUE and 0 for FALSE
     [Gender] char, 
     [Origin] nvarchar(30),
-    [Iban] nvarchar(30),
     [DateOfRegistration] Date NOT NULL,
     [AddressID] INT NOT NULL, 
         CONSTRAINT [FK_User_ToAddress] 

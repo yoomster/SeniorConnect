@@ -18,11 +18,9 @@ namespace SeniorConnect.DataAccesLibrary
             var connection = new SqlConnection(connectionString);
             await connection.OpenAsync(); 
             return connection;
-
         }
 
-
-        public async Task<SqlConnection> OpenSqlConnectionAsync()
+        public async Task<SqlConnection> OpenSqlConnection()
         {
             return await OpenSqlConnectionAsync(_connectionString);
         }

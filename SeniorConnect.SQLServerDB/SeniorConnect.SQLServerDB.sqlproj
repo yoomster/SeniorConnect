@@ -67,11 +67,11 @@
     <Build Include="dbo\Tables\Address.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\InsertDummyUsers.sql" />
-    <None Include="Scripts\InsertDummyActivities.sql" />
+    <None Include="Scripts\InsertUsers.sql" />
+    <None Include="Scripts\InsertActivities.sql" />
     <None Include="Scripts\InsertUserActivity.sql" />
     <None Include="Scripts\AllActiviesPerUser.sql" />
     <None Include="Scripts\AllUsersPerActivity.sql" />
-    <None Include="Scripts\InsertUserAddresses.sql" />
+    <None Include="Scripts\InsertAddresses.sql" />
   </ItemGroup>
 </Project>

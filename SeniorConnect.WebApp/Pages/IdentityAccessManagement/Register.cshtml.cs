@@ -4,6 +4,8 @@ using SeniorConnect.WebApp.Models;
 using SeniorConnect.DataAccesLibrary;
 using CoreDomain.Users;
 using SeniorConnect.Domain.Contracts;
+using System.Reflection;
+using CoreDomain;
 
 namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 {
@@ -12,7 +14,7 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
         private readonly IUserRepository _userRepository;
 
         [BindProperty]
-        public UserFormModel UserFormModel { get; set; }
+        public UserUI User { get; set; }
 
         public RegisterModel(IUserRepository userRepository)
         {
@@ -23,7 +25,7 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
         {
         }
 
-        public ActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -32,26 +34,41 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 
             try
             {
-                User newUser = new User
+                var newAddress = new Address
                 {
-                FirstName = UserFormModel.FirstName,
-                LastName = UserFormModel.LastName,
-                Email = UserFormModel.Email,
-                Password = UserFormModel.Password
+                    StreetName = User.StreetName,
+                    HouseNumber = User.HouseNumber,
+                    Zipcode = User.Zipcode,
+                    City = User.City,
+                    Country = User.Country,
                 };
 
-                //check for user with email
+                var addressId = await _addressRepository.SaveAddressToDBAsync(newAddress);
 
-                _userRepository.SaveUserToDB(newUser);
+                var newUser = new User
+                {
+                    FirstName = User.FirstName,
+                    LastName = User.LastName,
+                    Email = User.Email,
+                    Password = User.Password,
+                    DateOfBirth = DateOnly.FromDateTime(User.DateOfBirth),
+                    Gender = User.Gender,
+                    Origin = User.Origin,
+                    DateOfRegistration = DateTime.UtcNow,
+                    AddressId = addressId
+
+                };
+
+                await _userRepository.SaveUserToDBAsync(newUser);
+
+
                 TempData["SuccessMessage"] = "User registered successfully!";
+                return RedirectToPage("Login");
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = "Error registering user: " + ex.Message;
-                return Page(); // change this to handle the exception!! 
+                Console.WriteLine($"Error registering user: {ex.Message}");
+                TempData["ErrorMessage"] = "An error occurred while registering. Please try again later.";
+                return Page();
             }
-
-            return RedirectToPage("Login");
         }
-    }
-}
