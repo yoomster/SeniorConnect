@@ -1,4 +1,5 @@
-﻿using SeniorConnect.Domain.Users;
+﻿using CoreDomain;
+using SeniorConnect.Domain.Users;
 using System.Xml.Linq;
 
 namespace SeniorConnect.Domain.Activity;
@@ -12,8 +13,7 @@ public class Activity
     public TimeOnly StartTime => _startTime;
     public TimeOnly EndTime => _endTime;
     public int MaxParticipants => _maxParticipants;
-    public ActivityCoordinatorId ActivityCoordinatorId => _activityCoordinatorId;
-    public LocationId LocationId => _locationId;
+    public int AddressId => _addressId;
 
     private readonly int _id;
     private readonly string _name;
@@ -22,9 +22,8 @@ public class Activity
     private readonly TimeOnly _startTime;
     private readonly TimeOnly _endTime;
     private readonly int _maxParticipants;
-    private readonly ActivityCoordinatorId _activityCoordinatorId;
     private readonly List<Participant> _participants = new();
-    private readonly LocationId _locationId;
+    private readonly int _addressId;
 
     public Activity(
         int id,
@@ -33,9 +32,8 @@ public class Activity
         DateOnly date,
         TimeOnly startTime,
         TimeOnly endTime,
-        int maxParticipants)
-        //ActivityCoordinatorId activityCoordinatorId, 
-        //LocationId locationId)
+        int maxParticipants,
+        int addressId)
     {
         _id = id;
         _name = name;
@@ -44,32 +42,10 @@ public class Activity
         _startTime = startTime;
         _endTime = endTime;
         _maxParticipants = maxParticipants;
-        //_activityCoordinatorId = activityCoordinatorId;
-        //_locationId = locationId;
+        _addressId = addressId;
     }
 
-    public Activity(
-        string name,
-        string description,
-        DateOnly date,
-        TimeOnly startTime,
-        TimeOnly endTime,
-        int maxParticipants,
-        ActivityCoordinatorId activityCoordinatorId,
-        LocationId locationId
-        )
-    {
-        _name = name;
-        _description = description;
-        _date = date;
-        _startTime = startTime;
-        _endTime = endTime;
-        _maxParticipants = maxParticipants;
-        _activityCoordinatorId = activityCoordinatorId;
-        _locationId = locationId;
-    }
-
-        public void CancelReservation(Participant participant)
+    public void CancelReservation(Participant participant)
         {
             var utcTimeNow = DateTime.UtcNow;
             const int minHours = 24;
@@ -98,4 +74,16 @@ public class Activity
             participant.AddActivityToList(_id);
         }
     }
+
+    //public record struct LocationId(int Value)
+    //{
+    //    public static LocationId From(int value) =>
+    //        new LocationId(value);
+    //}
+
+    //public record struct ActivityCoordinatorId(int Value)
+    //{
+    //    public static ActivityCoordinatorId From(int value) =>
+    //        new ActivityCoordinatorId(value);
+    //}
 }
