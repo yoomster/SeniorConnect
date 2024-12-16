@@ -69,10 +69,10 @@ else if (TempData["ErrorMessage"] != null)
         <div class="form-group">
             <label for="Origin">Origin</label>
             <select id="Origin" class="form-control" asp-for="User.Origin">
-                <option value="M">Social Media</option>
-                <option value="F">Friend Referral</option>
-                <option value="N">Advertisement</option>
-                <option value="S">Search Engine</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Friend Referral">Friend Referral</option>
+                <option value="Advertisement">Advertisement</option>
+                <option value="Search Engine">Search Engine</option>
             </select>
             <span asp-validation-for="User.Origin" class="text-danger"></span>
         </div>

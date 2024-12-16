@@ -12,13 +12,15 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
     public class RegisterModel : PageModel
     {
         private readonly IUserRepository _userRepository;
+        private readonly IAddressRepository _addressRepository;
 
         [BindProperty]
         public UserUI User { get; set; }
 
-        public RegisterModel(IUserRepository userRepository)
+        public RegisterModel(IUserRepository userRepository, IAddressRepository addressRepository)
         {
             _userRepository = userRepository;
+            _addressRepository = addressRepository;
         }
 
         public void OnGet()
@@ -54,9 +56,8 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
                     DateOfBirth = DateOnly.FromDateTime(User.DateOfBirth),
                     Gender = User.Gender,
                     Origin = User.Origin,
-                    DateOfRegistration = DateTime.UtcNow,
+                    DateOfRegistration = DateOnly.FromDateTime(DateTime.Now),
                     AddressId = addressId
-
                 };
 
                 await _userRepository.SaveUserToDBAsync(newUser);
@@ -72,3 +73,6 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
                 return Page();
             }
         }
+    }
+}
+
