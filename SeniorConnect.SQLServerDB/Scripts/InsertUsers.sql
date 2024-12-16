@@ -21,4 +21,4 @@ VALUES
     ('Wim', 'van Dijk', 'wim.dijk@example.com', 'Password123!', '1943-11-05', 'M', 'Dutch', 'NL80INGB0008765432', '2023-07-24', 17),
     ('Clara', 'Smits', 'clara.smits@example.com', 'Password123!', '1942-04-09', 'F', 'Dutch', 'NL55RABO0300332211', '2021-10-18', 18),
     ('Rik', 'Hofman', 'rik.hofman@example.com', 'Password123!', '1936-07-22', 'M', 'Dutch', 'NL91ABNA0417234567', '2022-01-10', 19),
-    ('Noor', 'Heemskerk', 'noor.heemskerk@example.com', 'Password123!', '1941-06-13', 'F', 'Dutch', 'NL32INGB0009988776', '2020-08-15', 10);
+    ('Noor', 'Heemskerk', 'noor.heemskerk@example.com', 'Password123!', '1941-06-13', 'F', 'Dutch', 'NL32INGB0009988776', '2020-08-15', 20);
