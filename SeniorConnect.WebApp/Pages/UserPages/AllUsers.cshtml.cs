@@ -15,14 +15,15 @@ namespace SeniorConnect.WebApp.Pages.UserPages
             _userRepository = userRepository;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            List<User> users = _userRepository.GetUsers();
+            List<User> users = await _userRepository.GetUsersAsync();
 
             foreach (var user in users)
             {
                 Console.WriteLine($"User: {user.FirstName} {user.LastName}");
             }
+
             AllUsers = users;
         }
     }

@@ -1,65 +1,58 @@
 ﻿@page
 @model UpdatePersonDataModel
 @{
+    ViewData["Title"] = "Update Personal Data";
 }
-<h1>Change your personal data here</h1>
+
+<h1>Change Your Personal Data</h1>
 
 <div class="form-container">
     <form method="post" asp-antiforgery="true">
-        <div class="form-group">
-            <label for="FirstName">First Name</label>
-            <input type="text" id="FirstName" class="form-control" asp-for="UserFormModel.FirstName" />
-            <span asp-validation-for="UserFormModel.FirstName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="LastName">Last Name</label>
-            <input type="text" id="LastName" class="form-control" asp-for="UserFormModel.LastName" />
-            <span asp-validation-for="UserFormModel.LastName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="Iban">Iban</label>
-            <input type="Iban" id="Iban" class="form-control" asp-for="UserFormModel.Iban" />
-            <span asp-validation-for="UserFormModel.Iban" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="Gender">Gender</label>
-            <input type="text" id="Gender" class="form-control" asp-for="UserFormModel.Gender" />
-            <span asp-validation-for="UserFormModel.Gender" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="Gender">Gender</label>
-            <input type="gender" id="Gender" class="form-control" asp-for="UserFormModel.Gender" />
-            <span asp-validation-for="UserFormModel.Gender" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="Iban">Iban</label>
-            <input type="Iban" id="Iban" class="form-control" asp-for="UserFormModel.Iban" />
-            <span asp-validation-for="UserFormModel.Iban" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="StreetName">StreetName</label>
-            <input type="StreetName" id="StreetName" class="form-control" asp-for="UserFormModel.StreetName" />
-            <span asp-validation-for="UserFormModel.StreetName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="HouseNumber">HouseNumber</label>
-            <input type="HouseNumber" id="HouseNumber" class="form-control" asp-for="UserFormModel.HouseNumber" />
-            <span asp-validation-for="UserFormModel.HouseNumber" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="Gender">Zipcode</label>
-            <input type="Zipcode" id="Zipcode" class="form-control" asp-for="UserFormModel.Zipcode" />
-            <span asp-validation-for="UserFormModel.Zipcode" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="City">City</label>
-            <input type="City" id="City" class="form-control" asp-for="UserFormModel.City" />
-            <span asp-validation-for="UserFormModel.City" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="Country">Country</label>
-            <input type="Country" id="Country" class="form-control" asp-for="UserFormModel.Country" />
-            <span asp-validation-for="UserFormModel.Country" class="text-danger"></span>
-        </div>
-     </form>
+        <fieldset>
+            <legend>Personal Data</legend>
+            <div class="form-group">
+                <label asp-for="User.FirstName"></label>
+                <input asp-for="User.FirstName" class="form-control" />
+                <span asp-validation-for="User.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.LastName"></label>
+                <input asp-for="User.LastName" class="form-control" />
+                <span asp-validation-for="User.LastName" class="text-danger"></span>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Address Data</legend>
+            <div class="form-group">
+                <label asp-for="AddressForm.StreetName"></label>
+                <input asp-for="AddressForm.StreetName" class="form-control" />
+                <span asp-validation-for="AddressForm.StreetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressForm.HouseNumber"></label>
+                <input asp-for="AddressForm.HouseNumber" class="form-control" />
+                <span asp-validation-for="AddressForm.HouseNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressForm.Zipcode"></label>
+                <input asp-for="AddressForm.Zipcode" class="form-control" />
+                <span asp-validation-for="AddressForm.Zipcode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressForm.City"></label>
+                <input asp-for="AddressForm.City" class="form-control" />
+                <span asp-validation-for="AddressForm.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressForm.Country"></label>
+                <input asp-for="AddressForm.Country" class="form-control" />
+                <span asp-validation-for="AddressForm.Country" class="text-danger"></span>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

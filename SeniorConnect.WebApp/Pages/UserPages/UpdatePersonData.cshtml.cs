@@ -1,3 +1,4 @@
+using CoreDomain;
 using CoreDomain.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,7 +14,10 @@ namespace SeniorConnect.WebApp.Pages.UserPages
 
 
         [BindProperty]
-        public UserFormModel UserFormModel { get; set; }
+        public UserUI User { get; set; }
+
+        [BindProperty]
+        public AddressUI AddressForm { get; set; }
 
 
         public UpdatePersonDataModel(IUserRepository userRepository)
@@ -21,7 +25,7 @@ namespace SeniorConnect.WebApp.Pages.UserPages
             _userRepository = userRepository;
         }
 
-        public ActionResult OnPost()
+        public async Task<ActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -30,30 +34,37 @@ namespace SeniorConnect.WebApp.Pages.UserPages
 
             try
             {
-                var userToUpdate = new User
+                User userToUpdate = new User
                 {
-                    Id = UserFormModel.Id,
-                    FirstName = UserFormModel.FirstName,
-                    LastName = UserFormModel.LastName,
-                    Email = UserFormModel.Email,
-                    Password = UserFormModel.Password, // Hashing is handled in repository
-                    DateOfBirth = UserFormModel.DateOfBirth,
-                    Gender = UserFormModel.Gender,
-                    Iban = UserFormModel.Iban,
+                    Id = User.Id,
+                    FirstName = User.FirstName,
+                    LastName = User.LastName,
+                    Email = User.Email,
+                    Password = User.Password,
+                    DateOfBirth = DateOnly.FromDateTime(User.DateOfBirth),
+                    Gender = User.Gender,
+                };
+                // Update Address
+                var addressToUpdate = new Address
+                {
+                    StreetName = AddressForm.StreetName,
+                    HouseNumber = AddressForm.HouseNumber,
+                    Zipcode = AddressForm.Zipcode,
+                    City = AddressForm.City,
+                    Country = AddressForm.Country,
                 };
 
-                _userRepository.UpdateUser(userToUpdate);
+                await _userRepository.UpdateUserAsync(userToUpdate, addressToUpdate);
 
-                TempData["SuccessMessage"] = "User updated successfully!";
+                TempData["SuccessMessage"] = "User and address updated successfully!";
                 return RedirectToPage("Profile");
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "An error occurred while updating the user. Please try again.");
-                Console.WriteLine("Error updating user: " + ex.Message);
+                ModelState.AddModelError(string.Empty, "An error occurred while updating data. Please try again.");
+                Console.WriteLine("Error updating user or address: " + ex.Message);
                 return Page();
             }
         }
-
     }
 }
