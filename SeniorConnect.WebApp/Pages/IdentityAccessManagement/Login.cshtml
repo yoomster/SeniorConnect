@@ -12,13 +12,16 @@
         <input />
 
         <label for="password">Password:</label>
-        <input /> 
+        <input />
 
+        <button type="submit" class="btn btn-primary">Login</button> <br /> <br />
 
-        
+        <label>Are you new here? Please click the button to register</label> </br>
+        <button type="button" onclick="location.href='@Url.Page("/IdentityAccessManagement/Register")'">Register</button>
+
     </form>
 </div>
-
+@* 
 <div class="form-container">
     <form method="post" asp-antiforgery="true">
         <div class="form-group">
@@ -40,4 +43,4 @@
         <button type="button" onclick="location.href='@Url.Page("/IdentityAccessManagement/Register")'">Register</button>
 
     </form>
-</div>Password
+</div> *@

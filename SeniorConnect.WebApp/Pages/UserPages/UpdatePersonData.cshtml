@@ -8,6 +8,87 @@
 
 <div class="form-container">
     <form method="post" asp-antiforgery="true">
+        <div class="form-group">
+            <label for="FirstName" placeholder="User.FirstName">First Name</label>
+            <label for="LastName" placeholder="User.LastName">Last Name</label>
+        </div>
+
+        <div class="form-group">
+            <label for="Password">Password</label>
+            <input type="password" id="Password" class="form-control" asp-for="User.Password" />
+            <span asp-validation-for="User.Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="ConfirmPassword">Confirm Password</label>
+            <input type="password" id="ConfirmPassword" class="form-control" asp-for="User.ConfirmPassword" />
+            <span asp-validation-for="User.ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="DateOfBirth">Date of Birth</label>
+            <input type="date" id="DateOfBirth" class="form-control" asp-for="User.DateOfBirth" />
+            <span asp-validation-for="User.DateOfBirth" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="Gender">Gender</label>
+            <select id="Gender" class="form-control" asp-for="User.Gender">
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="N">Not Specified</option>
+            </select>
+            <span asp-validation-for="User.Gender" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="Origin">Origin</label>
+            <select id="Origin" class="form-control" asp-for="User.Origin">
+                <option value="Social Media">Social Media</option>
+                <option value="Friend Referral">Friend Referral</option>
+                <option value="Advertisement">Advertisement</option>
+                <option value="Search Engine">Search Engine</option>
+            </select>
+            <span asp-validation-for="User.Origin" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="StreetName">Street Name</label>
+            <input type="text" id="StreetName" class="form-control" asp-for="User.StreetName" />
+            <span asp-validation-for="User.StreetName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="HouseNumber">House Number</label>
+            <input type="text" id="HouseNumber" class="form-control" asp-for="User.HouseNumber" />
+            <span asp-validation-for="User.HouseNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="Zipcode">Zipcode</label>
+            <input type="text" id="Zipcode" class="form-control" asp-for="User.Zipcode" />
+            <span asp-validation-for="User.Zipcode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="City">City</label>
+            <input type="text" id="City" class="form-control" asp-for="User.City" />
+            <span asp-validation-for="User.City" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="Country">Country</label>
+            <input type="text" id="Country" class="form-control" asp-for="User.Country" />
+            <span asp-validation-for="User.Country" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+
+
+@* 
+<div class="form-container">
+    <form method="post" asp-antiforgery="true">
         <fieldset>
             <legend>Personal Data</legend>
             <div class="form-group">
@@ -51,7 +132,7 @@
         </fieldset>
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
-</div>
+</div> *@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
