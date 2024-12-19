@@ -7,10 +7,10 @@ namespace SeniorConnect.WebApp.Pages.UserPages
 {
     public class AllUsersModel : PageModel
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IActivityRepository _userRepository;
         public List<User> AllUsers { get; set; }
 
-        public AllUsersModel(IUserRepository userRepository)
+        public AllUsersModel(IActivityRepository userRepository)
         {
             _userRepository = userRepository;
         }

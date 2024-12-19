@@ -11,13 +11,13 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 {
     public class RegisterModel : PageModel
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IActivityRepository _userRepository;
         private readonly IAddressRepository _addressRepository;
 
         [BindProperty]
         public UserUI User { get; set; }
 
-        public RegisterModel(IUserRepository userRepository, IAddressRepository addressRepository)
+        public RegisterModel(IActivityRepositor userRepository, IAddressRepository addressRepository)
         {
             _userRepository = userRepository;
             _addressRepository = addressRepository;
