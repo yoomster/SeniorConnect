@@ -3,7 +3,7 @@ using CoreDomain.Users;
 
 namespace SeniorConnect.Domain.Contracts;
 
-public interface IUserRepository
+public interface IActivityRepository
 {
     public Task SaveUserToDBAsync(User user);
     public Task<List<User>> GetUsersAsync();
