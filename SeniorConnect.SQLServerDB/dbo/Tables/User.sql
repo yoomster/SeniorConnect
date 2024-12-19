@@ -6,7 +6,6 @@
     [Email] NVARCHAR(70) NOT NULL,
     [Password] NVARCHAR(50) NOT NULL,
     [DateOfBirth] Date NOT NULL,
-    --1 for TRUE and 0 for FALSE
     [Gender] char, 
     [Origin] nvarchar(30),
     [DateOfRegistration] Date NOT NULL,

@@ -31,7 +31,7 @@ namespace SeniorConnect.DataAccesLibrary
                     command.Parameters.AddWithValue("@FirstName", user.FirstName);
                     command.Parameters.AddWithValue("@LastName", user.LastName);
                     command.Parameters.AddWithValue("@Email", user.Email);
-                    command.Parameters.AddWithValue("@Password", HashPassword(user.Password));
+                    command.Parameters.AddWithValue("@Password", user.Password);
                     command.Parameters.AddWithValue("@DateOfBirth", user.DateOfBirth);
                     command.Parameters.AddWithValue("@Gender", (object?)user.Gender ?? DBNull.Value);
                     command.Parameters.AddWithValue("@Origin", (object?)user.Origin ?? DBNull.Value);
@@ -126,7 +126,7 @@ namespace SeniorConnect.DataAccesLibrary
                         userCommand.Parameters.AddWithValue("@FirstName", user.FirstName);
                         userCommand.Parameters.AddWithValue("@LastName", user.LastName);
                         userCommand.Parameters.AddWithValue("@Email", user.Email);
-                        userCommand.Parameters.AddWithValue("@Password", HashPassword(user.Password));
+                        userCommand.Parameters.AddWithValue("@Password",user.Password);
                         userCommand.Parameters.AddWithValue("@DateOfBirth", (object?)user.DateOfBirth ?? DBNull.Value);
                         userCommand.Parameters.AddWithValue("@Gender", (object?)user.Gender ?? DBNull.Value);
 
@@ -163,14 +163,5 @@ namespace SeniorConnect.DataAccesLibrary
             return true;
             //     return Users.Any(u => u.Email == email);
         }
-
-
-        private string HashPassword(string password)
-        {
-            //impl. hashing logic
-            return password;
-        }
-
-
     }
 }

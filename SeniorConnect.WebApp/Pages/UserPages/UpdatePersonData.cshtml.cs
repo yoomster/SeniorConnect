@@ -10,7 +10,7 @@ namespace SeniorConnect.WebApp.Pages.UserPages
 {
     public class UpdatePersonDataModel : PageModel
     {
-        private readonly IActivityRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
 
         [BindProperty]
@@ -20,7 +20,7 @@ namespace SeniorConnect.WebApp.Pages.UserPages
         public AddressUI AddressForm { get; set; }
 
 
-        public UpdatePersonDataModel(IActivityRepository userRepository)
+        public UpdatePersonDataModel(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
