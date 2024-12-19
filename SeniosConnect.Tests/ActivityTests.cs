@@ -23,7 +23,7 @@ namespace SeniorConnect.Tests
             int locationId = 100;
             int activityCoordinatorId = 200;
 
-            var activity = ActivityFactory.CreateActivity(dateOfActivity, startTime, endTime, maxParticipants, locationId, activityCoordinatorId);
+            var activity = CreateActivity(dateOfActivity, startTime, endTime, maxParticipants, locationId, activityCoordinatorId);
 
             var participant1 = new Participant();
             var participant2 = new Participant();

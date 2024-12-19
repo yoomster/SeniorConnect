@@ -45,6 +45,11 @@ public class Activity
         _addressId = addressId;
     }
 
+    public bool IsValid()
+    {
+        return Date > DateOnly.FromDateTime(DateTime.Now);
+    }
+
     public void CancelReservation(Participant participant)
         {
             var utcTimeNow = DateTime.UtcNow;
