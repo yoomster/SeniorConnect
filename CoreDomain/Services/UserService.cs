@@ -16,13 +16,11 @@ namespace SeniorConnect.Domain.Services
             _userRepository = userRepository;
         }
 
-        public static void RegisterUser(object registerDto, object userDto)
+        public static void CreateUser(object user)
         {
             throw new NotImplementedException();
             //if statement for validation, if true, create
         }
-
-        //Minimumleeftijd?
 
         //hashing van het wachtwoord?
         private string HashPassword(string password)

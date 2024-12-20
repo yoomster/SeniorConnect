@@ -16,11 +16,13 @@ namespace SeniorConnect.Domain.Services
             _activityRepository = activityRepository;
         }
 
-        public static void RegisterActivity (object registerDto, object userDto)
+        public static void RegisterActivity (object activity)
         {
             throw new NotImplementedException();
             //if statement for validation, if true, create
         }
+
+
 
         //An activity cannot contain more than the maximum number of participants
         //A reservation cannot be canceled for free less than 24 hours before the session starts
