@@ -6,18 +6,19 @@ using CoreDomain.Users;
 using SeniorConnect.Domain.Contracts;
 using System.Reflection;
 using CoreDomain;
+using SeniorConnect.Domain.Services;
 
 namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 {
     public class RegisterModel : PageModel
     {
-        private readonly IActivityRepository _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IAddressRepository _addressRepository;
 
         [BindProperty]
         public UserUI User { get; set; }
 
-        public RegisterModel(IActivityRepositor userRepository, IAddressRepository addressRepository)
+        public RegisterModel(IUserRepository userRepository, IAddressRepository addressRepository)
         {
             _userRepository = userRepository;
             _addressRepository = addressRepository;
@@ -36,6 +37,7 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 
             try
             {
+                //verander dit naar een CreateAddress method uit domein!
                 var newAddress = new Address
                 {
                     StreetName = User.StreetName,
@@ -47,6 +49,7 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 
                 var addressId = await _addressRepository.SaveAddressToDBAsync(newAddress);
 
+                //verander dit naar een CreateUser method uit domein!
                 var newUser = new User
                 {
                     FirstName = User.FirstName,
@@ -60,7 +63,10 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
                     AddressId = addressId
                 };
 
-                await _userRepository.SaveUserToDBAsync(newUser);
+                UserService.CreateUser(newUser);
+
+                //this be done by domain instead here
+                await _userRepository.SaveToDBAsync(newUser);
 
 
                 TempData["SuccessMessage"] = "User registered successfully!";
