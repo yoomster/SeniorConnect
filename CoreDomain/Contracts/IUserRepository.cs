@@ -3,12 +3,11 @@ using CoreDomain.Users;
 
 namespace SeniorConnect.Domain.Contracts;
 
-public interface IActivityRepository
+public interface IUserRepository
 {
-    public Task SaveUserToDBAsync(User user);
-    public Task<List<User>> GetUsersAsync();
-    public bool IsDuplicateEmail(string email);
-    public Task UpdateUserAsync(User user, Address address);
-
+    Task SaveToDBAsync(object user);
+    Task GetByIdAsync(int id);
+    Task<List<User>> GetAllAsync();
+    Task UpdateAsync(Object user, Object address);
+    Task DeleteAsync(int id);
 }
-

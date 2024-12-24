@@ -5,8 +5,11 @@ namespace SeniorConnect.Domain.Contracts;
 
 public interface IAddressRepository
 {
-    public Task<int> SaveAddressToDBAsync(Address address);
-    public Task UpdateAddresssync(Address address);
+    Task SaveToDBAsync(object address);
+    Task GetByIdAsync(int id);
+    Task<List<User>> GetAllAsync();
+    Task UpdateAsync(Object address);
+    Task DeleteAsync(int id);
 }
 
 

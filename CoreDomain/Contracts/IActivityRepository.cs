@@ -5,8 +5,10 @@ namespace SeniorConnect.Domain.Contracts;
 
 public interface IActivityRepository
 {
-    Task AddAsync(Activity activity);
-    Task<Activity> GetByIdAsync(int id);
-    Task<IEnumerable<Activity>> GetAllAsync();
+    Task SaveToDBAsync(Object activity);
+    Task GetByIdAsync(int id);
+    Task<List<Object>> GetAllAsync();
+    Task UpdateAsync(Object activity, Object address);
+    Task DeleteAsync(int id);
 }
 
