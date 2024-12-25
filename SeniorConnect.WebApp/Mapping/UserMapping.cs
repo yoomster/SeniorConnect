@@ -10,16 +10,21 @@ public static class UserMapping
     {
         var newUser = new User
         {
-            Email = formModel.Email,
             FirstName = formModel.FirstName,
             LastName = formModel.LastName,
+            Email = formModel.Email,
             Password = formModel.Password,
-            DateOfBirth = formModel.DateOfBirth.Date,
+            DateOfBirth = formModel.DateOfBirth,
+            Gender = formModel.Gender,
+            Origin = formModel.Origin,
+            StreetName = formModel.StreetName,
+            HouseNumber = formModel.HouseNumber,
+            Zipcode = formModel.Zipcode,
             City = formModel.City,
             Country = formModel.Country,
-            HouseNumber = formModel.HouseNumber,
-            StreetName = formModel.StreetName,
-            Zipcode = formModel.Zipcode,
         };
+
+        return newUser;
     }
 }
+
