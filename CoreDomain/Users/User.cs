@@ -14,7 +14,7 @@ public class User
     public required string LastName { get; set; }
     public required string Email { get; set; } // verification for uniqueness
     public required string Password { get; set; } // need to hash before sending to DB?
-    public DateOnly? DateOfBirth { get; set; }
+    public DateOnly DateOfBirth { get; set; }
     public char? Gender { get; set; } 
     public string? Origin { get; set; }
     public DateOnly DateOfRegistration { get; set; } = DateOnly.FromDateTime(DateTime.Now);
