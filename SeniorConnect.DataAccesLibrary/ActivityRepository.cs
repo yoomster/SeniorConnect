@@ -15,8 +15,8 @@
 
 //        public void SaveActivityToDB(Activity activity)
 //        {
-//            string query = "INSERT INTO Activities (Name, Description, Date, StartTime, EndTime, MaxParticipants, CoordinatorId, LocationId) " +
-//                            "VALUES (@Name, @Description, @Date, @StartTime, @EndTime, @MaxParticipants, @CoordinatorId, @LocationId)";
+//            string query = "INSERT INTO Activities (Name, Description, Date, StartTime, EndTime, MaxParticipants, CoordinatorId, StreetName, HouseNumber, Zipcode, City, Country) " +
+//                            "VALUES (@Name, @Description, @Date, @StartTime, @EndTime, @MaxParticipants, @CoordinatorId, @StreetName, @HouseNumber, @Zipcode, @City, @Country)";
 
 //            try
 //            {
@@ -30,7 +30,12 @@
 //                    command.Parameters.AddWithValue("@EndTime", activity.EndTime);
 //                    command.Parameters.AddWithValue("@MaxParticipants", activity.MaxParticipants);
 //                    command.Parameters.AddWithValue("@CoordinatorId", activity.ActivityCoordinatorId);
-//                    command.Parameters.AddWithValue("@LocationId", activity.LocationId);
+//                    command.Parameters.AddWithValue("@Country", activity.Country);
+//                    command.Parameters.AddWithValue("@StreetName", activity.StreetName);
+//                    command.Parameters.AddWithValue("@HouseNumber", activity.HouseNumber);
+//                    command.Parameters.AddWithValue("@Zipcode", activity.Zipcode);
+//                    command.Parameters.AddWithValue("@City", activity.City);
+//                    command.Parameters.AddWithValue("@Country", activity.Country);
 
 //                    command.ExecuteNonQuery();
 //                }
@@ -47,7 +52,7 @@
 //        {
 //            List<Activity> activities = new List<Activity>();
 
-//            string query = "SELECT [Id], [Name], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], [CoordinatorId], [LocationId] FROM [Activity]";
+//            string query = "SELECT [Id], [Name], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], [CoordinatorId], [StreetName], [HouseNumber], [Zipcode], [City], [Country] FROM [Activity]";
 //            try
 //            {
 //                using (var connection = _dataAccess.OpenSqlConnection())
@@ -56,7 +61,7 @@
 //                {
 //                    while (reader.Read())
 //                    {
-//                        var activity = new Activity(
+//                        var activity = new Activity( //STILL TO ADD ADDRESS INFO!
 //                            id: reader.GetInt32(0),
 //                            name: reader.GetString(reader.GetOrdinal("Name")),
 //                            description: reader.GetString(reader.GetOrdinal("Description")),
@@ -64,9 +69,10 @@
 //                            startTime: TimeOnly.Parse(reader.GetString(reader.GetOrdinal("StartTime"))),    //  StartTime is in string format?
 //                            endTime: TimeOnly.Parse(reader.GetString(reader.GetOrdinal("EndTime"))),        //  EndTime is in string format?
 //                            maxParticipants: reader.GetInt32(reader.GetOrdinal("MaxParticipants"))
+//                               
 //                        )
 //                        {
-                            
+
 //                        };
 
 //                        activities.Add(activity);

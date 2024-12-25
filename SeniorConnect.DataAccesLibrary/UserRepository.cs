@@ -2,6 +2,7 @@
 using CoreDomain.Users;
 using Microsoft.Data.SqlClient;
 using SeniorConnect.Domain.Contracts;
+using System.Net;
 
 namespace SeniorConnect.DataAccesLibrary
 {
@@ -15,13 +16,13 @@ namespace SeniorConnect.DataAccesLibrary
             _dataAccess = dataAccess;
         }
 
-        public async Task SaveUserToDBAsync(User user)
+        public async Task SaveToDBAsync(User user)
         {
             string query = @"
                 INSERT INTO [dbo].[User] 
-                ([FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Origin], [DateOfRegistration], [AddressID]) 
+                ([FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Origin], [DateOfRegistration], [StreetName], [HouseNumber], [Zipcode], [City], [Country]) 
                 VALUES 
-                (@FirstName, @LastName, @Email, @Password, @DateOfBirth, @Gender, @Origin, @DateOfRegistration, @AddressID)";
+                (@FirstName, @LastName, @Email, @Password, @DateOfBirth, @Gender, @Origin, @DateOfRegistration, @StreetName, @HouseNumber, @Zipcode, @City, @Country)";
 
             try
             {
@@ -36,7 +37,12 @@ namespace SeniorConnect.DataAccesLibrary
                     command.Parameters.AddWithValue("@Gender", (object?)user.Gender ?? DBNull.Value);
                     command.Parameters.AddWithValue("@Origin", (object?)user.Origin ?? DBNull.Value);
                     command.Parameters.AddWithValue("@DateOfRegistration", user.DateOfRegistration);
-                    command.Parameters.AddWithValue("@AddressID", user.AddressId);
+                    command.Parameters.AddWithValue("@Country", user.Country);
+                    command.Parameters.AddWithValue("@StreetName", user.StreetName);
+                    command.Parameters.AddWithValue("@HouseNumber", user.HouseNumber);
+                    command.Parameters.AddWithValue("@Zipcode", user.Zipcode);
+                    command.Parameters.AddWithValue("@City", user.City);
+                    command.Parameters.AddWithValue("@Country", user.Country);
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -47,6 +53,7 @@ namespace SeniorConnect.DataAccesLibrary
                 throw;
             }
         }
+
 
         private void LogError(string message, Exception ex)
         {
@@ -158,10 +165,61 @@ namespace SeniorConnect.DataAccesLibrary
         }
 
 
-        bool IUserRepository.IsDuplicateEmail(string email)
+        public bool IsDuplicateEmail(string email)
         {
             return true;
             //     return Users.Any(u => u.Email == email);
         }
+
+        public Task SaveToDBAsync(object user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task GetByIdAsync(int id)
+        {
+            string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Origin], [DateOfRegistration], [AddressID] FROM [dbo].[User] WHERE [UserId] = @UserId";
+
+            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@UserId", id);
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        return new User
+                        {
+                            Id = reader.GetInt32(0),
+                            FirstName = reader.GetString(1),
+                            LastName = reader.GetString(2),
+                            Email = reader.GetString(3),
+                            Password = reader.GetString(4),
+                            DateOfBirth = reader.IsDBNull(5) ? (DateOnly?)null : DateOnly.FromDateTime(reader.GetDateTime(5)),
+                            Gender = reader.IsDBNull(6) ? (char?)null : reader.GetString(6)[0],
+                            DateOfRegistration = reader.IsDBNull(7) ? default : DateOnly.FromDateTime(reader.GetDateTime(7)),
+
+                        };
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public Task<List<User>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(object user, object address)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
-}

@@ -16,7 +16,11 @@ public class User
     public required string Password { get; set; } // need to hash before sending to DB?
     public DateOnly? DateOfBirth { get; set; }
     public char? Gender { get; set; } 
-    public string Origin { get; set; }
+    public string? Origin { get; set; }
     public DateOnly DateOfRegistration { get; set; } = DateOnly.FromDateTime(DateTime.Now);
-    public int AddressId { get; set; }
+    public required string StreetName { get; set; }
+    public required string HouseNumber { get; set; }
+    public required string Zipcode { get; set; }
+    public required string City { get; set; }
+    public required string Country { get; set; }
 }

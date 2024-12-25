@@ -2,9 +2,9 @@
 
 namespace SeniorConnect.WebApp.Models
 {
-    public class UserUI
+    public class UserFormModel
     {
-        public UserUI()
+        public UserFormModel()
         {
                 
         }
