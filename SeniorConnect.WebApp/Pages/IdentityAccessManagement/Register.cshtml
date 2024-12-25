@@ -22,90 +22,90 @@ else if (TempData["ErrorMessage"] != null)
     <form method="post" asp-antiforgery="true">
         <div class="form-group">
             <label for="FirstName">First Name</label>
-            <input type="text" id="FirstName" class="form-control" asp-for="User.FirstName" />
-            <span asp-validation-for="User.FirstName" class="text-danger"></span>
+            <input type="text" id="FirstName" class="form-control" asp-for="UserFormModel.FirstName" />
+            <span asp-validation-for="UserFormModel.FirstName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="LastName">Last Name</label>
-            <input type="text" id="LastName" class="form-control" asp-for="User.LastName" />
-            <span asp-validation-for="User.LastName" class="text-danger"></span>
+            <input type="text" id="LastName" class="form-control" asp-for="UserFormModel.LastName" />
+            <span asp-validation-for="UserFormModel.LastName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="Email">Email</label>
-            <input type="email" id="Email" class="form-control" asp-for="User.Email" />
-            <span asp-validation-for="User.Email" class="text-danger"></span>
+            <input type="email" id="Email" class="form-control" asp-for="UserFormModel.Email" />
+            <span asp-validation-for="UserFormModel.Email" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="Password">Password</label>
-            <input type="password" id="Password" class="form-control" asp-for="User.Password" />
-            <span asp-validation-for="User.Password" class="text-danger"></span>
+            <input type="password" id="Password" class="form-control" asp-for="UserFormModel.Password" />
+            <span asp-validation-for="UserFormModel.Password" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="ConfirmPassword">Confirm Password</label>
-            <input type="password" id="ConfirmPassword" class="form-control" asp-for="User.ConfirmPassword" />
-            <span asp-validation-for="User.ConfirmPassword" class="text-danger"></span>
+            <input type="password" id="ConfirmPassword" class="form-control" asp-for="UserFormModel.ConfirmPassword" />
+            <span asp-validation-for="UserFormModel.ConfirmPassword" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="DateOfBirth">Date of Birth</label>
-            <input type="date" id="DateOfBirth" class="form-control" asp-for="User.DateOfBirth" />
-            <span asp-validation-for="User.DateOfBirth" class="text-danger"></span>
+            <input type="date" id="DateOfBirth" class="form-control" asp-for="UserFormModel.DateOfBirth" />
+            <span asp-validation-for="UserFormModel.DateOfBirth" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="Gender">Gender</label>
-            <select id="Gender" class="form-control" asp-for="User.Gender">
+            <select id="Gender" class="form-control" asp-for="UserFormModel.Gender">
                 <option value="M">Male</option>
                 <option value="F">Female</option>
                 <option value="N">Not Specified</option>
             </select>
-            <span asp-validation-for="User.Gender" class="text-danger"></span>
+            <span asp-validation-for="UserFormModel.Gender" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="Origin">Origin</label>
-            <select id="Origin" class="form-control" asp-for="User.Origin">
+            <select id="Origin" class="form-control" asp-for="UserFormModel.Origin">
                 <option value="Social Media">Social Media</option>
                 <option value="Friend Referral">Friend Referral</option>
                 <option value="Advertisement">Advertisement</option>
                 <option value="Search Engine">Search Engine</option>
             </select>
-            <span asp-validation-for="User.Origin" class="text-danger"></span>
+            <span asp-validation-for="UserFormModel.Origin" class="text-danger"></span>
         </div>
 
 
         <div class="form-group">
             <label for="StreetName">Street Name</label>
-            <input type="text" id="StreetName" class="form-control" asp-for="User.StreetName" />
-            <span asp-validation-for="User.StreetName" class="text-danger"></span>
+            <input type="text" id="StreetName" class="form-control" asp-for="UserFormModel.StreetName" />
+            <span asp-validation-for="UserFormModel.StreetName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="HouseNumber">House Number</label>
-            <input type="text" id="HouseNumber" class="form-control" asp-for="User.HouseNumber" />
-            <span asp-validation-for="User.HouseNumber" class="text-danger"></span>
+            <input type="text" id="HouseNumber" class="form-control" asp-for="UserFormModel.HouseNumber" />
+            <span asp-validation-for="UserFormModel.HouseNumber" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="Zipcode">Zipcode</label>
-            <input type="text" id="Zipcode" class="form-control" asp-for="User.Zipcode" />
-            <span asp-validation-for="User.Zipcode" class="text-danger"></span>
+            <input type="text" id="Zipcode" class="form-control" asp-for="UserFormModel.Zipcode" />
+            <span asp-validation-for="UserFormModel.Zipcode" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="City">City</label>
-            <input type="text" id="City" class="form-control" asp-for="User.City" />
-            <span asp-validation-for="User.City" class="text-danger"></span>
+            <input type="text" id="City" class="form-control" asp-for="UserFormModel.City" />
+            <span asp-validation-for="UserFormModel.City" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="Country">Country</label>
-            <input type="text" id="Country" class="form-control" asp-for="User.Country" />
-            <span asp-validation-for="User.Country" class="text-danger"></span>
+            <input type="text" id="Country" class="form-control" asp-for="UserFormModel.Country" />
+            <span asp-validation-for="UserFormModel.Country" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-primary">Register</button>
