@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Activity]
+﻿CREATE TABLE [dbo].[Activities]
 (
     [ActivityId] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Name] NVARCHAR(50) NOT NULL, 

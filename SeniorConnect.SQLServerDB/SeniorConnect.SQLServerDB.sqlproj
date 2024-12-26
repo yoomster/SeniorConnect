@@ -61,9 +61,9 @@
     <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Activity.sql" />
     <Build Include="dbo\Tables\UserActivity.sql" />
-    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Tables\Users.sql" />
+    <Build Include="dbo\Tables\Activities.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\InsertUsers.sql" />
@@ -71,6 +71,8 @@
     <None Include="Scripts\InsertUserActivity.sql" />
     <None Include="Scripts\AllActiviesPerUser.sql" />
     <None Include="Scripts\AllUsersPerActivity.sql" />
-    <None Include="Scripts\InsertAddresses.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="SeniorConnect.SQLServerDB.refactorlog" />
   </ItemGroup>
 </Project>
