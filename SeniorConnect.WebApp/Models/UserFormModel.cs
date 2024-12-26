@@ -31,10 +31,12 @@ namespace SeniorConnect.WebApp.Models
 
         [Required(ErrorMessage = "Required field!")]
         [DataType(DataType.Date)]
-        public DateOnly DateOfBirth { get; set; } 
+        public DateOnly DateOfBirth { get; set; }
 
-        public char? Gender { get; set; } 
-
+        [Required(ErrorMessage = "Required field!")]
+        public char? Gender { get; set; }
+        
+        [Required(ErrorMessage = "Required field!")]
         public string? Origin { get; set; }
 
         [Required(ErrorMessage = "Required field!")]

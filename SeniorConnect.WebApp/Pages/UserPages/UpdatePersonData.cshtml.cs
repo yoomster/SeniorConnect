@@ -14,7 +14,7 @@ namespace SeniorConnect.WebApp.Pages.UserPages
 
 
         [BindProperty]
-        public UserUI User { get; set; }
+        public UserFormModel User { get; set; }
 
         [BindProperty]
         public AddressUI AddressForm { get; set; }
