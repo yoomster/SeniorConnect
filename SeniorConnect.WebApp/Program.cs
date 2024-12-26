@@ -1,5 +1,6 @@
 using SeniorConnect.DataAccesLibrary;
 using SeniorConnect.Domain.Contracts;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,8 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<DataAccess>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => {
+    options.LoginPath = new PathString("/Pages/IdentityAccessManagement/Login");
+    options.AccessDeniedPath = new PathString("/Pages/IdentityAccessManagement/Login");
+}
+);
 
 
 var app = builder.Build();
@@ -26,6 +32,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
