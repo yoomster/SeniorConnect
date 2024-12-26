@@ -16,10 +16,6 @@ namespace SeniorConnect.WebApp.Pages.UserPages
         [BindProperty]
         public UserFormModel User { get; set; }
 
-        [BindProperty]
-        public AddressUI AddressForm { get; set; }
-
-
         public UpdatePersonDataModel(IUserRepository userRepository)
         {
             _userRepository = userRepository;
@@ -41,20 +37,17 @@ namespace SeniorConnect.WebApp.Pages.UserPages
                     LastName = User.LastName,
                     Email = User.Email,
                     Password = User.Password,
-                    DateOfBirth = DateOnly.FromDateTime(User.DateOfBirth),
+                    DateOfBirth = User.DateOfBirth,
                     Gender = User.Gender,
-                };
-                // Update Address
-                var addressToUpdate = new Address
-                {
-                    StreetName = AddressForm.StreetName,
-                    HouseNumber = AddressForm.HouseNumber,
-                    Zipcode = AddressForm.Zipcode,
-                    City = AddressForm.City,
-                    Country = AddressForm.Country,
+                    StreetName = User.StreetName,
+                    Origin = User.Origin,
+                    HouseNumber = User.HouseNumber,
+                    Zipcode = User.Zipcode,
+                    City = User.City,
+                    Country = User.Country,
                 };
 
-                await _userRepository.UpdateUserAsync(userToUpdate, addressToUpdate);
+                //await _userRepository.UpdateUserAsync(userToUpdate);
 
                 TempData["SuccessMessage"] = "User and address updated successfully!";
                 return RedirectToPage("Profile");

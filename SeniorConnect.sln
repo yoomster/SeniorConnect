@@ -11,7 +11,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SeniorConnect.SQLServerDB",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeniorConnect.Tests", "SeniosConnect.Tests\SeniorConnect.Tests.csproj", "{E1AFCF40-B798-43F7-829B-CB92CFAF9C6D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeniorConnect.DataAccesLibrary", "SeniorConnect.DataAccesLibrary\SeniorConnect.DataAccesLibrary.csproj", "{9384C7BC-BC58-4C8E-92C3-7DE24FFC2217}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeniorConnect.DataAccessLibrary", "SeniorConnect.DataAccesLibrary\SeniorConnect.DataAccessLibrary.csproj", "{9384C7BC-BC58-4C8E-92C3-7DE24FFC2217}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

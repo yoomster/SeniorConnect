@@ -19,7 +19,7 @@ namespace SeniorConnect.DataAccesLibrary
         public async Task SaveToDBAsync(User user)
         {
             string query = @"
-                INSERT INTO [dbo].[User] 
+                INSERT INTO [dbo].[Users] 
                 ([FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Origin], [DateOfRegistration], [StreetName], [HouseNumber], [Zipcode], [City], [Country]) 
                 VALUES 
                 (@FirstName, @LastName, @Email, @Password, @DateOfBirth, @Gender, @Origin, @DateOfRegistration, @StreetName, @HouseNumber, @Zipcode, @City, @Country)";
@@ -54,6 +54,104 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
+        //public async Task<List<User>> GetUsersAsync()
+        //{
+        //    var users = new List<User>();
+        //    string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Origin], [DateOfRegistration], [AddressID]
+
+        //             FROM [dbo].[Users]";
+
+        //    try
+        //    {
+        //        using (var connection = await _dataAccess.OpenSqlConnection())
+        //        using (var command = new SqlCommand(query, connection))
+        //        using (var reader = await command.ExecuteReaderAsync())
+        //        {
+        //            while (await reader.ReadAsync())
+        //            {
+        //                var user = new User
+        //                {
+        //                    Id = reader.GetInt32(0),
+        //                    FirstName = reader.GetString(1),
+        //                    LastName = reader.GetString(2),
+        //                    Email = reader.GetString(3),
+        //                    Password = reader.GetString(4),
+        //                    DateOfBirth = reader.IsDBNull(5) ? (DateOnly?)null : DateOnly.FromDateTime(reader.GetDateTime(5)),
+        //                    Gender = reader.IsDBNull(6) ? (char?)null : reader.GetString(6)[0],
+        //                    DateOfRegistration = reader.IsDBNull(7) ? default : DateOnly.FromDateTime(reader.GetDateTime(7))
+        //                };
+
+        //                users.Add(user);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Error loading data: " + ex.Message);
+        //    }
+
+        //    return users;
+        //}
+
+
+        //public async Task UpdateAsync(User user)
+        //{
+        //    var updateUserQuery = @"UPDATE [User] SET 
+        //                    FirstName = @FirstName, 
+        //                    LastName = @LastName, 
+        //                    Email = @Email, 
+        //                    Password = @Password, 
+        //                    DateOfBirth = @DateOfBirth, 
+        //                    Gender = @Gender, 
+        //                    Origin = @Origin 
+        //                    StreetName = @StreetName, 
+        //                    HouseNumber = @HouseNumber, 
+        //                    Zipcode = @Zipcode, 
+        //                    City = @City, 
+        //                    Country = @Country 
+        //                    WHERE UserId = @UserId";
+
+        //    try
+        //    {
+        //        using (var connection = await _dataAccess.OpenSqlConnection())
+        //        using (var transaction = connection.BeginTransaction())
+        //        {
+        //            // Update User
+        //            using (var userCommand = new SqlCommand(updateUserQuery, connection, transaction))
+        //            {
+        //                userCommand.Parameters.AddWithValue("@UserId", user.Id);
+        //                userCommand.Parameters.AddWithValue("@FirstName", user.FirstName);
+        //                userCommand.Parameters.AddWithValue("@LastName", user.LastName);
+        //                userCommand.Parameters.AddWithValue("@Email", user.Email);
+        //                userCommand.Parameters.AddWithValue("@Password", user.Password);
+        //                userCommand.Parameters.AddWithValue("@DateOfBirth", (object?)user.DateOfBirth ?? DBNull.Value);
+        //                userCommand.Parameters.AddWithValue("@Gender", (object?)user.Gender ?? DBNull.Value);
+        //                userCommand.Parameters.AddWithValue("@Origin", (object?)user.Origin ?? DBNull.Value);
+        //                userCommand.Parameters.AddWithValue("@StreetName", user.StreetName);
+        //                userCommand.Parameters.AddWithValue("@HouseNumber", user.HouseNumber);
+        //                userCommand.Parameters.AddWithValue("@Zipcode", user.Zipcode);
+        //                userCommand.Parameters.AddWithValue("@City", user.City);
+        //                userCommand.Parameters.AddWithValue("@Country", user.Country);
+
+        //                await userCommand.ExecuteNonQueryAsync();
+        //            }
+        //            // Commit the transaction
+        //            transaction.Commit();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogError("Error updating user and address to database", ex);
+        //        throw;
+        //    }
+        //}
+
+
+        //public bool IsDuplicateEmail(string email)
+        //{
+        //    return true;
+        //    //     return Users.Any(u => u.Email == email);
+        //}
 
         private void LogError(string message, Exception ex)
         {
@@ -61,124 +159,13 @@ namespace SeniorConnect.DataAccesLibrary
             Console.WriteLine($"{message}: {ex.Message}");
         }
 
-        public async Task<List<User>> GetUsersAsync()
+        public async Task<User?> GetByIdAsync(int id)
         {
-            var users = new List<User>();
-            string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Origin], [DateOfRegistration], [AddressID]
-
-                     FROM [dbo].[User]";
-
-            try
-            {
-                using (var connection = await _dataAccess.OpenSqlConnection())
-                using (var command = new SqlCommand(query, connection))
-                using (var reader = await command.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        var user = new User
-                        {
-                            Id = reader.GetInt32(0),
-                            FirstName = reader.GetString(1),
-                            LastName = reader.GetString(2),
-                            Email = reader.GetString(3),
-                            Password = reader.GetString(4),
-                            DateOfBirth = reader.IsDBNull(5) ? (DateOnly?)null : DateOnly.FromDateTime(reader.GetDateTime(5)),
-                            Gender = reader.IsDBNull(6) ? (char?)null : reader.GetString(6)[0],
-                            DateOfRegistration = reader.IsDBNull(7) ? default : DateOnly.FromDateTime(reader.GetDateTime(7))
-                        };
-
-                        users.Add(user);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error loading data: " + ex.Message);
-            }
-
-            return users;
-        }
-
-
-        public async Task UpdateUserAsync(User user, Address address)
-        {
-            var updateUserQuery = @"UPDATE [User] SET 
-                            FirstName = @FirstName, 
-                            LastName = @LastName, 
-                            Email = @Email, 
-                            Password = @Password, 
-                            DateOfBirth = @DateOfBirth, 
-                            Gender = @Gender, 
-                            Iban = @Iban 
-                            WHERE UserId = @UserId";
-
-            var updateAddressQuery = @"UPDATE [Address] SET 
-                               StreetName = @StreetName, 
-                               HouseNumber = @HouseNumber, 
-                               Zipcode = @Zipcode, 
-                               City = @City, 
-                               Country = @Country 
-                               WHERE AddressId = @AddressId";
-
-            try
-            {
-                using (var connection = await _dataAccess.OpenSqlConnection())
-                using (var transaction = connection.BeginTransaction())
-                {
-                    // Update User
-                    using (var userCommand = new SqlCommand(updateUserQuery, connection, transaction))
-                    {
-                        userCommand.Parameters.AddWithValue("@UserId", user.Id);
-                        userCommand.Parameters.AddWithValue("@FirstName", user.FirstName);
-                        userCommand.Parameters.AddWithValue("@LastName", user.LastName);
-                        userCommand.Parameters.AddWithValue("@Email", user.Email);
-                        userCommand.Parameters.AddWithValue("@Password",user.Password);
-                        userCommand.Parameters.AddWithValue("@DateOfBirth", (object?)user.DateOfBirth ?? DBNull.Value);
-                        userCommand.Parameters.AddWithValue("@Gender", (object?)user.Gender ?? DBNull.Value);
-
-                        await userCommand.ExecuteNonQueryAsync();
-                    }
-
-                    // Update Address
-                    using (var addressCommand = new SqlCommand(updateAddressQuery, connection, transaction))
-                    {
-                        addressCommand.Parameters.AddWithValue("@AddressId", address.Id);
-                        addressCommand.Parameters.AddWithValue("@StreetName", address.StreetName);
-                        addressCommand.Parameters.AddWithValue("@HouseNumber", address.HouseNumber);
-                        addressCommand.Parameters.AddWithValue("@Zipcode", address.Zipcode);
-                        addressCommand.Parameters.AddWithValue("@City", address.City);
-                        addressCommand.Parameters.AddWithValue("@Country", address.Country);
-
-                        await addressCommand.ExecuteNonQueryAsync();
-                    }
-
-                    // Commit the transaction
-                    transaction.Commit();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogError("Error updating user and address to database", ex);
-                throw;
-            }
-        }
-
-
-        public bool IsDuplicateEmail(string email)
-        {
-            return true;
-            //     return Users.Any(u => u.Email == email);
-        }
-
-        public Task SaveToDBAsync(object user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task GetByIdAsync(int id)
-        {
-            string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Origin], [DateOfRegistration], [AddressID] FROM [dbo].[User] WHERE [UserId] = @UserId";
+            string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
+                            [DateOfBirth], [Gender], [Origin], [DateOfRegistration], 
+                            [StreetName], [HouseNumber], [Zipcode], [City], [Country]  
+                     FROM [dbo].[Users] 
+                     WHERE [UserId] = @UserId";
 
             using (var connection = await _dataAccess.OpenSqlConnection())
             using (var command = new SqlCommand(query, connection))
@@ -197,29 +184,31 @@ namespace SeniorConnect.DataAccesLibrary
                             Email = reader.GetString(3),
                             Password = reader.GetString(4),
                             DateOfBirth = reader.IsDBNull(5) ? (DateOnly?)null : DateOnly.FromDateTime(reader.GetDateTime(5)),
-                            Gender = reader.IsDBNull(6) ? (char?)null : reader.GetString(6)[0],
-                            DateOfRegistration = reader.IsDBNull(7) ? default : DateOnly.FromDateTime(reader.GetDateTime(7)),
-
+                            Gender = reader.GetString(6)[0],
+                            Origin = reader.GetString(7),
+                            DateOfBirth = reader.IsDBNull(8) ? (DateOnly?)null : DateOnly.FromDateTime(reader.GetDateTime(8)),
+                            StreetName = reader.GetString(9), 
+                            HouseNumber = reader.GetString(10),
+                            Zipcode = reader.GetString(11),
+                            City = reader.GetString(12),
+                            Country = reader.GetString(13)
                         };
                     }
                 }
             }
 
-            return null;
+            return null; // Return null if no user found
         }
 
-        public Task<List<User>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task UpdateAsync(object user, object address)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task <List<User>> GetAllAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task DeleteAsync(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
+}

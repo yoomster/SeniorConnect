@@ -1,5 +1,5 @@
 ﻿-- Insert User data and link to AddressID
-INSERT INTO [dbo].[User] 
+INSERT INTO [dbo].[Users] 
 (FirstName, LastName, Email, Password, DateOfBirth, Gender, Origin, DateOfRegistration, AddressID)
 VALUES
     ('Jan', 'Jansen', 'jan.jansen@example.com', 'Password123!', '1950-04-12', 'M', 'Dutch', '2020-05-10', 1),
@@ -22,3 +22,22 @@ VALUES
     ('Clara', 'Smits', 'clara.smits@example.com', 'Password123!', '1942-04-09', 'F', 'Dutch', '2021-10-18', 18),
     ('Rik', 'Hofman', 'rik.hofman@example.com', 'Password123!', '1936-07-22', 'M', 'Dutch', '2022-01-10', 19),
     ('Noor', 'Heemskerk', 'noor.heemskerk@example.com', 'Password123!', '1941-06-13', 'F', 'Dutch', '2020-08-15', 20);
+
+
+--    create insert query for 25 people, all of age between 65 and 100 years old who live somewhere in the Netherlands, of which half in Eindhoven.   for the following table:CREATE TABLE [dbo].[User] 
+--(
+--	[UserId] INT NOT NULL PRIMARY KEY IDENTITY,
+--    [FirstName] NVARCHAR(50) NOT NULL, 
+--    [LastName] NVARCHAR(50) NOT NULL,
+--    [Email] NVARCHAR(70) NOT NULL,
+--    [Password] NVARCHAR(50) NOT NULL,
+--    [DateOfBirth] Date NOT NULL,
+--    [Gender] char, 
+--    [Origin] nvarchar(30),
+--    [DateOfRegistration] Date NOT NULL,
+--    [StreetName] NVARCHAR(50) NOT NULL, 
+--	[HouseNumber] NVARCHAR(10) NOT NULL, 
+--	[Zipcode] NVARCHAR(10) NOT NULL, 
+--    [City] NVARCHAR(50) NOT NULL, 
+--    [Country] NVARCHAR(30) NOT NULL,
+--)

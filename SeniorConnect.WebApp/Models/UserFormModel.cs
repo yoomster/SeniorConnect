@@ -34,7 +34,7 @@ namespace SeniorConnect.WebApp.Models
         public DateOnly DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Required field!")]
-        public char? Gender { get; set; }
+        public char Gender { get; set; }
         
         [Required(ErrorMessage = "Required field!")]
         public string? Origin { get; set; }

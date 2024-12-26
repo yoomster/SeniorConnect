@@ -11,8 +11,9 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => {
-    options.LoginPath = new PathString("/Pages/IdentityAccessManagement/Login");
-    options.AccessDeniedPath = new PathString("/Pages/IdentityAccessManagement/Login");
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.LoginPath = new PathString("/Pages/IdentityAccessManagement/Login");
+        options.AccessDeniedPath = new PathString("/Pages/Forbidden");
 }
 );
 
