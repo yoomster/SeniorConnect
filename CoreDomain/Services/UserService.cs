@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace SeniorConnect.Domain.Services
 {
@@ -18,38 +19,56 @@ namespace SeniorConnect.Domain.Services
             _userRepository = userRepository;
         }
 
-        public static async Task AddUser(User user)
+        public async Task AddUser(User user)
         {
-            var newUser = new User
+
+            if (IsEmailUnique(user.Email))
             {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Password = user.Password,
-                DateOfBirth = user.DateOfBirth,
-                Gender = user.Gender,
-                Origin = user.Origin,
-                DateOfRegistration = DateOnly.FromDateTime(DateTime.Now),
-                StreetName = user.StreetName,
-                HouseNumber = user.HouseNumber,
-                Zipcode = user.Zipcode,
-                City = user.City,
-                Country = user.Country,
-            };
+                var hash = HashPassword(user.Password, out var salt);
 
-            await _userRepository.SaveToDBAsync(newUser);
+                var newUser = new User
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Password = user.Password,
+                    DateOfBirth = user.DateOfBirth,
+                    Gender = user.Gender,
+                    Origin = user.Origin,
+                    DateOfRegistration = DateOnly.FromDateTime(DateTime.Now),
+                    StreetName = user.StreetName,
+                    HouseNumber = user.HouseNumber,
+                    Zipcode = user.Zipcode,
+                    City = user.City,
+                    Country = user.Country,
+                };
 
-            //if statement for validation, if true, create
+
+                await _userRepository.SaveToDBAsync(newUser); 
+            }
+
         }
 
         //hashing van het wachtwoord?
-        private string HashPassword(string password)
+        private static string HashPassword(string password, out byte[] salt)
         {
-            //impl. hashing logic
-            return password;
+            const int keySize = 64;
+            const int iterations = 350000;
+            HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
+
+            salt = RandomNumberGenerator.GetBytes(keySize);
+
+            var hash = Rfc2898DeriveBytes.Pbkdf2(
+                Encoding.UTF8.GetBytes(password),
+                salt,
+                iterations,
+                hashAlgorithm,
+                keySize);
+
+            return Convert.ToHexString(hash);
         }
 
-        private bool isEmailUnique(string email)
+        private static bool IsEmailUnique(string email)
         {
             bool output = false;
 
@@ -60,5 +79,7 @@ namespace SeniorConnect.Domain.Services
 
             return output;
         }
+
+
     }
 }

@@ -5,9 +5,9 @@ namespace SeniorConnect.Domain.Contracts;
 
 public interface IUserRepository
 {
-    Task SaveToDBAsync(object user);
+    Task SaveToDBAsync(User user);
     Task GetByIdAsync(int id);
-    Task<List<User>> GetAllAsync();
-    Task UpdateAsync(Object user, Object address);
-    Task DeleteAsync(int id);
+    //Task <List<User>> GetAllAsync();
+    //Task UpdateAsync(User user);
+    //Task DeleteAsync(int id);
 }
