@@ -1,9 +1,32 @@
-﻿INSERT INTO [dbo].[Activity]
-(Name, Description, Date, StartTime, EndTime, MaxParticipants, AddressId)
+﻿INSERT INTO [dbo].[Activities] 
+([Name], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], [StreetName], [HouseNumber], [Zipcode], [City], [Country])
 VALUES
-('Gentle Yoga for Seniors', 'A calm and gentle yoga class designed for seniors to improve flexibility and balance.', '2024-12-17', '09:00', '10:00', 10, 47),
-('Chair Aerobics', 'Low-impact aerobics using a chair for support, perfect for seniors to stay active.', '2024-12-27', '10:00', '11:00', 15, 48),
-('Senior Walking Group', 'A walking group for seniors to enjoy a leisurely walk and socialize in a park.', '2025-01-18', '14:00', '15:30', 20, 49),
-('Cooking for Health', 'A fun and educational cooking class for seniors, focusing on healthy, easy-to-make meals.', '2025-02-18', '11:00', '12:30', 12, 50),
-('Art Therapy for Seniors', 'An art class focused on creative expression and relaxation for seniors.', '2025-02-25', '13:00', '14:30', 10, 51),
-('Music Therapy for Seniors', 'A therapeutic music session designed to bring joy and emotional benefits to seniors.', '2025-03-08', '15:00', '16:30', 12, 51);
+-- Activity 1
+('Gentle Yoga', 'A relaxing yoga session focused on gentle stretching and breathing exercises, ideal for seniors.', '2024-01-19', '10:00', '11:00', 15, 'Alberdingk Thijmlaan', '1', '5615 EB', 'Eindhoven', 'Netherlands'),
+
+-- Activity 2
+('Art Class', 'A creative class where seniors can express themselves through painting or drawing, no experience needed.', '2024-01-21', '14:00', '16:00', 12, 'Alberdingk Thijmlaan', '1', '5615 EB', 'Eindhoven', 'Netherlands'),
+
+-- Activity 3
+('Social Tea Time', 'Join us for a warm cup of tea and socializing with fellow seniors in a cozy environment.', '2024-01-25', '15:00', '16:30', 20, 'Alberdingk Thijmlaan', '1', '5615 EB', 'Eindhoven', 'Netherlands'),
+
+-- Activity 4
+('Gentle Walk in the Park', 'A peaceful walk through the park, with plenty of stops for rest and conversation.', '2024-01-28', '11:00', '12:30', 10, 'Alberdingk Thijmlaan', '1', '5615 EB', 'Eindhoven', 'Netherlands'),
+
+-- Activity 5
+('Board Games Afternoon', 'An afternoon of fun and friendly competition with board games and puzzles, perfect for seniors.', '2024-01-30', '13:30', '16:00', 8, 'Alberdingk Thijmlaan', '1', '5615 EB', 'Eindhoven', 'Netherlands'),
+
+-- Activity 6
+('Memory Lane', 'A nostalgia-filled session where seniors can share memories and stories from the past.', '2024-02-02', '10:30', '12:00', 15, 'Antoon Coolenlaan', '2a', '5644 RX', 'Eindhoven', 'Netherlands'),
+
+-- Activity 7
+('Music and Movement', 'An enjoyable and low-impact dance and music session for seniors to keep moving and grooving.', '2024-02-05', '14:00', '15:00', 12, 'Antoon Coolenlaan', '2a', '5644 RX', 'Eindhoven', 'Netherlands'),
+
+-- Activity 8
+('Cooking Class', 'A hands-on cooking class where seniors learn to prepare easy and healthy meals.', '2024-02-10', '12:00', '14:00', 10, 'Antoon Coolenlaan', '2a', '5644 RX', 'Eindhoven', 'Netherlands'),
+
+-- Activity 9
+('Nature Talk', 'A talk on the importance of nature and the environment, followed by a discussion with experts.', '2024-02-15', '13:00', '14:30', 20, 'Antoon Coolenlaan', '2a', '5644 RX', 'Eindhoven', 'Netherlands'),
+
+-- Activity 10
+('Mindfulness Meditation', 'A peaceful session of mindfulness and meditation techniques to reduce stress and promote well-being.', '2024-02-20', '09:30', '10:30', 15, 'Antoon Coolenlaan', '2a', '5644 RX', 'Eindhoven', 'Netherlands');

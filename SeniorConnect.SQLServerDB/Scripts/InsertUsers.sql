@@ -1,43 +1,32 @@
-﻿-- Insert User data and link to AddressID
-INSERT INTO [dbo].[Users] 
-(FirstName, LastName, Email, Password, DateOfBirth, Gender, Origin, DateOfRegistration, AddressID)
+﻿INSERT INTO [dbo].[Users] 
+([FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Origin], [DateOfRegistration], [StreetName], [HouseNumber], [Zipcode], [City], [Country])
 VALUES
-    ('Jan', 'Jansen', 'jan.jansen@example.com', 'Password123!', '1950-04-12', 'M', 'Dutch', '2020-05-10', 1),
-    ('Maria', 'de Vries', 'maria.vries@example.com', 'Password123!', '1942-09-15', 'F', 'Dutch', '2019-08-25', 2),
-    ('Pieter', 'Kramer', 'pieter.kramer@example.com', 'Password123!', '1958-11-22', 'M', 'Dutch', '2021-01-17', 3),
-    ('Anke', 'Bakker', 'anke.bakker@example.com', 'Password123!', '1945-02-19', 'F', 'Dutch', '2023-03-12', 4),
-    ('Henk', 'Peters', 'henk.peters@example.com', 'Password123!', '1949-06-01', 'M', 'Dutch', '2022-12-30', 5),
-    ('Emma', 'Kuipers', 'emma.kuipers@example.com', 'Password123!', '1935-12-15', 'F', 'Dutch', '2023-04-22', 6),
-    ('Joop', 'Smit', 'joop.smit@example.com', 'Password123!', '1940-03-03', 'M', 'Dutch', '2020-11-08', 7),
-    ('Sophie', 'Visser', 'sophie.visser@example.com', 'Password123!', '1947-07-21', 'F', 'Dutch', '2021-07-13', 8),
-    ('Tom', 'de Boer', 'tom.boer@example.com', 'Password123!', '1938-01-01', 'M', 'Dutch', '2023-10-02', 9),
-    ('Eva', 'Jong', 'eva.jong@example.com', 'Password123!', '1955-08-10', 'F', 'Dutch', '2022-02-18', 10),
-    ('Karel', 'Vos', 'karel.vos@example.com', 'Password123!', '1946-05-20', 'M', 'Dutch', '2021-09-25', 11),
-    ('Inge', 'Mulder', 'inge.mulder@example.com', 'Password123!', '1944-09-14', 'F', 'Dutch', '2020-06-29', 12),
-    ('Bart', 'Vermeer', 'bart.vermeer@example.com', 'Password123!', '1950-12-31', 'M', 'Dutch', '2023-11-11', 13),
-    ('Els', 'Schouten', 'els.schouten@example.com', 'Password123!', '1937-02-02', 'F', 'Dutch', '2020-02-10', 14),
-    ('Frank', 'Groen', 'frank.groen@example.com', 'Password123!', '1948-03-15', 'M', 'Dutch', '2021-03-03', 15),
-    ('Lieke', 'Willems', 'lieke.willems@example.com', 'Password123!', '1939-09-07', 'F', 'Dutch', '2022-04-16', 16),
-    ('Wim', 'van Dijk', 'wim.dijk@example.com', 'Password123!', '1943-11-05', 'M', 'Dutch', '2023-07-24', 17),
-    ('Clara', 'Smits', 'clara.smits@example.com', 'Password123!', '1942-04-09', 'F', 'Dutch', '2021-10-18', 18),
-    ('Rik', 'Hofman', 'rik.hofman@example.com', 'Password123!', '1936-07-22', 'M', 'Dutch', '2022-01-10', 19),
-    ('Noor', 'Heemskerk', 'noor.heemskerk@example.com', 'Password123!', '1941-06-13', 'F', 'Dutch', '2020-08-15', 20);
-
-
---    create insert query for 25 people, all of age between 65 and 100 years old who live somewhere in the Netherlands, of which half in Eindhoven.   for the following table:CREATE TABLE [dbo].[User] 
---(
---	[UserId] INT NOT NULL PRIMARY KEY IDENTITY,
---    [FirstName] NVARCHAR(50) NOT NULL, 
---    [LastName] NVARCHAR(50) NOT NULL,
---    [Email] NVARCHAR(70) NOT NULL,
---    [Password] NVARCHAR(50) NOT NULL,
---    [DateOfBirth] Date NOT NULL,
---    [Gender] char, 
---    [Origin] nvarchar(30),
---    [DateOfRegistration] Date NOT NULL,
---    [StreetName] NVARCHAR(50) NOT NULL, 
---	[HouseNumber] NVARCHAR(10) NOT NULL, 
---	[Zipcode] NVARCHAR(10) NOT NULL, 
---    [City] NVARCHAR(50) NOT NULL, 
---    [Country] NVARCHAR(30) NOT NULL,
---)
+('Jan', 'Jansen', 'jan.jansen@example.com', 'password123', '1956-06-15', 'M', 'Netherlands', '2023-01-10', 'Kerkstraat', '12', '5611AB', 'Eindhoven', 'Netherlands'),
+('Piet', 'Bakker', 'piet.bakker@example.com', 'password123', '1957-08-22', 'M', 'Netherlands', '2023-01-10', 'Hoogstraat', '45', '5612AC', 'Eindhoven', 'Netherlands'),
+('Kees', 'de Vries', 'kees.devries@example.com', 'password123', '1959-03-10', 'M', 'Netherlands', '2023-01-10', 'Dorpstraat', '5', '5612AE', 'Eindhoven', 'Netherlands'),
+('Anja', 'Vermeer', 'anja.vermeer@example.com', 'password123', '1960-12-01', 'F', 'Netherlands', '2023-01-10', 'Zuidstraat', '3', '5613AD', 'Eindhoven', 'Netherlands'),
+('Henk', 'Smit', 'henk.smit@example.com', 'password123', '1962-11-05', 'M', 'Netherlands', '2023-01-10', 'Lindestraat', '8', '5614AA', 'Eindhoven', 'Netherlands'),
+('Lies', 'Hendriks', 'lies.hendriks@example.com', 'password123', '1963-01-30', 'F', 'Netherlands', '2023-01-10', 'Bosstraat', '20', '5615AB', 'Eindhoven', 'Netherlands'),
+('Maria', 'Koopman', 'maria.koopman@example.com', 'password123', '1964-07-15', 'F', 'Netherlands', '2023-01-10', 'Laan van Meerdervoort', '100', '5616AC', 'Eindhoven', 'Netherlands'),
+('John', 'Rasmussen', 'john.rasmussen@example.com', 'password123', '1965-05-10', 'M', 'Netherlands', '2023-01-10', 'Veldstraat', '25', '5617AA', 'Eindhoven', 'Netherlands'),
+('Sofie', 'Jansen', 'sofie.jansen@example.com', 'password123', '1966-02-10', 'F', 'Netherlands', '2023-01-10', 'Steenstraat', '7', '5618AB', 'Eindhoven', 'Netherlands'),
+('Peter', 'de Boer', 'peter.deboer@example.com', 'password123', '1967-12-22', 'M', 'Netherlands', '2023-01-10', 'Vijverstraat', '18', '5619AC', 'Eindhoven', 'Netherlands'),
+-- Non-Eindhoven users
+('Maarten', 'Dijkstra', 'maarten.dijkstra@example.com', 'password123', '1948-06-20', 'M', 'Netherlands', '2023-01-10', 'Grote Markt', '14', '2511AB', 'The Hague', 'Netherlands'),
+('Janneke', 'Brouwer', 'janneke.brouwer@example.com', 'password123', '1952-10-05', 'F', 'Netherlands', '2023-01-10', 'Keizersgracht', '21', '1000AA', 'Amsterdam', 'Netherlands'),
+('Lotte', 'Visser', 'lotte.visser@example.com', 'password123', '1950-02-15', 'F', 'Netherlands', '2023-01-10', 'Lindengracht', '13', '1015AA', 'Amsterdam', 'Netherlands'),
+('Gerard', 'Meyer', 'gerard.meyer@example.com', 'password123', '1953-07-30', 'M', 'Netherlands', '2023-01-10', 'Vijzelstraat', '8', '1016AJ', 'Amsterdam', 'Netherlands'),
+('Willem', 'Peters', 'willem.peters@example.com', 'password123', '1954-05-25', 'M', 'Netherlands', '2023-01-10', 'Haarlemmerdijk', '30', '1013JG', 'Amsterdam', 'Netherlands'),
+('Sophie', 'Ruiter', 'sophie.ruiter@example.com', 'password123', '1955-08-09', 'F', 'Netherlands', '2023-01-10', 'Oudezijds Voorburgwal', '60', '1012EE', 'Amsterdam', 'Netherlands'),
+('Els', 'Koster', 'els.koster@example.com', 'password123', '1960-12-01', 'F', 'Netherlands', '2023-01-10', 'Vondelstraat', '100', '3811CG', 'Amersfoort', 'Netherlands'),
+('Martijn', 'Verbeek', 'martijn.verbeek@example.com', 'password123', '1958-11-18', 'M', 'Netherlands', '2023-01-10', 'Spiegelstraat', '5', '3823BE', 'Amersfoort', 'Netherlands'),
+('Tina', 'Van den Berg', 'tina.vandenberg@example.com', 'password123', '1957-03-14', 'F', 'Netherlands', '2023-01-10', 'Van Asch van Wijckstraat', '20', '3800DD', 'Utrecht', 'Netherlands'),
+('Joris', 'Schmidt', 'joris.schmidt@example.com', 'password123', '1956-04-18', 'M', 'Netherlands', '2023-01-10', 'Lange Viestraat', '12', '3581EK', 'Utrecht', 'Netherlands'),
+('Frank', 'Bosch', 'frank.bosch@example.com', 'password123', '1955-01-27', 'M', 'Netherlands', '2023-01-10', 'Zeedijk', '15', '3064SH', 'Rotterdam', 'Netherlands'),
+('Yvonne', 'Schoon', 'yvonne.schoon@example.com', 'password123', '1954-07-03', 'F', 'Netherlands', '2023-01-10', 'Noordplein', '6', '3051AB', 'Rotterdam', 'Netherlands'),
+('Eddy', 'Dekker', 'eddy.dekker@example.com', 'password123', '1961-10-10', 'M', 'Netherlands', '2023-01-10', 'Nijmegenstraat', '5', '6000JK', 'Nijmegen', 'Netherlands'),
+('Ria', 'Jansen', 'ria.jansen@example.com', 'password123', '1962-01-14', 'F', 'Netherlands', '2023-01-10', 'Lijnbaan', '44', '6300JK', 'Nijmegen', 'Netherlands'),
+('Wilma', 'Gerrits', 'wilma.gerrits@example.com', 'password123', '1963-03-03', 'F', 'Netherlands', '2023-01-10', 'Slinge', '24', '3114KH', 'Rotterdam', 'Netherlands'),
+('Theo', 'Van Dam', 'theo.vandam@example.com', 'password123', '1958-05-17', 'M', 'Netherlands', '2023-01-10', 'Vlietlaan', '2', '3022JS', 'Rotterdam', 'Netherlands'),
+('Bert', 'Veldman', 'bert.veldman@example.com', 'password123', '1959-04-02', 'M', 'Netherlands', '2023-01-10', 'Oosterweg', '3', '3015JE', 'Rotterdam', 'Netherlands'),
+('Herman', 'Stevens', 'herman.stevens@example.com', 'password123', '1960-11-05', 'M', 'Netherlands', '2023-01-10', 'Houtweg', '99', '5034GB', 'Tilburg', 'Netherlands');

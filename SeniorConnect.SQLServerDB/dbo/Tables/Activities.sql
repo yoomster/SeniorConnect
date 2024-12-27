@@ -2,7 +2,7 @@
 (
     [ActivityId] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Name] NVARCHAR(50) NOT NULL, 
-    [Description] NVARCHAR(500) NULL, 
+    [Description] NVARCHAR(500) NOT NULL, 
     [Date] DATE NOT NULL, 
     [StartTime] TIME NOT NULL,
     [EndTime] TIME NOT NULL,
