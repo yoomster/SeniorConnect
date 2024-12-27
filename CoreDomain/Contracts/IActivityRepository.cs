@@ -1,14 +1,18 @@
-﻿using CoreDomain;
-using CoreDomain.Users;
+﻿using SeniorConnect.Domain.Activities;
 
 namespace SeniorConnect.Domain.Contracts;
 
 public interface IActivityRepository
 {
-    Task SaveToDBAsync(Object activity);
-    Task GetByIdAsync(int id);
-    Task<List<Object>> GetAllAsync();
-    Task UpdateAsync(Object activity, Object address);
-    Task DeleteAsync(int id);
+    public Task SaveActivityToDBAsync(Activity activity);
+
+    public Task<Activity?> GetActivityByIdAsync(int activityId);
+
+    public Task<List<Activity>> GetAllActivitiesAsync();
+
+    public Task<bool> UpdateActivityAsync(Activity activity);
+
+    public Task<bool> DeleteActivityAsync(int activityId);
+
 }
 

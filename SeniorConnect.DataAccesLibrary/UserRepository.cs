@@ -8,7 +8,6 @@ namespace SeniorConnect.DataAccesLibrary
 {
     public class UserRepository : IUserRepository
     {
-        //creating, reading, updating, or deleting records
         private readonly DataAccess _dataAccess;
 
         public UserRepository(DataAccess dataAccess)
@@ -16,7 +15,7 @@ namespace SeniorConnect.DataAccesLibrary
             _dataAccess = dataAccess;
         }
 
-        public async Task<int> SaveToDBAsync(User user)
+        public async Task<int> SaveUserToDBAsync(User user)
         {
             string query = @"INSERT INTO [dbo].[Users] 
                              ([FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Origin], 
@@ -48,7 +47,7 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
-        public async Task<User?> GetByIdAsync(int id)
+        public async Task<User?> GetUserByIdAsync(int id)
         {
             string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
                             [DateOfBirth], [Gender], [Origin], [DateOfRegistration], 
@@ -89,7 +88,7 @@ namespace SeniorConnect.DataAccesLibrary
             return null; 
         }
 
-        public async Task<List<User>> GetAllAsync()
+        public async Task<List<User>> GetUserAllAsync()
         {
             string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
                             [DateOfBirth], [Gender], [Origin], [DateOfRegistration], 
@@ -127,7 +126,7 @@ namespace SeniorConnect.DataAccesLibrary
             return users;
         }
 
-        public async Task<bool> UpdateAsync(User user)
+        public async Task<bool> UpdateUserAsync(User user)
         {
             string query = @"UPDATE [dbo].[Users]
                      SET [FirstName] = @FirstName, 
@@ -168,7 +167,7 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
-        public async Task<bool> DeleteAsync(int userId)
+        public async Task<bool> DeleteUserAsync(int userId)
         {
             string query = @"DELETE FROM [dbo].[Users] WHERE [UserId] = @UserId";
 

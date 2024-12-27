@@ -5,13 +5,13 @@ namespace SeniorConnect.Domain.Contracts;
 
 public interface IUserRepository
 {
-    public Task<int> SaveToDBAsync(User user);
+    public Task<int> SaveUserToDBAsync(User user);
 
-    public Task<User?> GetByIdAsync(int id);
+    public Task<User?> GetUserByIdAsync(int id);
 
-    public Task<List<User>> GetAllAsync();
+    public Task<List<User>> GetUserAllAsync();
 
-    public Task<bool> UpdateAsync(User user);
+    public Task<bool> UpdateUserAsync(User user);
 
-    public Task<bool> DeleteAsync(int userId);
+    public Task<bool> DeleteUserAsync(int userId);
 }
