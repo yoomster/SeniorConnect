@@ -9,10 +9,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoreDomain\SeniorConnect.Domain.csproj" />
+    <ProjectReference Include="..\SeniorConnect.Application\SeniorConnect.Application.csproj" />
   </ItemGroup>
 
 </Project>

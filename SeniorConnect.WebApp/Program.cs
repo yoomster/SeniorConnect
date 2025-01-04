@@ -1,21 +1,22 @@
-using SeniorConnect.DataAccesLibrary;
-using SeniorConnect.Domain.Contracts;
+//using SeniorConnect.DataAccesLibrary;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using SeniorConnect.DataAccessLibrary;
+using SeniorConnect.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<DataAccess>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddInfrastructure(); //<DataAccess>(); to register the infra services! put the reference back!
+builder.Services.AddScoped<UserService>();
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options => {
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-        options.LoginPath = new PathString("/Pages/IdentityAccessManagement/Login");
-        options.AccessDeniedPath = new PathString("/Pages/Forbidden");
-}
-);
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie(options => {
+//        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+//        options.LoginPath = new PathString("/Pages/IdentityAccessManagement/Login");
+//        options.AccessDeniedPath = new PathString("/Pages/Forbidden");
+//}
+//);
 
 
 var app = builder.Build();
