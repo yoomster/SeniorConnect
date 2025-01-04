@@ -1,7 +1,7 @@
 ﻿using CoreDomain;
 using CoreDomain.Users;
 
-namespace SeniorConnect.Domain.Contracts;
+namespace SeniorConnect.Application.Interfaces;
 
 public interface IUserRepository
 {
@@ -9,9 +9,12 @@ public interface IUserRepository
 
     public Task<User?> GetUserByIdAsync(int id);
 
-    public Task<List<User>> GetUserAllAsync();
+    public Task<List<User>> GetAllUserAsync();
 
     public Task<bool> UpdateUserAsync(User user);
 
     public Task<bool> DeleteUserAsync(int userId);
+
+    public Task<bool> IsDuplicateEmailAsync(string email);
+
 }
