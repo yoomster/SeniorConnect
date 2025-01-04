@@ -45,6 +45,7 @@
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <SqlTargetName>SeniorConnect</SqlTargetName>
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
@@ -71,8 +72,5 @@
     <None Include="Scripts\InsertUserActivity.sql" />
     <None Include="Scripts\AllActiviesPerUser.sql" />
     <None Include="Scripts\AllUsersPerActivity.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="SeniorConnect.SQLServerDB.refactorlog" />
   </ItemGroup>
 </Project>
