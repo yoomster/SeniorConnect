@@ -1,5 +1,5 @@
-﻿using CoreDomain.Users;
-using SeniorConnect.Domain.Contracts;
+﻿using SeniorConnect.Application.Interfaces;
+using SeniorConnect.Domain;
 
 namespace SeniorConnect.Application.Services
 {
@@ -7,7 +7,7 @@ namespace SeniorConnect.Application.Services
     {
         public async Task CreateUser(User user)
         {
-            if (await _userRepository.IsDuplicateEmailAsync(user.Email))
+            if (await IUserRepository.IsDuplicateEmailAsync(user.Email))
             {
                 throw new InvalidOperationException("Email is already registered.");
             }

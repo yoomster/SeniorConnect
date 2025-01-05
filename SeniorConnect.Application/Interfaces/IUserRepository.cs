@@ -1,5 +1,5 @@
 ﻿using CoreDomain;
-using CoreDomain.Users;
+using SeniorConnect.Domain;
 
 namespace SeniorConnect.Application.Interfaces;
 
@@ -7,7 +7,7 @@ public interface IUserRepository
 {
     public Task<int> SaveUserToDBAsync(User user);
 
-    public Task<User?> GetUserByIdAsync(int id);
+    public Task<User?> GetByIdAsync(int id);
 
     public Task<List<User>> GetAllUserAsync();
 
