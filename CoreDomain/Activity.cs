@@ -1,13 +1,11 @@
-﻿using CoreDomain;
-using SeniorConnect.Domain.Users;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
-namespace SeniorConnect.Domain.Activities;
+namespace SeniorConnect.Domain;
 
 public class Activity
 {
     //This allows the DAL to access the data it needs without violating encapsulation
-    //public string Name => _name;
+    //public string Title => _title;
     //public string Description => _description;
     //public DateOnly Date => _date;
     //public TimeOnly StartTime => _startTime;
@@ -15,7 +13,7 @@ public class Activity
     //public int MaxParticipants => _maxParticipants;
 
     //private readonly int _id;
-    //private readonly string _name;
+    //private readonly string _title;
     //private readonly string _description;
     //private readonly DateOnly _date;
     //private readonly TimeOnly _startTime;
@@ -23,8 +21,8 @@ public class Activity
     //private readonly int _maxParticipants;
     //private readonly List<Participant> _participants = new();
 
-    public required int ActivityId { get; set; }
-    public required string Name { get; set; }
+    public required int Id { get; set; }
+    public required string Title { get; set; }
     public required string Description { get; set; }
     public required DateOnly Date { get; set; }
     public required TimeOnly StartTime { get; set; }
@@ -40,7 +38,7 @@ public class Activity
 
     //public Activity(
     //    int id,
-    //    string name,
+    //    string title,
     //    string description,
     //    DateOnly date,
     //    TimeOnly startTime,
@@ -48,7 +46,7 @@ public class Activity
     //    int maxParticipants)
     //{
     //    _id = id;
-    //    _name = name;
+    //    _title = title;
     //    _description = description;
     //    _date = date;
     //    _startTime = startTime;
