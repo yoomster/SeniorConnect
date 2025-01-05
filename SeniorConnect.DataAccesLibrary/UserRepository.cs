@@ -1,16 +1,15 @@
-﻿using CoreDomain;
-using CoreDomain.Users;
-using Microsoft.Data.SqlClient;
-using SeniorConnect.Domain.Contracts;
-using System.Net;
+﻿using Microsoft.Data.SqlClient;
+using SeniorConnect.Application.Interfaces;
+using SeniorConnect.Domain;
 
 namespace SeniorConnect.DataAccesLibrary
 {
-    public class UserRepository : IUserRepository
+    //MAKE ALL METHOD INTERNAL, NO DI ALLOWED TO UI LAYER!
+    internal class UserRepository : IUserRepository
     {
         private readonly DataAccess _dataAccess;
 
-        public UserRepository(DataAccess dataAccess)
+        internal UserRepository(DataAccess dataAccess)
         {
             _dataAccess = dataAccess;
         }
@@ -47,7 +46,7 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
-        public async Task<User?> GetUserByIdAsync(int id)
+        public async Task<User?> GetByIdAsync(int id)
         {
             string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
                             [DateOfBirth], [Gender], [Origin], [DateOfRegistration], 
@@ -88,7 +87,7 @@ namespace SeniorConnect.DataAccesLibrary
             return null; 
         }
 
-        public async Task<List<User>> GetUserAllAsync()
+        public async Task<List<User>> GetAllUserAsync()
         {
             string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
                             [DateOfBirth], [Gender], [Origin], [DateOfRegistration], 
@@ -181,13 +180,20 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
+        public async Task<bool> IsDuplicateEmailAsync(string email)
+        {
+            string query = @"SELECT COUNT(*) 
+                             FROM [dbo].[Users] 
+                             WHERE [Email] = @Email";
 
+            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@Email", email);
 
-        //public bool IsDuplicateEmail(string email)
-        //{
-        //    return true;
-        //    //     return Users.Any(u => u.Email == email);
-        //}
-
+                var result = await command.ExecuteScalarAsync();
+                return (int)result > 0; 
+            }
+        }
     }
 }

@@ -1,14 +1,15 @@
-﻿using CoreDomain.Users;
-using Microsoft.Data.SqlClient;
-using SeniorConnect.Domain.Activities;
+﻿using Microsoft.Data.SqlClient;
+using SeniorConnect.Domain;
 
 namespace SeniorConnect.DataAccesLibrary
 {
-    public class ActivityRepository
+    internal class ActivityRepository
     {
+        //MAKE ALL METHOD INTERNAL, NO DI ALLOWED TO UI LAYER!
+
         private readonly DataAccess _dataAccess;
 
-        public ActivityRepository(DataAccess dataAccess)
+        internal ActivityRepository(DataAccess dataAccess)
         {
             _dataAccess = dataAccess;
         }
@@ -23,7 +24,7 @@ namespace SeniorConnect.DataAccesLibrary
             using (var connection = await _dataAccess.OpenSqlConnection())
             using (var command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@Name", activity.Name);
+                command.Parameters.AddWithValue("@Name", activity.Title);
                 command.Parameters.AddWithValue("@Description", activity.Description); 
                 command.Parameters.AddWithValue("@Date", activity.Date);
                 command.Parameters.AddWithValue("@StartTime", activity.StartTime);
@@ -57,8 +58,8 @@ namespace SeniorConnect.DataAccesLibrary
                     {
                         return new Activity
                         {
-                            ActivityId = reader.GetInt32(0),
-                            Name = reader.GetString(1),
+                            Id = reader.GetInt32(0),
+                            Title = reader.GetString(1),
                             Description = reader.GetString(2),
                             Date = DateOnly.FromDateTime(reader.GetDateTime(3)),
                             StartTime = TimeOnly.FromDateTime(reader.GetDateTime(4)),
@@ -93,8 +94,8 @@ namespace SeniorConnect.DataAccesLibrary
                 {
                     activities.Add(new Activity
                     {
-                        ActivityId = reader.GetInt32(0),
-                        Name = reader.GetString(1),
+                        Id = reader.GetInt32(0),
+                        Title = reader.GetString(1),
                         Description = reader.GetString(2),
                         Date = DateOnly.FromDateTime(reader.GetDateTime(3)),
                         StartTime = TimeOnly.FromDateTime(reader.GetDateTime(4)),
@@ -131,8 +132,8 @@ namespace SeniorConnect.DataAccesLibrary
             using (var connection = await _dataAccess.OpenSqlConnection())
             using (var command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@ActivityId", activity.ActivityId);
-                command.Parameters.AddWithValue("@Name", activity.Name);
+                command.Parameters.AddWithValue("@ActivityId", activity.Id);
+                command.Parameters.AddWithValue("@Name", activity.Title);
                 command.Parameters.AddWithValue("@Description", activity.Description);
                 command.Parameters.AddWithValue("@Date", activity.Date);
                 command.Parameters.AddWithValue("@StartTime", activity.StartTime);

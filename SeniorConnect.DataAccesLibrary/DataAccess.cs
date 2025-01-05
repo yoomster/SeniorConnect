@@ -1,14 +1,13 @@
-﻿using CoreDomain.Users;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
 namespace SeniorConnect.DataAccesLibrary
 {
-    public class DataAccess
+    internal class DataAccess
     {
         private readonly string _connectionString;
 
-        public DataAccess(IConfiguration configuration)
+        internal DataAccess(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("Default");
         }
@@ -20,7 +19,7 @@ namespace SeniorConnect.DataAccesLibrary
             return connection;
         }
 
-        public async Task<SqlConnection> OpenSqlConnection()
+        internal async Task<SqlConnection> OpenSqlConnection()
         {
             return await OpenSqlConnectionAsync(_connectionString);
         }
