@@ -1,91 +1,55 @@
-﻿using System.Xml.Linq;
-
-namespace SeniorConnect.Domain;
+﻿namespace SeniorConnect.Domain;
 
 public class Activity
 {
-    //This allows the DAL to access the data it needs without violating encapsulation
-    //public string Title => _title;
-    //public string Description => _description;
-    //public DateOnly Date => _date;
-    //public TimeOnly StartTime => _startTime;
-    //public TimeOnly EndTime => _endTime;
-    //public int MaxParticipants => _maxParticipants;
-
-    //private readonly int _id;
-    //private readonly string _title;
-    //private readonly string _description;
-    //private readonly DateOnly _date;
-    //private readonly TimeOnly _startTime;
-    //private readonly TimeOnly _endTime;
-    //private readonly int _maxParticipants;
-    //private readonly List<Participant> _participants = new();
-
-    public required int Id { get; set; }
-    public required string Title { get; set; }
-    public required string Description { get; set; }
-    public required DateOnly Date { get; set; }
-    public required TimeOnly StartTime { get; set; }
-    public required TimeOnly EndTime { get; set; }
-    public required int MaxParticipants { get; set; }
-
-    public required string StreetName { get; set; }
-    public required string HouseNumber { get; set; }
-    public required string Zipcode { get; set; }
-    public required string City { get; set; }
-    public required string Country { get; set; }
-
-
-    //public Activity(
-    //    int id,
-    //    string title,
-    //    string description,
-    //    DateOnly date,
-    //    TimeOnly startTime,
-    //    TimeOnly endTime,
-    //    int maxParticipants)
-    //{
-    //    _id = id;
-    //    _title = title;
-    //    _description = description;
-    //    _date = date;
-    //    _startTime = startTime;
-    //    _endTime = endTime;
-    //    _maxParticipants = maxParticipants;
-    //}
-
-    public bool IsValid()
+    public Activity(
+        int id,
+        string title,
+        string description,
+        DateOnly date,
+        TimeOnly startTime,
+        TimeOnly endTime,
+        int maxParticipants,
+        string streetName,
+        string houseNumber,
+        string zipcode,
+        string city,
+        string country)
     {
-        return Date > DateOnly.FromDateTime(DateTime.Now);
+        var today = DateOnly.FromDateTime(DateTime.Now);
+        if (date <= today)
+            throw new ArgumentException("The date must be in the future.", nameof(date));
+
+        if (endTime <= startTime)
+            throw new ArgumentException("End time must be after start time.", nameof(endTime));
+
+        if (maxParticipants <= 0)
+            throw new ArgumentException("Max participants must be greater than zero.", nameof(maxParticipants));
+        
+        Id = id;
+        Title = title;
+        Description = description;
+        Date = date;
+        StartTime = startTime;
+        EndTime = endTime;
+        MaxParticipants = maxParticipants;
+        StreetName = streetName;
+        HouseNumber = houseNumber;
+        Zipcode = zipcode;
+        City = city;
+        Country = country;
     }
 
-    //public void CancelReservation(Participant participant)
-    //    {
-    //        var utcTimeNow = DateTime.UtcNow;
-    //        const int minHours = 24;
-    //        bool canNotCancel = (_date.ToDateTime(_startTime) - utcTimeNow).TotalHours < minHours;
-
-    //        if (canNotCancel)
-    //        {
-    //            //button for canceling reservation is disabled
-    //            throw new Exception("Cannot cancel reservation too close to session");
-    //        }
-
-    //        _participants.Remove(participant);
-    //    }
-
-    //public void ReserveSpot(Participant participant)
-    //{
-    //    if (_participants.Count() >= _maxParticipants)
-    //    {
-    //        //todo: he system displays a message indicating that the activity is full. 
-    //        throw new InvalidOperationException ("maximum participants reached");
-    //    }
-    //    else
-    //    {
-    //        _participants.Add(participant);
-    //        //Add the activity ID to participant 
-    //        participant.AddActivityToList(_id);
-    //    }
-    //}
+    public required int Id { get; init; }
+    public required string Title { get; init; }
+    public required string Description { get; init; }
+    public required DateOnly Date { get; init; }
+    public required TimeOnly StartTime { get; init; }
+    public required TimeOnly EndTime { get; init; }
+    public required int MaxParticipants { get; init; }
+    public required string StreetName { get; init; }
+    public required string HouseNumber { get; init; }
+    public required string Zipcode { get; init; }
+    public required string City { get; init; }
+    public required string Country { get; init; }
 }
