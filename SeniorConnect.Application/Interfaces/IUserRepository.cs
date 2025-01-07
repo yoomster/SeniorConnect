@@ -14,6 +14,6 @@ public interface IUserRepository
 
     public Task<bool> DeleteAccountAsync(int userId);
 
-    public Task<bool> IsDuplicateEmailAsync(string email);
+    public Task<bool> IsEmailRegistered(string email);
 
 }
