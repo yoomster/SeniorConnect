@@ -58,20 +58,20 @@ public class User
     }
 
     public int Id { get; init; }
-    public required string FirstName { get; init;  }
-    public required string LastName { get; init; }
-    public required string Email { get; init; }
-    public required string Password { get; init; }
-    public required DateOnly DateOfBirth { get; init; }
-    public required char Gender { get; init; }
-    public required string Origin { get; init; }
-    public required string MaritalStatus { get; init; }
+    public string FirstName { get; init; }
+    public string LastName { get; init; }
+    public string Email { get; init; }
+    public string Password { get; init; }
+    public DateOnly DateOfBirth { get; init; }
+    public char Gender { get; init; }
+    public string Origin { get; init; }
+    public string MaritalStatus { get; init; }
     public DateOnly DateOfRegistration { get; init; } = DateOnly.FromDateTime(DateTime.Now);
-    public required string StreetName { get; init; }
-    public required string HouseNumber { get; init; }
-    public required string Zipcode { get; init; }
-    public required string City { get; init; }
-    public required string Country { get; init; }
+    public string StreetName { get; init; }
+    public string HouseNumber { get; init; }
+    public string Zipcode { get; init; }
+    public string City { get; init; }
+    public string Country { get; init; }
 
     private bool HashPassword(string value)
     {

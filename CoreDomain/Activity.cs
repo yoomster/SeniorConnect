@@ -40,16 +40,16 @@ public class Activity
         Country = country;
     }
 
-    public required int Id { get; init; }
-    public required string Title { get; init; }
-    public required string Description { get; init; }
-    public required DateOnly Date { get; init; }
-    public required TimeOnly StartTime { get; init; }
-    public required TimeOnly EndTime { get; init; }
-    public required int MaxParticipants { get; init; }
-    public required string StreetName { get; init; }
-    public required string HouseNumber { get; init; }
-    public required string Zipcode { get; init; }
-    public required string City { get; init; }
-    public required string Country { get; init; }
+    public  int Id { get; init; }
+    public  string Title { get; init; }
+    public  string Description { get; init; }
+    public  DateOnly Date { get; init; }
+    public TimeOnly StartTime { get; init; }
+    public  TimeOnly EndTime { get; init; }
+    public  int MaxParticipants { get; init; }
+    public  string StreetName { get; init; }
+    public  string HouseNumber { get; init; }
+    public  string Zipcode { get; init; }
+    public  string City { get; init; }
+    public  string Country { get; init; }
 }
