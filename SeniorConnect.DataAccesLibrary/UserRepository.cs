@@ -2,6 +2,7 @@
 using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Domain;
 
+
 namespace SeniorConnect.DataAccesLibrary
 {
     //MAKE ALL METHOD INTERNAL, NO DI ALLOWED TO UI LAYER!
@@ -32,8 +33,8 @@ namespace SeniorConnect.DataAccesLibrary
                 command.Parameters.AddWithValue("@DateOfBirth", user.DateOfBirth);
                 command.Parameters.AddWithValue("@Gender", user.Gender);
                 command.Parameters.AddWithValue("@Origin", user.Origin);
-                command.Parameters.AddWithValue("@MaritalStatus", user.MaritalStatus);
-                //command.Parameters.AddWithValue("@MaritalStatus", (int)user.MaritalStatus);
+                //command.Parameters.AddWithValue(parameterName: "@MaritalStatus", user.MaritalStatus);
+                command.Parameters.AddWithValue("@MaritalStatus", (int)user.MaritalStatus);
                 command.Parameters.AddWithValue("@DateOfRegistration", user.DateOfRegistration);
                 command.Parameters.AddWithValue("@StreetName", user.StreetName);
                 command.Parameters.AddWithValue("@HouseNumber", user.HouseNumber);
@@ -49,8 +50,9 @@ namespace SeniorConnect.DataAccesLibrary
         public async Task<User?> GetByIdAsync(int id)
         {
             string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
-                            [DateOfBirth], [Gender], [Origin], [DateOfRegistration], 
-                            [StreetName], [HouseNumber], [Zipcode], [City], [Country]  
+                           [DateOfBirth], [Gender], [Origin], [MaritalStatus], 
+                           [DateOfRegistration], [StreetName], [HouseNumber], 
+                           [Zipcode], [City], [Country]
                      FROM [dbo].[Users] 
                      WHERE [UserId] = @UserId";
 
@@ -63,36 +65,41 @@ namespace SeniorConnect.DataAccesLibrary
                 {
                     if (await reader.ReadAsync())
                     {
-                        return new User () 
+                        var user = new User(
+                            firstName: reader.GetString(1),
+                            lastName: reader.GetString(2),
+                            email: reader.GetString(3),
+                            password: reader.GetString(4),
+                            dateOfBirth: DateOnly.FromDateTime(reader.GetDateTime(5)),
+                            gender: reader.GetString(6)[0], 
+                            origin: reader.GetString(7),
+                            maritalStatus: (MaritalEnum)reader.GetInt32(8),
+                            streetName: reader.GetString(10),
+                            houseNumber: reader.GetString(11),
+                            zipcode: reader.GetString(12),
+                            city: reader.GetString(13),
+                            country: reader.GetString(14)
+                        )
                         {
                             Id = reader.GetInt32(0),
-                            FirstName = reader.GetString(1),
-                            LastName = reader.GetString(2),
-                            Email = reader.GetString(3),
-                            Password = reader.GetString(4),
-                            DateOfBirth = DateOnly.FromDateTime(reader.GetDateTime(5)),
-                            Gender = reader.GetString(6)[0],
-                            Origin = reader.GetString(7),
-                            DateOfRegistration = DateOnly.FromDateTime(reader.GetDateTime(8)),
-                            StreetName = reader.GetString(9),
-                            HouseNumber = reader.GetString(10),
-                            Zipcode = reader.GetString(11),
-                            City = reader.GetString(12),
-                            Country = reader.GetString(13)
+                            DateOfRegistration = DateOnly.FromDateTime(reader.GetDateTime(9)),
                         };
+
+                        return user;
                     }
                 }
             }
 
-            return null; 
+            return null; // Return null if no user found
         }
 
         public async Task<List<User>> GetAllAsync()
         {
             string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
-                            [DateOfBirth], [Gender], [Origin], [DateOfRegistration], 
-                            [StreetName], [HouseNumber], [Zipcode], [City], [Country]  
-                     FROM [dbo].[Users]";
+                           [DateOfBirth], [Gender], [Origin], [MaritalStatus], 
+                           [DateOfRegistration], [StreetName], [HouseNumber], 
+                           [Zipcode], [City], [Country]
+                    FROM [dbo].[Users]";
 
             var users = new List<User>();
 
@@ -102,22 +109,24 @@ namespace SeniorConnect.DataAccesLibrary
             {
                 while (await reader.ReadAsync())
                 {
-                    users.Add(new User
+                    users.Add(new User(
+                            firstName: reader.GetString(1),
+                            lastName: reader.GetString(2),
+                            email: reader.GetString(3),
+                            password: reader.GetString(4),
+                            dateOfBirth: DateOnly.FromDateTime(reader.GetDateTime(5)),
+                            gender: reader.GetString(6)[0],
+                            origin: reader.GetString(7),
+                            maritalStatus: (MaritalEnum)reader.GetInt32(8),
+                            streetName: reader.GetString(10),
+                            houseNumber: reader.GetString(11),
+                            zipcode: reader.GetString(12),
+                            city: reader.GetString(13),
+                            country: reader.GetString(14)
+                        )
                     {
                         Id = reader.GetInt32(0),
-                        FirstName = reader.GetString(1),
-                        LastName = reader.GetString(2),
-                        Email = reader.GetString(3),
-                        Password = reader.GetString(4),
-                        DateOfBirth = DateOnly.FromDateTime(reader.GetDateTime(5)),
-                        Gender = reader.GetString(6)[0],
-                        Origin = reader.GetString(7),
-                        DateOfRegistration = DateOnly.FromDateTime(reader.GetDateTime(8)),
-                        StreetName = reader.GetString(9),
-                        HouseNumber = reader.GetString(10),
-                        Zipcode = reader.GetString(11),
-                        City = reader.GetString(12),
-                        Country = reader.GetString(13)
+                        DateOfRegistration = DateOnly.FromDateTime(reader.GetDateTime(9)),
                     });
                 }
             }
@@ -135,6 +144,7 @@ namespace SeniorConnect.DataAccesLibrary
                          [DateOfBirth] = @DateOfBirth, 
                          [Gender] = @Gender, 
                          [Origin] = @Origin, 
+                         [MaritalStatus] = @MaritalStatus,
                          [DateOfRegistration] = @DateOfRegistration, 
                          [StreetName] = @StreetName, 
                          [HouseNumber] = @HouseNumber, 
@@ -154,6 +164,7 @@ namespace SeniorConnect.DataAccesLibrary
                 command.Parameters.AddWithValue("@DateOfBirth", user.DateOfBirth);
                 command.Parameters.AddWithValue("@Gender", user.Gender);
                 command.Parameters.AddWithValue("@Origin", user.Origin);
+                command.Parameters.AddWithValue("MaritalStatus", user.MaritalStatus);
                 command.Parameters.AddWithValue("@DateOfRegistration", user.DateOfRegistration);
                 command.Parameters.AddWithValue("@StreetName", user.StreetName);
                 command.Parameters.AddWithValue("@HouseNumber", user.HouseNumber);
@@ -168,7 +179,9 @@ namespace SeniorConnect.DataAccesLibrary
 
         public async Task<bool> DeleteAccountAsync(int userId)
         {
-            string query = @"DELETE FROM [dbo].[Users] WHERE [UserId] = @UserId";
+            string query = @"DELETE 
+                FROM [dbo].[Users] 
+                WHERE [UserId] = @UserId";
 
             using (var connection = await _dataAccess.OpenSqlConnection())
             using (var command = new SqlCommand(query, connection))
