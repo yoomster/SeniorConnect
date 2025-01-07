@@ -1,9 +1,7 @@
-using CoreDomain.Users;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SeniorConnect.DataAccesLibrary;
-using SeniorConnect.Domain.Contracts;
+using SeniorConnect.Domain;
 
-namespace SeniorConnect.WebApp.Pages.UserPages
+namespace SeniorConnect.WebApp.Pages.ProfilePages
 {
     public class AllUsersModel : PageModel
     {
@@ -17,11 +15,11 @@ namespace SeniorConnect.WebApp.Pages.UserPages
 
         public async Task OnGet()
         {
-            List<User> users = await _userRepository.GetUsersAsync();
+            List<User> users = await _userRepository.GetAllUserAsync();
 
             foreach (var user in users)
             {
-                Console.WriteLine($"User: {user.FirstName} {user.LastName}");
+                Console.WriteLine($"User: {user.Id}, {user.FirstName} {user.LastName}");
             }
 
             AllUsers = users;

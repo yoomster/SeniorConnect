@@ -1,4 +1,6 @@
-﻿namespace SeniorConnect.Application.Services;
+﻿using SeniorConnect.Domain;
+
+namespace SeniorConnect.Application.Services;
 
 public class ProfileServices
 {
@@ -7,6 +9,10 @@ public class ProfileServices
 
     }
     public void ChangeInterests(List<string> interests)
+    {
+
+    }
+    public void ChangeMaritalStatus(MaritalEnum status)
     {
 
     }

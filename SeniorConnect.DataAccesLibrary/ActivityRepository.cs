@@ -56,7 +56,7 @@ namespace SeniorConnect.DataAccesLibrary
                 {
                     if (await reader.ReadAsync())
                     {
-                        return new Activity
+                        return new Activity(1)
                         {
                             Id = reader.GetInt32(0),
                             Title = reader.GetString(1),

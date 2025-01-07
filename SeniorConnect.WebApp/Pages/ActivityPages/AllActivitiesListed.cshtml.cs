@@ -1,7 +1,4 @@
-using CoreDomain.Users;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SeniorConnect.DataAccesLibrary;
-using SeniorConnect.Domain.Activity;
 
 namespace SeniorConnect.WebApp.Pages.ActivityPages
 {

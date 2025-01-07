@@ -1,12 +1,9 @@
-using CoreDomain;
-using CoreDomain.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SeniorConnect.DataAccesLibrary;
-using SeniorConnect.Domain.Contracts;
+using SeniorConnect.Domain;
 using SeniorConnect.WebApp.Models;
 
-namespace SeniorConnect.WebApp.Pages.UserPages
+namespace SeniorConnect.WebApp.Pages.ProfilePages
 {
     public class UpdatePersonDataModel : PageModel
     {
@@ -32,7 +29,7 @@ namespace SeniorConnect.WebApp.Pages.UserPages
             {
                 User userToUpdate = new User
                 {
-                    Id = User.Id,
+                    //Id = User.Id,
                     FirstName = User.FirstName,
                     LastName = User.LastName,
                     Email = User.Email,

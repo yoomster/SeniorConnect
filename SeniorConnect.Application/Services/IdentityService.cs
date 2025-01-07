@@ -14,33 +14,34 @@ namespace SeniorConnect.Application.Services
             _passwordHasher = passwordHasher;
         }
         public async Task CreateAccount(
-            string firstName, string lastName, string email, 
-            string password, DateOnly dateOfBirth, char gender,
-            string origin, string maritalStatus, string streetName, 
-            string houseNumber, string zipcode, string city, string country)
+            //string firstName, string lastName, string email, 
+            //string password, DateOnly dateOfBirth, char gender,
+            //string origin, string maritalStatus, string streetName, 
+            //string houseNumber, string zipcode, string city, string country
+            User user)
         {
-            if (await _userRepository.IsEmailRegistered(email))
+            if (await _userRepository.IsEmailRegistered(user.Email))
             {
                 throw new InvalidOperationException("Email is already registered.");
             }
             else
             {
-                //var hashedPassword = _passwordHasher.HashPassword(password, out var salt));
+                //var hashedPassword = _passwordHasher.HashPassword(user.Password, out var salt));
 
                 User newUser = new User(
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    password: password, //becomes hashedPassword after impl hashing methods
-                    dateOfBirth: dateOfBirth,
-                    gender: gender,
-                    origin: origin,
-                    maritalStatus: maritalStatus,
-                    streetName: streetName,
-                    houseNumber: houseNumber,
-                    zipcode: zipcode,
-                    city: city,
-                    country: country
+                    firstName: user.FirstName,
+                    lastName: user.LastName,
+                    email: user.Email,
+                    password: user.Password, //becomes hashedPassword after impl hashing methods ^^
+                    dateOfBirth: user.DateOfBirth,
+                    gender: user.Gender,
+                    origin: user.Origin,
+                    maritalStatus: user.MaritalStatus,
+                    streetName: user.StreetName,
+                    houseNumber: user.HouseNumber,
+                    zipcode: user.Zipcode,
+                    city: user.City,
+                    country: user.Country
                 );
 
                 await _userRepository.CreateAccountToDBAsync(newUser);

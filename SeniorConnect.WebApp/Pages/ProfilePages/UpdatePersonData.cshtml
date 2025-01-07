@@ -53,6 +53,16 @@
         </div>
 
         <div class="form-group">
+            <label for="Interests">Interests</label>
+            <select id="Interests" class="form-control" asp-for="User.Interests">
+                <option value="Nature">Nature</option>
+                <option value="Thrill">Thrill</option>
+                <option value="Zen">Zen</option>
+            </select>
+            <span asp-validation-for="User.Interests" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
             <label for="StreetName">Street Name</label>
             <input type="text" id="StreetName" class="form-control" asp-for="User.StreetName" />
             <span asp-validation-for="User.StreetName" class="text-danger"></span>

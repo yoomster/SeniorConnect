@@ -14,15 +14,13 @@ namespace SeniorConnect.DataAccesLibrary
             _dataAccess = dataAccess;
         }
 
-        public async Task<int> SaveUserToDBAsync(User user)
+        public async Task<int> CreateAccountToDBAsync(User user)
         {
-            string query = @"INSERT INTO [dbo].[Users] 
-                             ([FirstName], [LastName], [Email], [Password], [DateOfBirth], [Gender], [Origin], 
-                             [DateOfRegistration], [StreetName], [HouseNumber], [Zipcode], [City], [Country]) 
-                     VALUES 
-                     (@FirstName, @LastName, @Email, @Password, @DateOfBirth, @Gender, @Origin, @DateOfRegistration, 
-                      @StreetName, @HouseNumber, @Zipcode, @City, @Country);
-                     SELECT SCOPE_IDENTITY();"; // gets the new UserId
+            string query = @"
+            INSERT INTO [dbo].[Users] 
+            (FirstName, LastName, Email, Password, DateOfBirth, Gender, Origin, MaritalStatus, DateOfRegistration, StreetName, HouseNumber, Zipcode, City, Country)
+            VALUES(@FirstName, @LastName, @Email, @Password, @DateOfBirth, @Gender, @Origin, @MaritalStatus, @DateOfRegistration, @StreetName, @HouseNumber, @Zipcode, @City, @Country);
+            SELECT SCOPE_IDENTITY();"; // gets the new UserId
 
             using (var connection = await _dataAccess.OpenSqlConnection())
             using (var command = new SqlCommand(query, connection))
@@ -34,6 +32,8 @@ namespace SeniorConnect.DataAccesLibrary
                 command.Parameters.AddWithValue("@DateOfBirth", user.DateOfBirth);
                 command.Parameters.AddWithValue("@Gender", user.Gender);
                 command.Parameters.AddWithValue("@Origin", user.Origin);
+                command.Parameters.AddWithValue("@MaritalStatus", user.MaritalStatus);
+                //command.Parameters.AddWithValue("@MaritalStatus", (int)user.MaritalStatus);
                 command.Parameters.AddWithValue("@DateOfRegistration", user.DateOfRegistration);
                 command.Parameters.AddWithValue("@StreetName", user.StreetName);
                 command.Parameters.AddWithValue("@HouseNumber", user.HouseNumber);
@@ -63,7 +63,7 @@ namespace SeniorConnect.DataAccesLibrary
                 {
                     if (await reader.ReadAsync())
                     {
-                        return new User
+                        return new User () 
                         {
                             Id = reader.GetInt32(0),
                             FirstName = reader.GetString(1),
@@ -87,7 +87,7 @@ namespace SeniorConnect.DataAccesLibrary
             return null; 
         }
 
-        public async Task<List<User>> GetAllUserAsync()
+        public async Task<List<User>> GetAllAsync()
         {
             string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
                             [DateOfBirth], [Gender], [Origin], [DateOfRegistration], 
@@ -125,7 +125,7 @@ namespace SeniorConnect.DataAccesLibrary
             return users;
         }
 
-        public async Task<bool> UpdateUserAsync(User user)
+        public async Task<bool> UpdateAccountAsync(User user)
         {
             string query = @"UPDATE [dbo].[Users]
                      SET [FirstName] = @FirstName, 
@@ -166,7 +166,7 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
-        public async Task<bool> DeleteUserAsync(int userId)
+        public async Task<bool> DeleteAccountAsync(int userId)
         {
             string query = @"DELETE FROM [dbo].[Users] WHERE [UserId] = @UserId";
 
@@ -180,7 +180,7 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
-        public async Task<bool> IsDuplicateEmailAsync(string email)
+        public async Task<bool> IsEmailRegistered(string email)
         {
             string query = @"SELECT COUNT(*) 
                              FROM [dbo].[Users] 
