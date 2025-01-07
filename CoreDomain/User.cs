@@ -72,9 +72,4 @@ public class User
     public string Zipcode { get; init; }
     public string City { get; init; }
     public string Country { get; init; }
-
-    private bool HashPassword(string value)
-    {
-        throw new NotImplementedException();
-    }
 }

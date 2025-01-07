@@ -3,13 +3,15 @@ using SeniorConnect.Domain;
 
 namespace SeniorConnect.Application.Services
 {
-    public class IdentityService
+    public class IdentityService 
     {
         private readonly IUserRepository _userRepository;
+        private readonly IPasswordHasher _passwordHasher;
 
-        public IdentityService(IUserRepository userRepository)
+        public IdentityService(IUserRepository userRepository, IPasswordHasher passwordHasher)
         {
             _userRepository = userRepository;
+            _passwordHasher = passwordHasher;
         }
         public async Task CreateAccount(
             string firstName, string lastName, string email, 
@@ -23,13 +25,13 @@ namespace SeniorConnect.Application.Services
             }
             else
             {
-                //var hash = HashPassword(password, out var salt);
+                //var hashedPassword = _passwordHasher.HashPassword(password, out var salt));
 
                 User newUser = new User(
                     firstName: firstName,
                     lastName: lastName,
                     email: email,
-                    password: password,
+                    password: password, //becomes hashedPassword after impl hashing methods
                     dateOfBirth: dateOfBirth,
                     gender: gender,
                     origin: origin,
@@ -58,26 +60,6 @@ namespace SeniorConnect.Application.Services
         public void DeleteAccount(int userId)
         {
             _userRepository.DeleteAccountAsync(userId);
-
-
         }
-
-        //private static /*string*/ void HashPassword(string password, out byte[] salt)
-        //{
-        //    const int keySize = 64;
-        //    const int iterations = 350000;
-        //    HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
-
-        //    salt = RandomNumberGenerator.GetBytes(keySize);
-
-        //    var hash = Rfc2898DeriveBytes.Pbkdf2(
-        //        Encoding.UTF8.GetBytes(password),
-        //        salt,
-        //        iterations,
-        //        hashAlgorithm,
-        //        keySize);
-
-        //    return Convert.ToHexString(hash);
-        //}
     }
 }
