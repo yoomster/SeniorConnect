@@ -11,33 +11,35 @@ namespace SeniorConnect.Application.Services
         {
             _userRepository = userRepository;
         }
-        public async Task CreateAccount(User user)
+        public async Task CreateAccount(
+            string firstName, string lastName, string email, 
+            string password, DateOnly dateOfBirth, char gender,
+            string origin, string maritalStatus, string streetName, 
+            string houseNumber, string zipcode, string city, string country)
         {
-            if (await _userRepository.IsDuplicateEmailAsync(user.Email))
+            if (await _userRepository.IsEmailRegistered(email))
             {
                 throw new InvalidOperationException("Email is already registered.");
             }
             else
             {
-                //var hash = HashPassword(user.Password, out var salt);
+                //var hash = HashPassword(password, out var salt);
 
-                User newUser = new User
-                {
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    Password = user.Password,
-                    DateOfBirth = user.DateOfBirth,
-                    Gender = user.Gender,
-                    Origin = user.Origin,
-                    Interests = user.Interests,
-                    DateOfRegistration = DateOnly.FromDateTime(DateTime.Now),
-                    StreetName = user.StreetName,
-                    HouseNumber = user.HouseNumber,
-                    Zipcode = user.Zipcode,
-                    City = user.City,
-                    Country = user.Country,
-                };
+                User newUser = new User(
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password,
+                    dateOfBirth: dateOfBirth,
+                    gender: gender,
+                    origin: origin,
+                    maritalStatus: maritalStatus,
+                    streetName: streetName,
+                    houseNumber: houseNumber,
+                    zipcode: zipcode,
+                    city: city,
+                    country: country
+                );
 
                 await _userRepository.CreateAccountToDBAsync(newUser);
             }
