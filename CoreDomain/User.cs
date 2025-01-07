@@ -10,7 +10,7 @@ public class User
        DateOnly dateOfBirth,
        char gender,
        string origin,
-       string maritalStatus,
+       MaritalEnum maritalStatus,
        string streetName,
        string houseNumber,
        string zipcode,
@@ -65,7 +65,7 @@ public class User
     public DateOnly DateOfBirth { get; init; }
     public char Gender { get; init; }
     public string Origin { get; init; }
-    public string MaritalStatus { get; init; }
+    public MaritalEnum MaritalStatus { get; init; }
     public DateOnly DateOfRegistration { get; init; } = DateOnly.FromDateTime(DateTime.Now);
     public string StreetName { get; init; }
     public string HouseNumber { get; init; }

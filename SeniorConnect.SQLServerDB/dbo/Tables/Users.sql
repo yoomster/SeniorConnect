@@ -8,6 +8,8 @@
     [DateOfBirth] Date NOT NULL,
     [Gender] char NOT NULL, 
     [Origin] nvarchar(30) NOT NULL,
+    [MaritalStatus] TINYINT NOT NULL, 
+    --1 (Single), 2 (Married), 3 (Divorced), 4 (Widowed)
     [DateOfRegistration] Date NOT NULL,
     [StreetName] NVARCHAR(50) NOT NULL, 
 	[HouseNumber] NVARCHAR(10) NOT NULL, 

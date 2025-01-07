@@ -1,13 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SeniorConnect.WebApp.Models;
-using SeniorConnect.Domain.Services;
 using SeniorConnect.WebApp.Mapping;
+using SeniorConnect.Application.Services;
+
 
 namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 {
     public class RegisterModel : PageModel
     {
+        private readonly IdentityService _identityService;
+
+        public RegisterModel(IdentityService identityService)
+        {
+            _identityService = identityService;
+        }
 
         [BindProperty]
         public UserFormModel UserFormModel { get; set; }
@@ -26,7 +33,7 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
             try
             {
                 var userEntity = UserFormModel.ToUserEntity();
-                await UserService.AddUser(userEntity);
+                await _identityService.CreateAccount(userEntity);
 
                 TempData["SuccessMessage"] = "User registered successfully!";
                 return RedirectToPage("Login");

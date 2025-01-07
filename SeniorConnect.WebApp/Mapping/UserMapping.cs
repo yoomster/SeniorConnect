@@ -1,6 +1,8 @@
-﻿using CoreDomain;
-using CoreDomain.Users;
+﻿using SeniorConnect.Domain;
 using SeniorConnect.WebApp.Models;
+using System.Diagnostics.Metrics;
+using System.Reflection.Emit;
+using System.Reflection;
 
 namespace SeniorConnect.WebApp.Mapping;
 
@@ -8,23 +10,20 @@ public static class UserMapping
 {
     public static User ToUserEntity(this UserFormModel formModel)
     {
-        var newUser = new User
-        {
-            FirstName = formModel.FirstName,
-            LastName = formModel.LastName,
-            Email = formModel.Email,
-            Password = formModel.Password,
-            DateOfBirth = formModel.DateOfBirth,
-            Gender = formModel.Gender,
-            Origin = formModel.Origin,
-            StreetName = formModel.StreetName,
-            HouseNumber = formModel.HouseNumber,
-            Zipcode = formModel.Zipcode,
-            City = formModel.City,
-            Country = formModel.Country,
-        };
-
-        return newUser;
+        return new User(
+            formModel.FirstName,
+            formModel.LastName,
+            formModel.Email,
+            formModel.Password,
+            formModel.DateOfBirth,
+            formModel.Gender,
+            formModel.Origin,
+            formModel.MaritalStatus,
+            formModel.StreetName,
+            formModel.HouseNumber,
+            formModel.Zipcode,
+            formModel.City,
+            formModel.Country);
     }
 }
 

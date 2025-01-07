@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SeniorConnect.Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace SeniorConnect.WebApp.Models
 {
@@ -8,7 +9,7 @@ namespace SeniorConnect.WebApp.Models
         {
                 
         }
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         [Required(ErrorMessage = "Required field!")]
         public string FirstName { get; init; }
@@ -37,7 +38,10 @@ namespace SeniorConnect.WebApp.Models
         public char Gender { get; set; }
         
         [Required(ErrorMessage = "Required field!")]
-        public string? Origin { get; set; }
+        public string Origin { get; set; }
+
+        [Required(ErrorMessage = "Required field!")]
+        public MaritalEnum MaritalStatus { get; set; }
 
         [Required(ErrorMessage = "Required field!")]
         public string StreetName { get; set; }
