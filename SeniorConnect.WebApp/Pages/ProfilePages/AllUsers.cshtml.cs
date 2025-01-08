@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Domain;
 
 namespace SeniorConnect.WebApp.Pages.ProfilePages
@@ -15,7 +16,7 @@ namespace SeniorConnect.WebApp.Pages.ProfilePages
 
         public async Task OnGet()
         {
-            List<User> users = await _userRepository.GetAllUserAsync();
+            List<User> users = await _userRepository.GetAllAsync();
 
             foreach (var user in users)
             {

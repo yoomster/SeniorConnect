@@ -1,7 +1,7 @@
-//using SeniorConnect.DataAccesLibrary;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SeniorConnect.DataAccessLibrary;
 using SeniorConnect.Application.Services;
+using SeniorConnect.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddInfrastructure(); //<DataAccess>(); to register the infra services! put the reference back!
 builder.Services.AddScoped<IdentityService>();
+
 
 //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 //    .AddCookie(options => {

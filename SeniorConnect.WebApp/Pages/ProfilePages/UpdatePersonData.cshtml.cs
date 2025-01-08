@@ -1,21 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SeniorConnect.Application.Interfaces;
+using SeniorConnect.Application.Services;
 using SeniorConnect.Domain;
+using SeniorConnect.WebApp.Mapping;
 using SeniorConnect.WebApp.Models;
 
 namespace SeniorConnect.WebApp.Pages.ProfilePages
 {
     public class UpdatePersonDataModel : PageModel
     {
-        private readonly IUserRepository _userRepository;
+        //private readonly IUserRepository _userRepository;
+        private readonly ProfileServices _profileService;
+
 
 
         [BindProperty]
-        public UserFormModel User { get; set; }
+        public UserFormModel UserFormModel { get; set; }
 
-        public UpdatePersonDataModel(IUserRepository userRepository)
+        public UpdatePersonDataModel(IUserRepository userRepository, ProfileServices profileService)
         {
-            _userRepository = userRepository;
+            //_userRepository = userRepository;
+            _profileService = profileService;
         }
 
         public async Task<ActionResult> OnPostAsync()
@@ -27,24 +33,9 @@ namespace SeniorConnect.WebApp.Pages.ProfilePages
 
             try
             {
-                User userToUpdate = new User
-                {
-                    //Id = User.Id,
-                    FirstName = User.FirstName,
-                    LastName = User.LastName,
-                    Email = User.Email,
-                    Password = User.Password,
-                    DateOfBirth = User.DateOfBirth,
-                    Gender = User.Gender,
-                    StreetName = User.StreetName,
-                    Origin = User.Origin,
-                    HouseNumber = User.HouseNumber,
-                    Zipcode = User.Zipcode,
-                    City = User.City,
-                    Country = User.Country,
-                };
+                var userEntity = UserFormModel.ToUserEntity();
 
-                //await _userRepository.UpdateUserAsync(userToUpdate);
+                await _profileService.UpdateProfileAsync(userEntity);
 
                 TempData["SuccessMessage"] = "User and address updated successfully!";
                 return RedirectToPage("Profile");
