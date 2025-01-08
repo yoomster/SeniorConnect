@@ -1,7 +1,7 @@
 ﻿using SeniorConnect.Domain;
 
 namespace SeniorConnect.Application.Interfaces;
-internal interface IActivityRepository
+public interface IActivityRepository
 {
     public Task SaveActivityToDBAsync(Activity activity);
 

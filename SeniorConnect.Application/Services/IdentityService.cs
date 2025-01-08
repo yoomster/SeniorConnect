@@ -20,12 +20,12 @@ namespace SeniorConnect.Application.Services
             //string houseNumber, string zipcode, string city, string country
             User user)
         {
-            if (await _userRepository.IsEmailRegistered(user.Email))
-            {
-                throw new InvalidOperationException("Email is already registered.");
-            }
-            else
-            {
+            //if (await _userRepository.IsEmailRegistered(user.Email))
+            //{
+            //    throw new InvalidOperationException("Email is already registered.");
+            //}
+            //else
+            //{
                 //var hashedPassword = _passwordHasher.HashPassword(user.Password, out var salt));
 
                 User newUser = new User(
@@ -45,7 +45,7 @@ namespace SeniorConnect.Application.Services
                 );
 
                 await _userRepository.CreateAccountToDBAsync(newUser);
-            }
+            //}
         }
         
         public void Login(string email, string password)

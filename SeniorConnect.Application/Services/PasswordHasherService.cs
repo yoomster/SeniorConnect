@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SeniorConnect.Application.Services
 {
-    internal class PasswordHasherService : IPasswordHasher
+    public class PasswordHasherService : IPasswordHasher
     {
         public string HashPassword(string plainPassword)
         {
