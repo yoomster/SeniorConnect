@@ -9,7 +9,7 @@ namespace SeniorConnect.DataAccesLibrary
 
         private readonly DataAccess _dataAccess;
 
-        internal ActivityRepository(DataAccess dataAccess)
+        public ActivityRepository(DataAccess dataAccess)
         {
             _dataAccess = dataAccess;
         }
@@ -40,78 +40,78 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
-        public async Task<Activity?> GetByIdAsync(int activityId)
-        {
-            string query = @"SELECT [ActivityId], [Name], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], 
-                            [StreetName], [HouseNumber], [Zipcode], [City], [Country]  
-                     FROM [dbo].[Activities] 
-                     WHERE [ActivityId] = @ActivityId";
+        //public async Task<Activity?> GetByIdAsync(int activityId)
+        //{
+        //    string query = @"SELECT [ActivityId], [Name], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], 
+        //                    [StreetName], [HouseNumber], [Zipcode], [City], [Country]  
+        //             FROM [dbo].[Activities] 
+        //             WHERE [ActivityId] = @ActivityId";
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
-            using (var command = new SqlCommand(query, connection))
-            {
-                command.Parameters.AddWithValue("@ActivityId", activityId);
+        //    using (var connection = await _dataAccess.OpenSqlConnection())
+        //    using (var command = new SqlCommand(query, connection))
+        //    {
+        //        command.Parameters.AddWithValue("@ActivityId", activityId);
 
-                using (var reader = await command.ExecuteReaderAsync())
-                {
-                    if (await reader.ReadAsync())
-                    {
-                        return new Activity(1)
-                        {
-                            Id = reader.GetInt32(0),
-                            Title = reader.GetString(1),
-                            Description = reader.GetString(2),
-                            Date = DateOnly.FromDateTime(reader.GetDateTime(3)),
-                            StartTime = TimeOnly.FromDateTime(reader.GetDateTime(4)),
-                            EndTime = TimeOnly.FromDateTime(reader.GetDateTime(5)),
-                            MaxParticipants = reader.GetInt32(6),
-                            StreetName = reader.GetString(7),
-                            HouseNumber = reader.GetString(8),
-                            Zipcode = reader.GetString(9),
-                            City = reader.GetString(10),
-                            Country = reader.GetString(11)
-                        };
-                    }
-                }
-            }
+        //        using (var reader = await command.ExecuteReaderAsync())
+        //        {
+        //            if (await reader.ReadAsync())
+        //            {
+        //                return new Activity(1)
+        //                {
+        //                    Id = reader.GetInt32(0),
+        //                    Title = reader.GetString(1),
+        //                    Description = reader.GetString(2),
+        //                    Date = DateOnly.FromDateTime(reader.GetDateTime(3)),
+        //                    StartTime = TimeOnly.FromDateTime(reader.GetDateTime(4)),
+        //                    EndTime = TimeOnly.FromDateTime(reader.GetDateTime(5)),
+        //                    MaxParticipants = reader.GetInt32(6),
+        //                    StreetName = reader.GetString(7),
+        //                    HouseNumber = reader.GetString(8),
+        //                    Zipcode = reader.GetString(9),
+        //                    City = reader.GetString(10),
+        //                    Country = reader.GetString(11)
+        //                };
+        //            }
+        //        }
+        //    }
 
-            return null; 
-        }
+        //    return null; 
+        //}
 
-        public async Task<List<Activity>> GetAllAsync()
-        {
-            string query = @"SELECT [ActivityId], [Name], [Description], [Date], [StartTime], [EndTime], 
-                            [MaxParticipants], [StreetName], [HouseNumber], [Zipcode], [City], [Country]  
-                     FROM [dbo].[Activities]";
+        //public async Task<List<Activity>> GetAllAsync()
+        //{
+        //    string query = @"SELECT [ActivityId], [Name], [Description], [Date], [StartTime], [EndTime], 
+        //                    [MaxParticipants], [StreetName], [HouseNumber], [Zipcode], [City], [Country]  
+        //             FROM [dbo].[Activities]";
 
-            var activities = new List<Activity>();
+        //    var activities = new List<Activity>();
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
-            using (var command = new SqlCommand(query, connection))
-            using (var reader = await command.ExecuteReaderAsync())
-            {
-                while (await reader.ReadAsync())
-                {
-                    activities.Add(new Activity
-                    {
-                        Id = reader.GetInt32(0),
-                        Title = reader.GetString(1),
-                        Description = reader.GetString(2),
-                        Date = DateOnly.FromDateTime(reader.GetDateTime(3)),
-                        StartTime = TimeOnly.FromDateTime(reader.GetDateTime(4)),
-                        EndTime = TimeOnly.FromDateTime(reader.GetDateTime(5)),
-                        MaxParticipants = reader.GetInt32(6),
-                        StreetName = reader.GetString(7),
-                        HouseNumber = reader.GetString(8),
-                        Zipcode = reader.GetString(9),
-                        City = reader.GetString(10),
-                        Country = reader.GetString(11)
-                    });
-                }
-            }
+        //    using (var connection = await _dataAccess.OpenSqlConnection())
+        //    using (var command = new SqlCommand(query, connection))
+        //    using (var reader = await command.ExecuteReaderAsync())
+        //    {
+        //        while (await reader.ReadAsync())
+        //        {
+        //            activities.Add(new Activity
+        //            {
+        //                Id = reader.GetInt32(0),
+        //                Title = reader.GetString(1),
+        //                Description = reader.GetString(2),
+        //                Date = DateOnly.FromDateTime(reader.GetDateTime(3)),
+        //                StartTime = TimeOnly.FromDateTime(reader.GetDateTime(4)),
+        //                EndTime = TimeOnly.FromDateTime(reader.GetDateTime(5)),
+        //                MaxParticipants = reader.GetInt32(6),
+        //                StreetName = reader.GetString(7),
+        //                HouseNumber = reader.GetString(8),
+        //                Zipcode = reader.GetString(9),
+        //                City = reader.GetString(10),
+        //                Country = reader.GetString(11)
+        //            });
+        //        }
+        //    }
 
-            return activities;
-        }
+        //    return activities;
+        //}
 
         public async Task<bool> UpdateAsync(Activity activity)
         {

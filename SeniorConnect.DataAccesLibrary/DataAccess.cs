@@ -7,7 +7,7 @@ namespace SeniorConnect.DataAccesLibrary
     {
         private readonly string _connectionString;
 
-        internal DataAccess(IConfiguration configuration)
+        public DataAccess(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("Default");
         }

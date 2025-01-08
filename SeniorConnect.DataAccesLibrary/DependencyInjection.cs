@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SeniorConnect.Application.Interfaces;
+using SeniorConnect.Application.Services;
 using SeniorConnect.DataAccesLibrary;
 
 namespace SeniorConnect.DataAccessLibrary
@@ -8,7 +9,10 @@ namespace SeniorConnect.DataAccessLibrary
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
+            services.AddScoped<DataAccess>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPasswordHasher, PasswordHasherService>();
+
 
             return services;
         }

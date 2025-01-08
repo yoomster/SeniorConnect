@@ -10,7 +10,7 @@ namespace SeniorConnect.DataAccesLibrary
     {
         private readonly DataAccess _dataAccess;
 
-        internal UserRepository(DataAccess dataAccess)
+        public UserRepository(DataAccess dataAccess)
         {
             _dataAccess = dataAccess;
         }
@@ -193,20 +193,20 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
-        public async Task<bool> IsEmailRegistered(string email)
-        {
-            string query = @"SELECT COUNT(*) 
-                             FROM [dbo].[Users] 
-                             WHERE [Email] = @Email";
+        //public async Task<bool> IsEmailRegistered(string email)
+        //{
+        //    string query = @"SELECT COUNT(*) 
+        //                     FROM [dbo].[Users] 
+        //                     WHERE [Email] = @Email";
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
-            using (var command = new SqlCommand(query, connection))
-            {
-                command.Parameters.AddWithValue("@Email", email);
+        //    using (var connection = await _dataAccess.OpenSqlConnection())
+        //    using (var command = new SqlCommand(query, connection))
+        //    {
+        //        command.Parameters.AddWithValue("@Email", email);
 
-                var result = await command.ExecuteScalarAsync();
-                return (int)result > 0; 
-            }
-        }
+        //        var result = await command.ExecuteScalarAsync();
+        //        return (int)result > 0; 
+        //    }
+        //}
     }
 }
