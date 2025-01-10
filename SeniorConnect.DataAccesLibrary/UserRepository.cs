@@ -15,7 +15,7 @@ namespace SeniorConnect.DataAccesLibrary
             _dataAccess = dataAccess;
         }
 
-        public async Task<int> CreateAccountToDBAsync(User user)
+        public async Task CreateAccountToDBAsync(User user)
         {
             string query = @"
             INSERT INTO [dbo].[Users] 
@@ -33,17 +33,14 @@ namespace SeniorConnect.DataAccesLibrary
                 command.Parameters.AddWithValue("@DateOfBirth", user.DateOfBirth);
                 command.Parameters.AddWithValue("@Gender", user.Gender);
                 command.Parameters.AddWithValue("@Origin", user.Origin);
-                //command.Parameters.AddWithValue(parameterName: "@MaritalStatus", user.MaritalStatus);
-                command.Parameters.AddWithValue("@MaritalStatus", (int)user.MaritalStatus);
+                command.Parameters.AddWithValue("@MaritalStatus", (byte)user.MaritalStatus);
                 command.Parameters.AddWithValue("@DateOfRegistration", user.DateOfRegistration);
                 command.Parameters.AddWithValue("@StreetName", user.StreetName);
                 command.Parameters.AddWithValue("@HouseNumber", user.HouseNumber);
                 command.Parameters.AddWithValue("@Zipcode", user.Zipcode);
                 command.Parameters.AddWithValue("@City", user.City);
                 command.Parameters.AddWithValue("@Country", user.Country);
-
                 var result = await command.ExecuteScalarAsync();
-                return Convert.ToInt32(result); // UserId for login and personal welcome message/page
             }
         }
 
@@ -73,7 +70,7 @@ namespace SeniorConnect.DataAccesLibrary
                             dateOfBirth: DateOnly.FromDateTime(reader.GetDateTime(5)),
                             gender: reader.GetString(6)[0], 
                             origin: reader.GetString(7),
-                            maritalStatus: (MaritalEnum)reader.GetInt32(8),
+                            maritalStatus: (MaritalEnum)reader.GetByte(8),
                             streetName: reader.GetString(10),
                             houseNumber: reader.GetString(11),
                             zipcode: reader.GetString(12),
@@ -117,7 +114,7 @@ namespace SeniorConnect.DataAccesLibrary
                             dateOfBirth: DateOnly.FromDateTime(reader.GetDateTime(5)),
                             gender: reader.GetString(6)[0],
                             origin: reader.GetString(7),
-                            maritalStatus: (MaritalEnum)reader.GetInt32(8),
+                            maritalStatus: (MaritalEnum)reader.GetByte(8),
                             streetName: reader.GetString(10),
                             houseNumber: reader.GetString(11),
                             zipcode: reader.GetString(12),
