@@ -4,56 +4,75 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SeniorConnect </title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+@*     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SeniorConnect.WebApp.styles.css" asp-append-version="true" />
+ *@
+    <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">SeniorConnect</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="IdentityAccessManagement/Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="UserPages/UpdatePersonData">Change your personal data</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="UserPages/AllUsers">Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="ActivityPages/AllActivitiesListed">See all our open activities</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <img src="Images/Logo SC.svg" alt="Senior Connect Logo">
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav class="navbar">
+            <a asp-area="" asp-page="/ActivityPages/AllActivitiesListed">Activiteiten</a>
+            <a asp-area="" asp-page="UserPages/AllUsers">Alle gebruikers</a>
+            <a asp-area="" asp-page="UserPages/UpdatePersonData">Profiel gegevens wijzigen</a>
+
+            <a asp-area="" asp-page="IdentityAccessManagement/Login">Mijn account</a>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - SeniorConnect - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer>
+        <div class="footer-column">
+            <h4>Over ons</h4>
+            <ul>
+                <li><a asp-area="" asp-page="/About/Mission">Onze missie</a></li>
+                <li><a asp-area="" asp-page="/About/Team">Team</a></li>
+                <li><a asp-area="" asp-page="/About/Contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Diensten</h4>
+            <ul>
+@*                 <li><a asp-area="" asp-page="/MentorPages/AllMentors">Mentor vinden</a></li>
+                <li><a asp-area="" asp-page="/VolunteerPages/AllVolunteers">Vrijwilligerswerk</a></li> *@
+                <li><a asp-area="" asp-page="/ActivityPages/AllActivitiesListed">Activiteiten boeken</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Hulp nodig?</h4>
+            <ul>
+                <li><a asp-area="" asp-page="/FAQ">FAQ</a></li>
+                <li><a asp-area="" asp-page="/Support">Support</a></li>
+                <li><a asp-area="" asp-page="/Privacy">Privacybeleid</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <div class="footer-column-logo">
+                <a href="https://www.facebook.com/"><img id="linkedlogo" src="Images/square-facebook-brands-solid.svg" alt=""></a>
+                <a href="https://www.instagram.com"><img id="linkedlogo" src="Images/instagram-brands-solid.svg" alt=""></a>
+                <a href="https://www.x.com"><img id="linkedlogo" src="Images/twitter-brands-solid.svg" alt=""></a>
+            </div>
         </div>
     </footer>
 
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+@*     <script src="~/js/site.js" asp-append-version="true"></script> *@
+    <script src="~/js/app.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
