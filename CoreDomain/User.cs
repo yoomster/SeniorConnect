@@ -26,6 +26,10 @@ public class User
         if (dateOfBirth >= DateOnly.FromDateTime(DateTime.Now))
             throw new ArgumentException("Date of birth must be in the past.", nameof(dateOfBirth));
 
+        var minimumDateOfBirth = DateTime.Now.AddYears(-60).Date;
+        if (dateOfBirth > DateOnly.FromDateTime(minimumDateOfBirth))
+            throw new ArgumentException("User must be at least 60 y/o.", nameof(dateOfBirth));
+
         if (!new[] { 'M', 'F', 'O' }.Contains(gender))
             throw new ArgumentException("Gender must be 'M', 'F', or 'O'.", nameof(gender));
 

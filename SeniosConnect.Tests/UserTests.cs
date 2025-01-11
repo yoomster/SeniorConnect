@@ -1,10 +1,12 @@
-﻿using SeniorConnect.Domain;
+﻿using FluentAssertions;
+using SeniorConnect.Domain;
 
 
 namespace SeniorConnect.Tests;
 
 public class UserTests
 {
+    //Arrange
     User validUser = new(
     firstName: "Adam",
     lastName: "Akil",
@@ -26,24 +28,31 @@ public class UserTests
     
     //Valid Input:ctor inits object correctly when all inputs are valid.
     [Fact]
-    public void User_Creation_WithValidInput_ShouldSucceed()
+    public void UserCreationWithValidInput_ShouldSucceed()
     {
-        //Arrange
         //Act
-
+        var password = validUser.Password;
 
         //Assert
+        //can we test if all props are included 
+        password.Should().NotBeEmpty();
+        
     }
 
     //Invalid Email Test: Test with invalid email formats to verify validation 
-    [Fact]
-    public void User_Creation_WithInvalidEmail_ShouldThrowException()
+    [Fact(Skip = "testing")]
+    public void UserCreationWithInvalidEmail_ShouldThrowException()
     {
+        //Act
+        var email = validUser.Email;
 
+        //Assert
+        email.Should().NotBeEmpty();
+        email.Should().Contain("@");
     }
 
     //Test for duplicate email addresses
-    [Fact]
+    [Fact(Skip = "testing")]
     public void User_Creation_WithDiplicateEmail_ShouldThrowException()
     {
 

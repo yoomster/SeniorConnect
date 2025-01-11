@@ -1,4 +1,5 @@
-﻿using SeniorConnect.Domain;
+﻿using Microsoft.AspNetCore.Mvc;
+using SeniorConnect.Domain;
 using System.ComponentModel.DataAnnotations;
 
 namespace SeniorConnect.WebApp.Models
@@ -17,6 +18,7 @@ namespace SeniorConnect.WebApp.Models
         [Required(ErrorMessage = "Required field!")]
         public string LastName { get; init; }
 
+        [Remote(action: "VerifyEmail", controller: "Users")] //implement JS method
         [Required(ErrorMessage = "Required field!")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; init; }
@@ -32,6 +34,7 @@ namespace SeniorConnect.WebApp.Models
 
         [Required(ErrorMessage = "Required field!")]
         [DataType(DataType.Date)]
+        [MinAge(60, ErrorMessage = "User must be at least 60 years old.")] // LOOK INTO 
         public DateOnly DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Required field!")]
