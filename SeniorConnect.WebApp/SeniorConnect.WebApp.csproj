@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CoreDomain\SeniorConnect.Domain.csproj" />
     <ProjectReference Include="..\SeniorConnect.Application\SeniorConnect.Application.csproj" />
     <ProjectReference Include="..\SeniorConnect.DataAccesLibrary\SeniorConnect.DataAccessLibrary.csproj" />
   </ItemGroup>

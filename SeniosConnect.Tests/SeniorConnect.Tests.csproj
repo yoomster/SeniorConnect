@@ -31,8 +31,4 @@
     <ProjectReference Include="..\SeniorConnect.Application\SeniorConnect.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mocking\" />
-  </ItemGroup>
-
 </Project>
