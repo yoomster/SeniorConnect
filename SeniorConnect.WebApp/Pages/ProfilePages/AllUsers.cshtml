@@ -1,12 +1,9 @@
-﻿@page "/Users"
-
+﻿@page 
 @model SeniorConnect.WebApp.Pages.ProfilePages.AllUsersModel
 
 @{
-    ViewData["Title"] = "All Users";
+    ViewData["Title"] = "Alle gebruikers";
 }
-
-<h1>@ViewData["Title"]</h1>
 
  
 @if (Model.AllUsers != null && Model.AllUsers.Count > 0)

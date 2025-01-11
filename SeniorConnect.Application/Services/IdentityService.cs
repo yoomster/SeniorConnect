@@ -13,12 +13,7 @@ namespace SeniorConnect.Application.Services
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
         }
-        public async Task CreateAccount(
-            //string firstName, string lastName, string email, 
-            //string password, DateOnly dateOfBirth, char gender,
-            //string origin, string maritalStatus, string streetName, 
-            //string houseNumber, string zipcode, string city, string country
-            User user)
+        public async Task CreateAccount(User user)
         {
             //if (await _userRepository.IsEmailRegistered(user.Email))
             //{

@@ -3,7 +3,6 @@
 public class Activity
 {
     public Activity(
-        int id,
         string title,
         string description,
         DateOnly date,
@@ -26,7 +25,6 @@ public class Activity
         if (maxParticipants <= 0)
             throw new ArgumentException("Max participants must be greater than zero.", nameof(maxParticipants));
         
-        Id = id;
         Title = title;
         Description = description;
         Date = date;

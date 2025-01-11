@@ -1,0 +1,37 @@
+﻿@page
+@model SeniorConnect.WebApp.Pages.IdentityAccessManagement.AccountByNickModel
+@{
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="account-container">
+        <h1>My Account</h1>
+        <div class="account-info">
+            <label>Username:</label>
+            <div id="username">admin</div>
+        </div>
+        <div class="account-info">
+            <label>Email:</label>
+            <div id="email">admin@example.com</div>
+        </div>
+        <a href="index.html" class="btn">Logout</a>
+    </div>
+
+    <script>
+        const username = "admin";
+        const email = "admin@example.com";
+
+        document.getElementById('username').textContent = username;
+        document.getElementById('email').textContent = email;
+
+
+
+    </script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 ﻿using SeniorConnect.Application.Interfaces;
+using SeniorConnect.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SeniorConnect.Application.Services
 {
-    internal class ActivityService
+    public class ActivityService
     {
         private readonly IActivityRepository _activityRepository;
 
@@ -16,7 +17,7 @@ namespace SeniorConnect.Application.Services
             _activityRepository = activityRepository;
         }
 
-        public static void RegisterActivity(object activity)
+        public static void RegisterActivity(Activity activity)
         {
             throw new NotImplementedException();
             //if statement for validation, if true, create

@@ -12,4 +12,8 @@
     <ProjectReference Include="..\SeniorConnect.DataAccesLibrary\SeniorConnect.DataAccessLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
 </Project>

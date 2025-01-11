@@ -1,13 +1,13 @@
 ﻿INSERT INTO [dbo].[Activities] 
 ([Name], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], [StreetName], [HouseNumber], [Zipcode], [City], [Country])
 VALUES
-('Gentle Yoga', 'A relaxing yoga session focused on gentle stretching and breathing exercises, ideal for seniors.', '2024-01-19', '10:00', '11:00', 15, 'Alberdingk Thijmlaan', '1', '5615 EB', 'Eindhoven', 'Netherlands'),
-('Art Class', 'A creative class where seniors can express themselves through painting or drawing, no experience needed.', '2024-01-21', '14:00', '16:00', 12, 'Alberdingk Thijmlaan', '1', '5615 EB', 'Eindhoven', 'Netherlands'),
-('Social Tea Time', 'Join us for a warm cup of tea and socializing with fellow seniors in a cozy environment.', '2024-01-25', '15:00', '16:30', 20, 'Alberdingk Thijmlaan', '1', '5615 EB', 'Eindhoven', 'Netherlands'),
-('Gentle Walk in the Park', 'A peaceful walk through the park, with plenty of stops for rest and conversation.', '2024-01-28', '11:00', '12:30', 10, 'Alberdingk Thijmlaan', '1', '5615 EB', 'Eindhoven', 'Netherlands'),
-('Board Games Afternoon', 'An afternoon of fun and friendly competition with board games and puzzles, perfect for seniors.', '2024-01-30', '13:30', '16:00', 8, 'Alberdingk Thijmlaan', '1', '5615 EB', 'Eindhoven', 'Netherlands'),
-('Memory Lane', 'A nostalgia-filled session where seniors can share memories and stories from the past.', '2024-02-02', '10:30', '12:00', 15, 'Antoon Coolenlaan', '2a', '5644 RX', 'Eindhoven', 'Netherlands'),
-('Music and Movement', 'An enjoyable and low-impact dance and music session for seniors to keep moving and grooving.', '2024-02-05', '14:00', '15:00', 12, 'Antoon Coolenlaan', '2a', '5644 RX', 'Eindhoven', 'Netherlands'),
-('Cooking Class', 'A hands-on cooking class where seniors learn to prepare easy and healthy meals.', '2024-02-10', '12:00', '14:00', 10, 'Antoon Coolenlaan', '2a', '5644 RX', 'Eindhoven', 'Netherlands'),
-('Nature Talk', 'A talk on the importance of nature and the environment, followed by a discussion with experts.', '2024-02-15', '13:00', '14:30', 20, 'Antoon Coolenlaan', '2a', '5644 RX', 'Eindhoven', 'Netherlands'),
-('Mindfulness Meditation', 'A peaceful session of mindfulness and meditation techniques to reduce stress and promote well-being.', '2024-02-20', '09:30', '10:30', 15, 'Antoon Coolenlaan', '2a', '5644 RX', 'Eindhoven', 'Netherlands');
+('Kunst en Cultuur Workshop', 'Een creatieve workshop waar senioren kunnen schilderen en beeldhouwen.', '2025-02-05', '10:00:00', '12:30:00', 15, 'Kunstlaan', 12, '5611AA', 'Eindhoven', 'Nederland'),
+('Wandeling in het Park', 'Een begeleide wandeling door het stadspark, inclusief koffie en thee.', '2025-02-07', '14:00:00', '16:00:00', 20, 'Parkstraat', 5, '5615AB', 'Eindhoven', 'Nederland'),
+('Dansmiddag', 'Een gezellige dansmiddag met live muziek en dansles.', '2025-02-10', '13:30:00', '16:00:00', 25, 'Dorpsplein', 8, '5623CD', 'Eindhoven', 'Nederland'),
+('Gezelschapsspellen Dag', 'Een middag met diverse spellen zoals schaken, kaarten en domino.', '2025-02-12', '14:00:00', '17:00:00', 20, 'Gezelligheidslaan', 3, '5614EF', 'Eindhoven', 'Nederland'),
+('Filmvoorstelling', 'Een filmvoorstelling van een klassieke Nederlandse film.', '2025-02-14', '19:00:00', '21:30:00', 30, 'Bioscoopstraat', 22, '5622GH', 'Eindhoven', 'Nederland'),
+('Stoelyoga', 'Een rustige yogales speciaal voor senioren.', '2025-02-17', '11:00:00', '12:00:00', 15, 'Zorgpad', 10, '5616IJ', 'Eindhoven', 'Nederland'),
+('Kookworkshop', 'Leer eenvoudige en gezonde recepten bereiden.', '2025-02-19', '15:00:00', '17:00:00', 10, 'Keukenstraat', 6, '5612KL', 'Eindhoven', 'Nederland'),
+('Lezing over Geschiedenis', 'Een inspirerende lezing over de geschiedenis van Eindhoven.', '2025-02-23', '13:00:00', '15:00:00', 40, 'Historielaan', 7, '5613MN', 'Eindhoven', 'Nederland'),
+('Havenwandeling Rotterdam', 'Een informatieve wandeling door de Rotterdamse haven.', '2025-02-15', '10:30:00', '12:30:00', 25, 'Havenkade', 1, '3011AA', 'Rotterdam', 'Nederland'),
+('Koffieochtend en Breiclub', 'Een ontspannen ochtend breien en praten.', '2025-02-18', '10:00:00', '12:00:00', 15, 'Wolstraat', 2, '7511AB', 'Enschede', 'Nederland');

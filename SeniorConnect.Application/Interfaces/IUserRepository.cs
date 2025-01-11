@@ -4,7 +4,7 @@ namespace SeniorConnect.Application.Interfaces;
 
 public interface IUserRepository
 {
-    public Task<int> CreateAccountToDBAsync(User user);
+    public Task CreateAccountToDBAsync(User user);
 
     public Task<User?> GetByIdAsync(int id);
 
