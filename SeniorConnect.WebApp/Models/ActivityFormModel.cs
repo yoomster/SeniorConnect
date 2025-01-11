@@ -4,10 +4,10 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SeniorConnect.WebApp.Models
 {
-    public class ActivityUI
+    public class ActivityFormModel
     {
         [Required(ErrorMessage = "Required field!")]
-        public string Name { get; init; }
+        public string Title { get; init; }
 
         [Required(ErrorMessage = "Required field!")]
         public string Description { get; init; }
