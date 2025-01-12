@@ -4,16 +4,17 @@ namespace SeniorConnect.Application.Interfaces;
 
 public interface IUserRepository
 {
-    public Task CreateAccountToDBAsync(User user);
+    Task CreateUserInDBAsync(User user);
 
-    public Task<User?> GetByIdAsync(int id);
+    Task<User?> GetByEmailAsync(string email);
 
-    public Task<List<User>> GetAllAsync();
+    Task<List<User>> GetAllAsync();
 
-    public Task<bool> UpdateAccountAsync(User user);
+    Task<bool> UpdateAccountAsync(User user);
 
-    public Task<bool> DeleteAccountAsync(int userId);
+    Task<bool> DeleteAccountAsync(int userId);
+
+    Task<User> ValidateUserAsync(string email, string password);
 
     //public Task<bool> IsEmailRegistered(string email);
-
 }
