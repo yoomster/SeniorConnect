@@ -3,13 +3,18 @@
 namespace SeniorConnect.Application.Interfaces;
 public interface IActivityRepository
 {
-    public Task SaveActivityToDBAsync(Activity activity);
+    Task CreateActivityAsync(Activity activity);
 
-    public Task<Activity?> GetActivityByIdAsync(int activityId);
+    Task<Activity?> GetActivityByIdAsync(int activityId);
 
-    public Task<List<Activity>> GetAllActivitiesAsync();
+    Task<List<Activity>> GetAllAsync();
 
-    public Task<bool> UpdateActivityAsync(Activity activity);
+    Task<bool> UpdateActivityAsync(Activity activity);
 
-    public Task<bool> DeleteActivityAsync(int activityId);
+    Task<bool> DeleteActivityAsync(int activityId);
+
+    //Task<List<Activity>> GetActivitiesByDateAsync(DateOnly date);
+    //Task<List<Activity>> GetActivitiesByCityAsync(string city);
+    //Task<List<Activity>> GetActivitiesByHostAsync(int hostUserId);
+
 }

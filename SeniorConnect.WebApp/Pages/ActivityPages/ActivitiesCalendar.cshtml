@@ -1,0 +1,49 @@
+﻿@page
+@model SeniorConnect.WebApp.Pages.ActivityPages.ActivitiesCalendarModel
+@{
+    ViewData["Title"] = "Activiteiten Agenda";
+}
+
+@if (Model.Activities != null && Model.Activities.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Datum</th>
+                <th>Starttijd</th>
+                <th>Stad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var activity in Model.Activities)
+            {
+
+                <tr>
+                    <td>@activity.Title</td>
+                    <td>@activity.Date</td>
+                    <td>@activity.StartTime</td>
+                    <td>@activity.City</td>
+                    <td><a href="/ActivityPages/Details/@activity.Id" class="btn">Bekijk details</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No activity found.</p>
+}
+
+@*     <div class="cards">
+        @foreach (var activity in Model.Activities)
+        {
+            <div class="card">
+                <h2>@activity.Title</h2>
+                <p>Datum: @activity.Date.ToString("dd-MM-yyyy")</p>
+                <p>Starttijd: @activity.StartTime.ToString(@"hh\:mm")</p>
+                <p>Stad: @activity.City</p>
+                <a href="/ActivityPages/Details/@activity.Id" class="btn">Bekijk details</a>
+            </div>
+        }
+    </div> *@

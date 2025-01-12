@@ -1,5 +1,6 @@
 ﻿using SeniorConnect.Domain;
 using SeniorConnect.WebApp.Models;
+using System.Runtime.CompilerServices;
 
 namespace SeniorConnect.WebApp.Mapping
 {

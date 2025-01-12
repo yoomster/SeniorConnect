@@ -1,30 +1,31 @@
 ﻿using Microsoft.Data.SqlClient;
+using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Domain;
+using System.Data;
 
 namespace SeniorConnect.DataAccesLibrary
 {
-    internal class ActivityRepository
+    internal class ActivityRepository : IActivityRepository
     {
-        //MAKE ALL METHOD INTERNAL, NO DI ALLOWED TO UI LAYER!
-
         private readonly DataAccess _dataAccess;
 
         public ActivityRepository(DataAccess dataAccess)
         {
             _dataAccess = dataAccess;
         }
-        public async Task SaveActivityToDBAsync(Activity activity)
+        public async Task CreateActivityAsync(Activity activity)
         {
-            string query = @"INSERT INTO [dbo].[Activities] 
-                     ([Name], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], [StreetName], [HouseNumber], [Zipcode], [City], [Country]) 
-                     VALUES 
-                     (@Name, @Description, @Date, @StartTime, @EndTime, @MaxParticipants, @StreetName, @HouseNumber, @Zipcode, @City, @Country);
-                     SELECT SCOPE_IDENTITY();"; // To get the newly inserted ActivityId
+            string query = @"
+                INSERT INTO [dbo].[Activities] 
+                ([Name], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], [StreetName], [HouseNumber], [Zipcode], [City], [Country]) 
+                VALUES 
+                (@Name, @Description, @Date, @StartTime, @EndTime, @MaxParticipants, @StreetName, @HouseNumber, @Zipcode, @City, @Country);
+                SELECT CAST(SCOPE_IDENTITY() AS INT);"; //gets new ActivityId
 
             using (var connection = await _dataAccess.OpenSqlConnection())
             using (var command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@Name", activity.Title);
+                command.Parameters.AddWithValue("@Title", activity.Title);
                 command.Parameters.AddWithValue("@Description", activity.Description); 
                 command.Parameters.AddWithValue("@Date", activity.Date);
                 command.Parameters.AddWithValue("@StartTime", activity.StartTime);
@@ -35,85 +36,89 @@ namespace SeniorConnect.DataAccesLibrary
                 command.Parameters.AddWithValue("@Zipcode", activity.Zipcode);
                 command.Parameters.AddWithValue("@City", activity.City);
                 command.Parameters.AddWithValue("@Country", activity.Country);
+                command.Parameters.AddWithValue("@HostUserId", activity.HostUserId);
+
 
                 var result = await command.ExecuteScalarAsync();
             }
         }
 
-        //public async Task<Activity?> GetByIdAsync(int activityId)
-        //{
-        //    string query = @"SELECT [ActivityId], [Name], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], 
-        //                    [StreetName], [HouseNumber], [Zipcode], [City], [Country]  
-        //             FROM [dbo].[Activities] 
-        //             WHERE [ActivityId] = @ActivityId";
+        public async Task<List<Activity>> GetAllAsync()
+        {
+            string query = @"SELECT 
+                    [ActivityId], [Title], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], 
+                    [StreetName], [HouseNumber], [Zipcode], [City], [Country], [hostUserId] 
+                     FROM [dbo].[Activities]";
 
-        //    using (var connection = await _dataAccess.OpenSqlConnection())
-        //    using (var command = new SqlCommand(query, connection))
-        //    {
-        //        command.Parameters.AddWithValue("@ActivityId", activityId);
+            var activities = new List<Activity>();
 
-        //        using (var reader = await command.ExecuteReaderAsync())
-        //        {
-        //            if (await reader.ReadAsync())
-        //            {
-        //                return new Activity(1)
-        //                {
-        //                    Id = reader.GetInt32(0),
-        //                    Title = reader.GetString(1),
-        //                    Description = reader.GetString(2),
-        //                    Date = DateOnly.FromDateTime(reader.GetDateTime(3)),
-        //                    StartTime = TimeOnly.FromDateTime(reader.GetDateTime(4)),
-        //                    EndTime = TimeOnly.FromDateTime(reader.GetDateTime(5)),
-        //                    MaxParticipants = reader.GetInt32(6),
-        //                    StreetName = reader.GetString(7),
-        //                    HouseNumber = reader.GetString(8),
-        //                    Zipcode = reader.GetString(9),
-        //                    City = reader.GetString(10),
-        //                    Country = reader.GetString(11)
-        //                };
-        //            }
-        //        }
-        //    }
+            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var command = new SqlCommand(query, connection))
+            using (var reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    activities.Add(new Activity(
+                        id: reader.GetInt32(0),
+                        title: reader.GetString(1),
+                        description: reader.GetString(2),
+                        date: DateOnly.FromDateTime(reader.GetDateTime(3)),  
+                        startTime: TimeOnly.FromTimeSpan(reader.GetTimeSpan(4)),
+                        endTime: TimeOnly.FromTimeSpan(reader.GetTimeSpan(5)),
+                        maxParticipants: reader.GetInt32(6),
+                        streetName: reader.GetString(7),
+                        houseNumber: reader.GetString(8),
+                        zipcode: reader.GetString(9),
+                        city: reader.GetString(10),
+                        country: reader.GetString(11),
+                        hostUserId: reader.GetInt32(12)
+                        ) );
+                }
+            }
 
-        //    return null; 
-        //}
+            return activities;
+        }
 
-        //public async Task<List<Activity>> GetAllAsync()
-        //{
-        //    string query = @"SELECT [ActivityId], [Name], [Description], [Date], [StartTime], [EndTime], 
-        //                    [MaxParticipants], [StreetName], [HouseNumber], [Zipcode], [City], [Country]  
-        //             FROM [dbo].[Activities]";
+        public async Task<Activity?> GetActivityByIdAsync(int activityId)
+        {
+            string query = @"SELECT                     
+                    [ActivityId], [Title], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], 
+                    [StreetName], [HouseNumber], [Zipcode], [City], [Country], [hostUserId] 
+                     FROM [dbo].[Activities]
+                     WHERE [ActivityId] = @ActivityId";
 
-        //    var activities = new List<Activity>();
+            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@ActivityId", activityId);
 
-        //    using (var connection = await _dataAccess.OpenSqlConnection())
-        //    using (var command = new SqlCommand(query, connection))
-        //    using (var reader = await command.ExecuteReaderAsync())
-        //    {
-        //        while (await reader.ReadAsync())
-        //        {
-        //            activities.Add(new Activity
-        //            {
-        //                Id = reader.GetInt32(0),
-        //                Title = reader.GetString(1),
-        //                Description = reader.GetString(2),
-        //                Date = DateOnly.FromDateTime(reader.GetDateTime(3)),
-        //                StartTime = TimeOnly.FromDateTime(reader.GetDateTime(4)),
-        //                EndTime = TimeOnly.FromDateTime(reader.GetDateTime(5)),
-        //                MaxParticipants = reader.GetInt32(6),
-        //                StreetName = reader.GetString(7),
-        //                HouseNumber = reader.GetString(8),
-        //                Zipcode = reader.GetString(9),
-        //                City = reader.GetString(10),
-        //                Country = reader.GetString(11)
-        //            });
-        //        }
-        //    }
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        return new Activity(
+                        id: reader.GetInt32(0),
+                        title: reader.GetString(1),
+                        description: reader.GetString(2),
+                        date: DateOnly.FromDateTime(reader.GetDateTime(3)),
+                        startTime: TimeOnly.FromDateTime(reader.GetDateTime(4)),
+                        endTime: TimeOnly.FromDateTime(reader.GetDateTime(5)),
+                        maxParticipants: reader.GetInt32(6),
+                        streetName: reader.GetString(7),
+                        houseNumber: reader.GetString(8),
+                        zipcode: reader.GetString(9),
+                        city: reader.GetString(10),
+                        country: reader.GetString(11),
+                        hostUserId: reader.GetInt32(12)
+                        );
+                    }
+                }
+            }
 
-        //    return activities;
-        //}
+            return null;
+        }
 
-        public async Task<bool> UpdateAsync(Activity activity)
+        public async Task<bool> UpdateActivityAsync(Activity activity)
         {
             string query = @"UPDATE [dbo].[Activities] 
                      SET [Name] = @Name, 
@@ -146,11 +151,11 @@ namespace SeniorConnect.DataAccesLibrary
                 command.Parameters.AddWithValue("@Country", activity.Country);
 
                 int rowsAffected = await command.ExecuteNonQueryAsync();
-                return rowsAffected > 0; 
+                return rowsAffected > 0;
             }
         }
 
-        public async Task<bool> DeleteAsync(int activityId)
+        public async Task<bool> DeleteActivityAsync(int activityId)
         {
             string query = @"DELETE FROM [dbo].[Activities] 
                      WHERE [ActivityId] = @ActivityId";
@@ -164,7 +169,5 @@ namespace SeniorConnect.DataAccesLibrary
                 return rowsAffected > 0; // Return true if deleted
             }
         }
-
-
     }
 }

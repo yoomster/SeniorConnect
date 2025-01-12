@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddInfrastructure(); //<DataAccess>(); to register the infra services! put the reference back!
+builder.Services.AddInfrastructure(); 
 builder.Services.AddScoped<IdentityService>();
 
 

@@ -17,46 +17,57 @@ namespace SeniorConnect.Application.Services
             _activityRepository = activityRepository;
         }
 
-        public static void RegisterActivity(Activity activity)
+        public async Task CreateActivity(Activity activity, int loggedInUserId)
         {
-            throw new NotImplementedException();
-            //if statement for validation, if true, create
+            Activity newActivity = new(
+                title: activity.Title,
+                description: activity.Description,
+                date: activity.Date,
+                startTime: activity.StartTime,
+                endTime: activity.EndTime,
+                maxParticipants: activity.MaxParticipants,
+                streetName: activity.StreetName,
+                houseNumber: activity.HouseNumber,
+                zipcode: activity.Zipcode,
+                city: activity.City,
+                country: activity.Country
+                );
+
+            newActivity.AssignHostUser(loggedInUserId);
+
+            await _activityRepository.CreateActivityAsync(newActivity);
         }
 
+        public async Task ChangeActivity(Activity activity)
+        {
+            Activity changedActivity = new(
+                id: activity.Id,
+                title: activity.Title,
+                description: activity.Description,
+                date: activity.Date,
+                startTime: activity.StartTime,
+                endTime: activity.EndTime,
+                maxParticipants: activity.MaxParticipants,
+                streetName: activity.StreetName,
+                houseNumber: activity.HouseNumber,
+                zipcode: activity.Zipcode,
+                city: activity.City,
+                country: activity.Country,
+                hostUserId: activity.HostUserId);
 
+            await _activityRepository.UpdateActivityAsync(changedActivity);
+        }
+
+        public async Task DeleteActivity(int activityId)
+        {
+            await _activityRepository.DeleteActivityAsync(activityId);
+        }
+
+        public static List<User> GetParticipants(int activityId)
+        {
+            throw new NotImplementedException();
+        }
 
         //An activity cannot contain more than the maximum number of participants
-        //A reservation cannot be canceled for free less than 24 hours before the session starts
-
-
-        //public void CancelReservation(Participant participant)
-        //    {
-        //        var utcTimeNow = DateTime.UtcNow;
-        //        const int minHours = 24;
-        //        bool canNotCancel = (_date.ToDateTime(_startTime) - utcTimeNow).TotalHours < minHours;
-
-        //        if (canNotCancel)
-        //        {
-        //            //button for canceling reservation is disabled
-        //            throw new Exception("Cannot cancel reservation too close to session");
-        //        }
-
-        //        _participants.Remove(participant);
-        //    }
-
-        //public void ReserveSpot(Participant participant)
-        //{
-        //    if (_participants.Count() >= _maxParticipants)
-        //    {
-        //        //todo: he system displays a message indicating that the activity is full. 
-        //        throw new InvalidOperationException ("maximum participants reached");
-        //    }
-        //    else
-        //    {
-        //        _participants.Add(participant);
-        //        //Add the activity ID to participant 
-        //        participant.AddActivityToList(_id);
-        //    }
-        //}
     }
 }
