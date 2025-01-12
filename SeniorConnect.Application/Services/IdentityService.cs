@@ -19,7 +19,7 @@ namespace SeniorConnect.Application.Services
         {           
             var hashedPassword = HashPassword(user.Password);
 
-            User newUser = new User(
+            User newUser = new (
                     firstName: user.FirstName,
                     lastName: user.LastName,
                     email: user.Email,
@@ -43,14 +43,14 @@ namespace SeniorConnect.Application.Services
         //    await _userRepository.
         //}
 
-        public async Task LoginAsync(string email, string password)
+        public async Task<User?> LoginAsync(string email, string password)
         {
             bool isValidUser = await ValidateUserAsync(email, password);
 
             if (isValidUser)
-            {
-                var user = await _userRepository.GetByEmailAsync(email);
-            }
+                return await _userRepository.GetByEmailAsync(email);
+            else 
+                return null;
         }
 
         public async Task<bool> ValidateUserAsync(string email, string password)
