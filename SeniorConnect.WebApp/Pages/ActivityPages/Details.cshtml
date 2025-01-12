@@ -1,0 +1,16 @@
+﻿@page "/ActivityPages/Details/{id:int}"
+@model SeniorConnect.WebApp.Pages.ActivityPages.DetailsModel
+@{
+    ViewData["Title"] = "Activiteit Details";
+}
+
+<main class="activity">
+    <div class="activity-card">
+        <h1>@Model.Activity.Title</h1>
+        <p>Datum: @Model.Activity.Date.ToString("dd-MM-yyyy")</p>
+        <p>Starttijd: @Model.Activity.StartTime.ToString(@"hh\:mm")</p>
+        <p>Locatie: @Model.Activity.City</p>
+        <p>Beschrijving: @Model.Activity.Description</p>
+        <p>Maximaal aantal deelnemers: @Model.Activity.MaxParticipants</p>
+    </div>
+</main>
