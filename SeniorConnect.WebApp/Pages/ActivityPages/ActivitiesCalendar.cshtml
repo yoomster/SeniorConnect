@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Activiteiten Agenda";
 }
+<a href="/ActivityPages/CreateNewActivity" class="btn btn-primary mb-3">Nieuwe Activiteit Hosten</a>
 
 @if (Model.Activities != null && Model.Activities.Count > 0)
 {
@@ -34,16 +35,3 @@ else
 {
     <p>No activity found.</p>
 }
-
-@*     <div class="cards">
-        @foreach (var activity in Model.Activities)
-        {
-            <div class="card">
-                <h2>@activity.Title</h2>
-                <p>Datum: @activity.Date.ToString("dd-MM-yyyy")</p>
-                <p>Starttijd: @activity.StartTime.ToString(@"hh\:mm")</p>
-                <p>Stad: @activity.City</p>
-                <a href="/ActivityPages/Details/@activity.Id" class="btn">Bekijk details</a>
-            </div>
-        }
-    </div> *@
