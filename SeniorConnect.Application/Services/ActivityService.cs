@@ -1,10 +1,5 @@
 ﻿using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeniorConnect.Application.Services
 {
@@ -16,6 +11,7 @@ namespace SeniorConnect.Application.Services
         {
             _activityRepository = activityRepository;
         }
+
 
         public async Task CreateActivity(Activity activity, int loggedInUserId)
         {

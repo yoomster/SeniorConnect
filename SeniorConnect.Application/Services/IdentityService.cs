@@ -1,5 +1,7 @@
 ﻿using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Domain;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace SeniorConnect.Application.Services
 {
@@ -14,20 +16,14 @@ namespace SeniorConnect.Application.Services
             _passwordHasher = passwordHasher;
         }
         public async Task CreateAccount(User user)
-        {
-            //if (await _userRepository.IsEmailRegistered(user.Email))
-            //{
-            //    throw new InvalidOperationException("Email is already registered.");
-            //}
-            //else
-            //{
-                //var hashedPassword = _passwordHasher.HashPassword(user.Password, out var salt));
+        {           
+            var hashedPassword = HashPassword(user.Password);
 
-                User newUser = new User(
+            User newUser = new User(
                     firstName: user.FirstName,
                     lastName: user.LastName,
                     email: user.Email,
-                    password: user.Password, //becomes hashedPassword after impl hashing methods ^^
+                    password: hashedPassword,
                     dateOfBirth: user.DateOfBirth,
                     gender: user.Gender,
                     origin: user.Origin,
@@ -39,18 +35,47 @@ namespace SeniorConnect.Application.Services
                     country: user.Country
                 );
 
-                await _userRepository.CreateAccountToDBAsync(newUser);
-            //}
+                await _userRepository.CreateUserInDBAsync(newUser);
         }
-        
-        public void Login(string email, string password)
-        {
 
+        //public async Task<int> GetLoggedInUserId()
+        //{
+        //    await _userRepository.
+        //}
+
+        public async Task LoginAsync(string email, string password)
+        {
+            bool isValidUser = await ValidateUserAsync(email, password);
+
+            if (isValidUser)
+            {
+                var user = await _userRepository.GetByEmailAsync(email);
+            }
+        }
+
+        public async Task<bool> ValidateUserAsync(string email, string password)
+        {
+            var user = await _userRepository.GetByEmailAsync(email);
+
+            if (user == null)
+                return false;
+
+            var hashedPassword = HashPassword(password);
+            return user.Password == hashedPassword;
+        }
+
+        private string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(hashedBytes);
+            }
         }
 
         public void Logout()
         {
-
+            //static ISession.Clear();
         }
 
         public void DeleteAccount(int userId)

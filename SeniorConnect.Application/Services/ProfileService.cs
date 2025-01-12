@@ -5,7 +5,7 @@ using System.Reflection.Emit;
 
 namespace SeniorConnect.Application.Services;
 
-public class ProfileServices
+public class ProfileService
 {
     public async Task UpdateProfileAsync(User user)
     {
