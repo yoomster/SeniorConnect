@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using SeniorConnect.DataAccessLibrary;
 using SeniorConnect.Application.Services;
 using SeniorConnect.Application.Interfaces;
+using SeniorConnect.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,15 +10,29 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddInfrastructure(); 
 builder.Services.AddScoped<IdentityService>();
+builder.Services.AddScoped<RegistrationService>();
+builder.Services.AddScoped<ProfileService>();
+builder.Services.AddScoped<ActivityService>();
+builder.Services.AddHttpContextAccessor();
 
 
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//    .AddCookie(options => {
-//        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-//        options.LoginPath = new PathString("/Pages/IdentityAccessManagement/Login");
-//        options.AccessDeniedPath = new PathString("/Pages/Forbidden");
-//}
-//);
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.LoginPath = new PathString("/Pages/IdentityAccessManagement/Login");
+        options.AccessDeniedPath = new PathString("/Pages/Forbidden");
+    }
+);
+builder.Services.AddDistributedMemoryCache();
+
+//short timeout to simplify testing
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(60);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 
 var app = builder.Build();
@@ -35,6 +50,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
