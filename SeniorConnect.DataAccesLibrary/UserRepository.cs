@@ -5,7 +5,6 @@ using SeniorConnect.Domain;
 
 namespace SeniorConnect.DataAccesLibrary
 {
-    //MAKE ALL METHOD INTERNAL, NO DI ALLOWED TO UI LAYER!
     internal class UserRepository : IUserRepository
     {
         private readonly DataAccess _dataAccess;
@@ -15,7 +14,7 @@ namespace SeniorConnect.DataAccesLibrary
             _dataAccess = dataAccess;
         }
 
-        public async Task CreateAccountToDBAsync(User user)
+        public async Task CreateUserInDBAsync(User user)
         {
             string query = @"
             INSERT INTO [dbo].[Users] 
@@ -44,19 +43,19 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
-        public async Task<User?> GetByIdAsync(int id)
+        public async Task<User?> GetByEmailAsync(string email)
         {
             string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
                            [DateOfBirth], [Gender], [Origin], [MaritalStatus], 
                            [DateOfRegistration], [StreetName], [HouseNumber], 
                            [Zipcode], [City], [Country]
                      FROM [dbo].[Users] 
-                     WHERE [UserId] = @UserId";
+                     WHERE [Email] = @Email";
 
             using (var connection = await _dataAccess.OpenSqlConnection())
             using (var command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@UserId", id);
+                command.Parameters.AddWithValue("@Email", email);
 
                 using (var reader = await command.ExecuteReaderAsync())
                 {

@@ -17,9 +17,9 @@ namespace SeniorConnect.DataAccesLibrary
         {
             string query = @"
                 INSERT INTO [dbo].[Activities] 
-                ([Name], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], [StreetName], [HouseNumber], [Zipcode], [City], [Country]) 
+                ([Title], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], [StreetName], [HouseNumber], [Zipcode], [City], [Country]) 
                 VALUES 
-                (@Name, @Description, @Date, @StartTime, @EndTime, @MaxParticipants, @StreetName, @HouseNumber, @Zipcode, @City, @Country);
+                (@Title, @Description, @Date, @StartTime, @EndTime, @MaxParticipants, @StreetName, @HouseNumber, @Zipcode, @City, @Country);
                 SELECT CAST(SCOPE_IDENTITY() AS INT);"; //gets new ActivityId
 
             using (var connection = await _dataAccess.OpenSqlConnection())
@@ -121,7 +121,7 @@ namespace SeniorConnect.DataAccesLibrary
         public async Task<bool> UpdateActivityAsync(Activity activity)
         {
             string query = @"UPDATE [dbo].[Activities] 
-                     SET [Name] = @Name, 
+                     SET [Title] = @Title, 
                          [Description] = @Description, 
                          [Date] = @Date, 
                          [StartTime] = @StartTime, 
@@ -138,7 +138,7 @@ namespace SeniorConnect.DataAccesLibrary
             using (var command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@ActivityId", activity.Id);
-                command.Parameters.AddWithValue("@Name", activity.Title);
+                command.Parameters.AddWithValue("@Title", activity.Title);
                 command.Parameters.AddWithValue("@Description", activity.Description);
                 command.Parameters.AddWithValue("@Date", activity.Date);
                 command.Parameters.AddWithValue("@StartTime", activity.StartTime);

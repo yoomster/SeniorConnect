@@ -14,7 +14,5 @@ public interface IUserRepository
 
     Task<bool> DeleteAccountAsync(int userId);
 
-    Task<User> ValidateUserAsync(string email, string password);
-
     //public Task<bool> IsEmailRegistered(string email);
 }
