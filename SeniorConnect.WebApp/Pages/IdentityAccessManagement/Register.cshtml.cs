@@ -23,16 +23,16 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
         {
         }
 
-        [AcceptVerbs("GET", "POST")]
-        public IActionResult VerifyEmail(string email)
-        {
-            if (!_userService.VerifyEmail(email))
-            {
-                return Json($"Email {email} is already in use.");
-            }
+        //[AcceptVerbs("GET", "POST")]
+        //public IActionResult VerifyEmail(string email)
+        //{
+        //    if (!_userService.VerifyEmail(email))
+        //    {
+        //        return Json($"Email {email} is already in use.");
+        //    }
 
-            return Json(true);
-        }
+        //    return Json(true);
+        //}
 
         public async Task<IActionResult> OnPostAsync()
         {

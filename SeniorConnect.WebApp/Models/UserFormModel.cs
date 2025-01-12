@@ -10,7 +10,6 @@ namespace SeniorConnect.WebApp.Models
         {
                 
         }
-        //public int Id { get; set; }
 
         [Required(ErrorMessage = "Required field!")]
         public string FirstName { get; init; }
@@ -34,7 +33,7 @@ namespace SeniorConnect.WebApp.Models
 
         [Required(ErrorMessage = "Required field!")]
         [DataType(DataType.Date)]
-        [MinAge(60, ErrorMessage = "User must be at least 60 years old.")] // LOOK INTO 
+        //[MinAge(60, ErrorMessage = "User must be at least 60 years old.")] // LOOK INTO 
         public DateOnly DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Required field!")]
