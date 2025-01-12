@@ -7,7 +7,7 @@ namespace SeniorConnect.WebApp.Pages.ProfilePages
     public class AllUsersModel : PageModel
     {
         private readonly IUserRepository _userRepository;
-        public List<User> AllUsers { get; set; }
+        public List<User> Users { get; set; }
 
         public AllUsersModel(IUserRepository userRepository)
         {
@@ -23,7 +23,7 @@ namespace SeniorConnect.WebApp.Pages.ProfilePages
                 Console.WriteLine($"User: {user.Id}, {user.FirstName} {user.LastName}");
             }
 
-            AllUsers = users;
+            Users = users;
         }
     }
 }

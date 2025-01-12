@@ -11,14 +11,14 @@ namespace SeniorConnect.WebApp.Pages.ProfilePages
     public class UpdatePersonDataModel : PageModel
     {
         //private readonly IUserRepository _userRepository;
-        private readonly ProfileServices _profileService;
+        private readonly ProfileService _profileService;
 
 
 
         [BindProperty]
         public UserFormModel UserFormModel { get; set; }
 
-        public UpdatePersonDataModel(IUserRepository userRepository, ProfileServices profileService)
+        public UpdatePersonDataModel(IUserRepository userRepository, ProfileService profileService)
         {
             //_userRepository = userRepository;
             _profileService = profileService;

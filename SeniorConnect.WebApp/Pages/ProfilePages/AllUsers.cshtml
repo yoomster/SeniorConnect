@@ -6,7 +6,7 @@
 }
 
  
-@if (Model.AllUsers != null && Model.AllUsers.Count > 0)
+@if (Model.Users != null && Model.Users.Count > 0)
  {
      <table class="table">
          <thead>
@@ -17,7 +17,7 @@
              </tr>
          </thead>
          <tbody>
-            @foreach (var user in Model.AllUsers)
+            @foreach (var user in Model.Users)
              {
 
                  <tr>
@@ -33,3 +33,5 @@
  {
      <p>No users found.</p>
  }
+
+
