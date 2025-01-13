@@ -11,24 +11,24 @@ namespace SeniorConnect.WebApp.Models
                 
         }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Voornaam is verplicht.")]
         public string FirstName { get; init; }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Achternaam is verplicht.")]
         public string LastName { get; init; }
 
-        [Remote(action: "VerifyEmail", controller: "Users")] //implement JS method
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Email is verplicht.")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; init; }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Wachtwoord is verplicht.")]
+        [MinLength(5, ErrorMessage = "Wachtwoord moet minstens 6 tekens bevatten.")]
         [DataType(DataType.Password)]
         public string Password { get; init; }
 
         [Required(ErrorMessage = "Required field!")]
         [DataType(DataType.Password)]
-        [Compare("Password")]
+        [Compare("Password", ErrorMessage = "Wachtwoorden komen niet overeen.")]
         public string ConfirmPassword { get; init; }
 
         [Required(ErrorMessage = "Required field!")]

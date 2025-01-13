@@ -12,6 +12,10 @@ namespace SeniorConnect.Application.Services
             _activityRepository = activityRepository;
         }
 
+        public async Task<Activity?> GetActivityById(int id)
+        {
+            return await _activityRepository.GetActivityByIdAsync(id);
+        }
 
         public async Task CreateActivity(Activity activity, int loggedInUserId)
         {

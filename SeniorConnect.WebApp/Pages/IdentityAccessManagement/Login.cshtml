@@ -9,15 +9,16 @@
 <div class="form-container">
     <form method="POST">
         <label for="email">Email:</label>
-        <input />
+        <input id="email" name="email" type="email" required />
 
         <label for="password">Password:</label>
-        <input />
+        <input id="password" name="password" type="password" required />
 
-        <button type="submit" class="btn btn-primary">Login</button> <br /> <br />
+        <button type="submit" class="btn btn-primary">Login</button>
+        <br /><br />
 
-        <label>Are you new here? Please click the button to register</label> </br>
+        <label>Are you new here? Please click the button to register</label>
+        <br />
         <button type="button" onclick="location.href='@Url.Page("/IdentityAccessManagement/Register")'">Register</button>
-
     </form>
 </div>

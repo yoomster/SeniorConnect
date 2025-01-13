@@ -1,11 +1,7 @@
 ﻿@page
-@model SeniorConnect.WebApp.Pages.IdentityAccessManagement.RegisterModel
+@model SeniorConnect.WebApp.Pages.IdentityAccessManagement.UserRegistrationModel
 @{
-    ViewData["Title"] = "Registreer";
 }
-
-<header class="content-header">@ViewData["Title"]</header>
-
 <section class="login-container">
     <h1>Registreer als nieuwe gebruiker</h1>
     <form method="POST">
@@ -99,9 +95,3 @@
         <button type="submit" class="btn">Registreer</button>
     </form>
 </section>
-
-
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

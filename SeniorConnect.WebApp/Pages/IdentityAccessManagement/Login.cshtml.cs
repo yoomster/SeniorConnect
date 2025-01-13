@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Application.Services;
-using SeniorConnect.Domain;
 using System.Security.Claims;
 
 namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
@@ -42,10 +40,14 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 
                 return RedirectToPage("/ActivityPages/ActivitiesCalendar");
             }
+            else if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            {
+                ModelState.AddModelError("", "Email and Password are required.");
+                return Page();
+            }
 
             ModelState.AddModelError("", "Invalid username or password.");
             return Page();
-
         }
     }
 }
