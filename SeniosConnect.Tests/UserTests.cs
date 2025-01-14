@@ -1,13 +1,16 @@
 ﻿using FluentAssertions;
 using SeniorConnect.Domain;
+using SeniorConnect.Application.Services;
+
 
 
 namespace SeniorConnect.Tests;
 
 public class UserTests
 {
+    private 
     //Arrange
-    User validUser = new(
+    User sut = new(
     firstName: "Adam",
     lastName: "Akil",
     email: "adam.akil@example.com",
@@ -31,24 +34,39 @@ public class UserTests
     public void UserCreationWithValidInput_ShouldSucceed()
     {
         //Act
-        var password = validUser.Password;
+        var email = sut.Email;
+        var password = sut.Password;
+
+        var dateOfBirth = sut.DateOfBirth;
+        var today = DateOnly.FromDateTime(DateTime.Now);
+        var age = today.Year - dateOfBirth.Year;
+
+
 
         //Assert
         //can we test if all props are included 
+        email.Should().NotBeEmpty();
+        email.Should().Contain("@");
+
         password.Should().NotBeEmpty();
-        
+
+        age.Should().BePositive();
+        age.Should().BeGreaterThan(60);
     }
 
     //Invalid Email Test: Test with invalid email formats to verify validation 
     [Fact(Skip = "testing")]
     public void UserCreationWithInvalidEmail_ShouldThrowException()
     {
-        //Act
-        var email = validUser.Email;
+        var invalidEmail = sut.Email.Remove(6);
+
+        //Act (should be a method instead?)
+        Action result = () => (invalidEmail);
 
         //Assert
-        email.Should().NotBeEmpty();
-        email.Should().Contain("@");
+        result.Should().Throw<ArgumentException>()
+            .WithMessage("Invalid email address.");
+        
     }
 
     //Test for duplicate email addresses
