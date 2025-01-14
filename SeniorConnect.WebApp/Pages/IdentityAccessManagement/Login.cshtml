@@ -6,19 +6,23 @@
     ViewData["Title"] = "Login";
 }
 <header class="content-header">@ViewData["Title"]</header>
-<div class="form-container">
+<div class="login-container">
     <form method="POST">
-        <label for="email">Email:</label>
-        <input id="email" name="email" type="email" required />
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input id="email" name="email" type="email" required />
+        </div>
 
-        <label for="password">Password:</label>
-        <input id="password" name="password" type="password" required />
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input id="password" name="password" type="password" required />
+        </div>
 
-        <button type="submit" class="btn btn-primary">Login</button>
-        <br /><br />
+        <button type="submit" class="btn">Login</button>
 
-        <label>Are you new here? Please click the button to register</label>
-        <br />
-        <button type="button" onclick="location.href='@Url.Page("/IdentityAccessManagement/Register")'">Register</button>
+        <div class="form-group">
+            <p>Are you new here? Please click the button to register:</p>
+            <button type="button" class="btn" onclick="location.href='@Url.Page("/IdentityAccessManagement/UserRegistration")'">Register</button>
+        </div>
     </form>
 </div>
