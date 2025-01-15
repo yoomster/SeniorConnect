@@ -8,7 +8,7 @@ public interface IUserRepository
 
     Task<User?> GetByEmailAsync(string email);
 
-    Task<List<User>> GetAllAsync();
+    Task<IEnumerable<User>> GetAllAsync();
 
     Task<bool> UpdateAccountAsync(User user);
 

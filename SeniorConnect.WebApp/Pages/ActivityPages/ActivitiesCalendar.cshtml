@@ -1,11 +1,13 @@
 ﻿@page
 @model SeniorConnect.WebApp.Pages.ActivityPages.ActivitiesCalendarModel
+@using System.Linq
+
 @{
     ViewData["Title"] = "Activiteiten Agenda";
 }
 <a href="/ActivityPages/CreateNewActivity" class="btn btn-primary mb-3">Nieuwe Activiteit Hosten</a>
 
-@if (Model.Activities != null && Model.Activities.Count > 0)
+@if (Model.Activities != null && Model.Activities.Count() > 0)
 {
     <table class="table">
         <thead>

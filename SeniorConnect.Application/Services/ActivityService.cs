@@ -38,7 +38,7 @@ namespace SeniorConnect.Application.Services
             return await _activityRepository.GetActivityByIdAsync(id);
         }
 
-        public async Task<List<Activity>> GetAllAsync()
+        public async Task<IEnumerable<Activity>> GetAllAsync()
         {
             return await _activityRepository.GetAllAsync();
         }

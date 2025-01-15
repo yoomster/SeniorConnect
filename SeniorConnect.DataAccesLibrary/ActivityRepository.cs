@@ -43,7 +43,7 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
-        public async Task<List<Activity>> GetAllAsync()
+        public async Task<IEnumerable<Activity>> GetAllAsync()
         {
             string query = @"SELECT 
                     [ActivityId], [Title], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], 

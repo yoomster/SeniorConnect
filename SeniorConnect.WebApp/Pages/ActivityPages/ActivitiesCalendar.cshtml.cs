@@ -9,7 +9,7 @@ namespace SeniorConnect.WebApp.Pages.ActivityPages
     public class ActivitiesCalendarModel : PageModel
     {
         private readonly ActivityService _activityService;
-        public List<Activity> Activities { get; set; }
+        public IEnumerable<Activity> Activities { get; set; }
 
         public ActivitiesCalendarModel(ActivityService activityService)
         {
@@ -18,14 +18,12 @@ namespace SeniorConnect.WebApp.Pages.ActivityPages
 
         public async Task OnGet()
         {
-            List<Activity> activities = await _activityService.GetAllAsync();
+            Activities = await _activityService.GetAllAsync();
 
-            foreach (var activity in activities)
+            foreach (var activity in Activities)
             {
                 Console.WriteLine($"Activity: {activity.Title}, {activity.Date} {activity.StartTime}, {activity.City}");
             }
-
-            Activities = activities;
         }
     }
 }

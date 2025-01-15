@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Application.Services;
 using SeniorConnect.Domain;
 
@@ -8,7 +7,7 @@ namespace SeniorConnect.WebApp.Pages.ProfilePages
     public class AllUsersModel : PageModel
     {
         private readonly UserService _userService;
-        public List<User> Users { get; set; }
+        public IEnumerable<User> Users { get; set; }
 
         public AllUsersModel(UserService userService)
         {
@@ -17,14 +16,12 @@ namespace SeniorConnect.WebApp.Pages.ProfilePages
 
         public async Task OnGet()
         {
-            List<User> users = await _userService.GetAllAsync();
+            Users = await _userService.GetAllAsync();
 
-            foreach (var user in users)
+            foreach (var user in Users)
             {
                 Console.WriteLine($"User: {user.Id}, {user.FirstName} {user.LastName}");
             }
-
-            Users = users;
         }
     }
 }

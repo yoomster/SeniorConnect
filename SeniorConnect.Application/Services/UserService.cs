@@ -33,18 +33,14 @@ public class UserService
         await _userRepository.CreateUserAsync(newUser);
     }
 
-    public async Task<List<User>> GetAllAsync()
+    public async Task<IEnumerable<User>> GetAllAsync()
     {
-        try
-        {
-            var users = await _userRepository.GetAllAsync();
-            return users;
-        }
-        catch (Exception)
-        {
+        return await _userRepository.GetAllAsync();
+    }
 
-            throw;
-        }
+    public async Task<User> GetUserInfo(string email)
+    {
+        return await _userRepository.GetByEmailAsync(email);
     }
 
     public void DeleteAccount(int userId)

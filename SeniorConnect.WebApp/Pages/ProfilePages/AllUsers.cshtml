@@ -1,12 +1,13 @@
 ﻿@page 
 @model SeniorConnect.WebApp.Pages.ProfilePages.AllUsersModel
+@using System.Linq
 
 @{
     ViewData["Title"] = "Alle gebruikers";
 }
 
  
-@if (Model.Users != null && Model.Users.Count > 0)
+@if (Model.Users != null && Model.Users.Count() > 0)
  {
      <table class="table">
          <thead>

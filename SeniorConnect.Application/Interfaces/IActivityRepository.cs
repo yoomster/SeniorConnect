@@ -7,7 +7,7 @@ public interface IActivityRepository
 
     Task<Activity?> GetActivityByIdAsync(int activityId);
 
-    Task<List<Activity>> GetAllAsync();
+    Task<IEnumerable <Activity>> GetAllAsync();
 
     Task<bool> UpdateActivityAsync(Activity activity);
 

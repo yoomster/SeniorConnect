@@ -89,7 +89,7 @@ namespace SeniorConnect.DataAccesLibrary
             return null; // Return null if no user found
         }
 
-        public async Task<List<User>> GetAllAsync()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
             string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
                            [DateOfBirth], [Gender], [Origin], [MaritalStatus], 

@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddInfrastructure(); 
 builder.Services.AddScoped<IdentityService>();
-//builder.Services.AddScoped<RegistrationService>();
+builder.Services.AddScoped<UserService>();
 //builder.Services.AddScoped<ProfileService>();
 builder.Services.AddScoped<ActivityService>();
 builder.Services.AddHttpContextAccessor();
