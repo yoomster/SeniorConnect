@@ -29,21 +29,23 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
             {
                 return Page();
             }
+            return Page();
 
-            try
-            {
-                var userEntity = UserFormModel.ToUserEntity();
-                await _identityService.CreateAccount(userEntity);
 
-                TempData["SuccessMessage"] = "User registered successfully!";
-                return RedirectToPage("Login");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error registering user: {ex.Message}");
-                TempData["ErrorMessage"] = "An error occurred while registering. Please try again later.";
-                return Page();
-            }
+            //try
+            //{
+            //    var userEntity = UserFormModel.ToUserEntity();
+            //    await _identityService.CreateAccount(userEntity);
+
+            //    //TempData["SuccessMessage"] = "User registered successfully!";
+            //    return RedirectToPage("Login");
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"Error registering user: {ex.Message}");
+            //    //TempData["ErrorMessage"] = "An error occurred while registering. Please try again later.";
+            //    return Page();
+            //}
         }
     }
 }
