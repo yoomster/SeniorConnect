@@ -8,36 +8,12 @@ namespace SeniorConnect.Application.Services
     public class IdentityService 
     {
         private readonly IUserRepository _userRepository;
-        private readonly IPasswordHasher _passwordHasher;
 
-        public IdentityService(IUserRepository userRepository, IPasswordHasher passwordHasher)
+        public IdentityService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _passwordHasher = passwordHasher;
         }
-        public async Task CreateAccount(User user)
-        {           
-            var hashedPassword = HashPassword(user.Password);
-
-            User newUser = new (
-                    firstName: user.FirstName,
-                    lastName: user.LastName,
-                    email: user.Email,
-                    password: hashedPassword,
-                    dateOfBirth: user.DateOfBirth,
-                    gender: user.Gender,
-                    origin: user.Origin,
-                    maritalStatus: user.MaritalStatus,
-                    streetName: user.StreetName,
-                    houseNumber: user.HouseNumber,
-                    zipcode: user.Zipcode,
-                    city: user.City,
-                    country: user.Country
-                );
-
-                await _userRepository.CreateUserInDBAsync(newUser);
-        }
-
+       
         //public async Task<int> GetLoggedInUserId()
         //{
         //    await _userRepository.
@@ -60,17 +36,8 @@ namespace SeniorConnect.Application.Services
             if (user == null)
                 return false;
 
-            var hashedPassword = HashPassword(password);
+            var hashedPassword = PasswordHashing.HashPassword(password);
             return user.Password == hashedPassword;
-        }
-
-        private string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(hashedBytes);
-            }
         }
 
         public void Logout()
@@ -78,9 +45,6 @@ namespace SeniorConnect.Application.Services
             //static ISession.Clear();
         }
 
-        public void DeleteAccount(int userId)
-        {
-            _userRepository.DeleteAccountAsync(userId);
-        }
+
     }
 }
