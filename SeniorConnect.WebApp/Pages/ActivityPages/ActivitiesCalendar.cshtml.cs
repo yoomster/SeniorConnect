@@ -1,23 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SeniorConnect.Application.Interfaces;
+using SeniorConnect.Application.Services;
 using SeniorConnect.Domain;
 
 namespace SeniorConnect.WebApp.Pages.ActivityPages
 {
     public class ActivitiesCalendarModel : PageModel
     {
-        private readonly IActivityRepository _activityRepository;
+        private readonly ActivityService _activityService;
         public List<Activity> Activities { get; set; }
 
-        public ActivitiesCalendarModel(IActivityRepository activityRepository)
+        public ActivitiesCalendarModel(ActivityService activityService)
         {
-            _activityRepository = activityRepository;
+            _activityService = activityService;
         }
 
         public async Task OnGet()
         {
-            List<Activity> activities = await _activityRepository.GetAllAsync();
+            List<Activity> activities = await _activityService.GetAllAsync();
 
             foreach (var activity in activities)
             {

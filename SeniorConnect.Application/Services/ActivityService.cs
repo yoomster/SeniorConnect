@@ -12,11 +12,6 @@ namespace SeniorConnect.Application.Services
             _activityRepository = activityRepository;
         }
 
-        public async Task<Activity?> GetActivityById(int id)
-        {
-            return await _activityRepository.GetActivityByIdAsync(id);
-        }
-
         public async Task CreateActivity(Activity activity, int loggedInUserId)
         {
             Activity newActivity = new(
@@ -36,6 +31,16 @@ namespace SeniorConnect.Application.Services
             newActivity.AssignHostUser(loggedInUserId);
 
             await _activityRepository.CreateActivityAsync(newActivity);
+        }
+
+        public async Task<Activity?> GetActivityById(int id)
+        {
+            return await _activityRepository.GetActivityByIdAsync(id);
+        }
+
+        public async Task<List<Activity>> GetAllAsync()
+        {
+            return await _activityRepository.GetAllAsync();
         }
 
         public async Task ChangeActivity(Activity activity)
