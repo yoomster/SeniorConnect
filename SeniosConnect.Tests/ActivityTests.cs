@@ -1,29 +1,41 @@
 ﻿using FluentAssertions;
 using SeniorConnect.Domain;
 using SeniorConnect.Application.Services;
+using NSubstitute;
+using SeniorConnect.Application.Interfaces;
 
 namespace SeniorConnect.Tests
 {
+
     public class ActivityTests
     {
+
+        private readonly IActivityRepository _activityRepository = Substitute.For<IActivityRepository>();
+        private readonly ActivityService _sut;
+
+        public ActivityTests()
+        {
+            
+        }
+
         Activity futureActivity = new Activity(
             title: "Tech Conference",
-            description: "A conference about new technologies.",
-            date: DateOnly.FromDateTime(DateTime.Now.AddDays(10)), // Future date
+            description: "An event about unit testing.",
+            date: DateOnly.FromDateTime(DateTime.Now.AddDays(10)),
             startTime: TimeOnly.Parse("09:00"),
             endTime: TimeOnly.Parse("17:00"),
-            maxParticipants: 100,
+            maxParticipants: 1,
             streetName: "Conference Road",
             houseNumber: "45B",
             zipcode: "56789",
             city: "Amsterdam",
             country: "Netherlands");
 
-        // This will throw an exception
+        // This should throw an exception
         Activity pastActivity = new Activity(
             title: "Past Event",
             description: "An event that already happened.",
-            date: DateOnly.FromDateTime(DateTime.Now.AddDays(-5)), // Past date
+            date: DateOnly.FromDateTime(DateTime.Now.AddDays(-5)), 
             startTime: TimeOnly.Parse("10:00"),
             endTime: TimeOnly.Parse("15:00"),
             maxParticipants: 50,
@@ -33,25 +45,19 @@ namespace SeniorConnect.Tests
             city: "Eindhoven",
             country: "Netherlands");
 
-        ActivityRegistration participant1 = new ActivityRegistration();
 
         [Fact]
         public void ReserveSpot_ShouldFailReservation_WhenNoMoreRoom()
         {
-            //Arrange
-            var dateOfActivity = DateOnly.Parse("2024-12-01");
-            var startTime = TimeOnly.Parse("10:00");
-            var endTime = TimeOnly.Parse("12:00");
-            int maxParticipants = 1;  
-            int locationId = 100;
-            int activityCoordinatorId = 200;
+            ////Arrange
+            //_activityRepository.ReserveSpot(futureActivity);
 
-            //var activity = CreateActivity(dateOfActivity, startTime, endTime, maxParticipants, locationId, activityCoordinatorId);
+            //var activity = _sut.CreateActivity(futureActivity, 1002);
 
-            var participant1 = new ActivityRegistration();
-            var participant2 = new ActivityRegistration();
+            //var participant1 = new ActivityRegistration();
+            //var participant2 = new ActivityRegistration();
 
-            //Act
+            ////Act
             //activity.ReserveSpot(participant1);
             //var action = () => activity.ReserveSpot(participant2);
 
