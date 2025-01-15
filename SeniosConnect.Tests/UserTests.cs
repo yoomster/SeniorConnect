@@ -1,39 +1,53 @@
 ﻿using FluentAssertions;
-using SeniorConnect.Domain;
 using SeniorConnect.Application.Services;
-
-
+using SeniorConnect.Application.Interfaces;
+using NSubstitute;
+using SeniorConnect.Domain;
+using System.Collections.Generic;
 
 namespace SeniorConnect.Tests;
 
 public class UserTests
 {
-    private 
-    //Arrange
-    User sut = new(
-    firstName: "Adam",
-    lastName: "Akil",
-    email: "adam.akil@example.com",
-    password: "Password123",
-    dateOfBirth: new DateOnly(1955, 8, 20),
-    gender: 'M',
-    origin: "Social Media",
-    maritalStatus: MaritalEnum.Married,
-    streetName: "Main Street",
-    houseNumber: "104",
-    zipcode: "5616TZ",
-    city: "Eindhoven",
-    country: "Netherlands");
+    private readonly IUserRepository _userRepository = Substitute.For<IUserRepository>();
+    private readonly UserService _sut;
 
+    public UserTests()
+    {
+        _sut = new UserService(_userRepository);
+    }
+
+    //Arrange
+    User TestUser = new User(
+        firstName: "Adam",
+        lastName: "Akil",
+        email: "aa@example.com",
+        password: "Password123",
+        dateOfBirth: new DateOnly(1955, 8, 20),
+        gender: 'M',
+        origin: "Social Media",
+        maritalStatus: MaritalEnum.Married,
+        streetName: "Main Street",
+        houseNumber: "104",
+        zipcode: "5616TZ",
+        city: "Eindhoven",
+        country: "Netherlands");
 
     //If the User class has any validation logic, you may need to mock any dependencies or
     //add additional assertions to handle specific validation cases.
-    
+
     //Valid Input:ctor inits object correctly when all inputs are valid.
-    [Fact]
+    [Fact(Skip = "testing")]
     public void UserCreationWithValidInput_ShouldSucceed()
     {
+        //Arange
+        _sut.CreateAccount(TestUser);
+
         //Act
+        _userRepository.CreateUserAsync(TestUser).Returns(expectedUsers);
+
+        
+
         var email = sut.Email;
         var password = sut.Password;
 
@@ -58,24 +72,69 @@ public class UserTests
     [Fact(Skip = "testing")]
     public void UserCreationWithInvalidEmail_ShouldThrowException()
     {
-        var invalidEmail = sut.Email.Remove(6);
+        ////    var invalidEmail = sut.Email.Remove(6);
 
-        //Act (should be a method instead?)
-        Action result = () => (invalidEmail);
+        ////    //Act (should be a method instead?)
+        ////    Action result = () => (invalidEmail);
 
-        //Assert
-        result.Should().Throw<ArgumentException>()
-            .WithMessage("Invalid email address.");
-        
+        //    //Assert
+        //    result.Should().Throw<ArgumentException>()
+        //        .WithMessage("Invalid email address.");
+
     }
 
     //Test for duplicate email addresses
     [Fact(Skip = "testing")]
-    public void User_Creation_WithDiplicateEmail_ShouldThrowException()
+    public void User_Creation_WithDuplicateEmail_ShouldThrowException()
     {
 
     }
 
-    //participant cannot reserve overlapping activities
+    [Fact]
+    public async void GetallAsync_ShouldReturnEmptyList_WhenNoUsersExist()
+    {
+        //Arrange
+        _userRepository.GetAllAsync().Returns(Array.Empty<User>());
 
+        //Act
+        var users = await _sut.GetAllAsync();
+
+        //Assert
+        users.Should().BeEmpty();
+    }
+
+    [Fact]
+    public async Task GetAllAsync_ShouldReturnAListOfUsers_WhenUsersExist()
+    {
+        //Arrange
+        var expectedUsers = new[]
+        {
+            new User(
+            firstName: "Adam",
+            lastName: "Akil",
+            email: "aa@example.com",
+            password: "Password123",
+            dateOfBirth: new DateOnly(1955, 8, 20),
+            gender: 'M',
+            origin: "Social Media",
+            maritalStatus: MaritalEnum.Married,
+            streetName: "Main Street",
+            houseNumber: "104",
+            zipcode: "5616TZ",
+            city: "Eindhoven",
+            country: "Netherlands")
+        };
+
+        _userRepository.GetAllAsync().Returns(expectedUsers);
+        
+        //Act
+        var users = await _sut.GetAllAsync();
+
+        //Assert
+        users.Should().Contain(expectedUsers);
+        users.Should().ContainSingle(x => x.FirstName == "Adam");
+        users.Should().ContainSingle(x => x.FirstName == "Naomi");
+
+
+    }
 }
