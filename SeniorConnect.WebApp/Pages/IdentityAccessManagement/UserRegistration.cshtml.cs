@@ -8,11 +8,11 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 {
     public class UserRegistrationModel : PageModel
     {
-        private readonly IdentityService _identityService;
+        private readonly UserService _userService;
 
-        public UserRegistrationModel(IdentityService identityService)
+        public UserRegistrationModel(UserService userService)
         {
-            _identityService = identityService;
+            _userService = userService;
 
         }
 
@@ -33,7 +33,7 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
             try
             {
                 var userEntity = UserFormModel.ToUserEntity();
-                await _identityService.CreateAccount(userEntity);
+                await _userService.CreateAccount(userEntity);
                 return RedirectToPage("Login");
 
             }

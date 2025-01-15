@@ -14,7 +14,7 @@ namespace SeniorConnect.DataAccesLibrary
             _dataAccess = dataAccess;
         }
 
-        public async Task CreateUserInDBAsync(User user)
+        public async Task CreateUserAsync(User user)
         {
             string query = @"
             INSERT INTO [dbo].[Users] 

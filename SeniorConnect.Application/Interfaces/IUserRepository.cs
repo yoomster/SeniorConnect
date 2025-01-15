@@ -4,7 +4,7 @@ namespace SeniorConnect.Application.Interfaces;
 
 public interface IUserRepository
 {
-    Task CreateUserInDBAsync(User user);
+    Task CreateUserAsync(User user);
 
     Task<User?> GetByEmailAsync(string email);
 

@@ -11,7 +11,6 @@ namespace SeniorConnect.DataAccessLibrary
         {
             services.AddScoped<DataAccess>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IPasswordHasher, PasswordHasherService>();
             services.AddScoped<IActivityRepository, ActivityRepository>();
 
 

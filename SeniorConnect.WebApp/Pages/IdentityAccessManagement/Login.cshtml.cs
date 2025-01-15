@@ -8,11 +8,11 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 {
     public class LoginModel : PageModel
     {
-        private readonly IdentityService _userRepository;
+        private readonly IdentityService _identiyService;
 
-        public LoginModel(IdentityService userRepository)
+        public LoginModel(IdentityService identiyService)
         {
-            _userRepository = userRepository;
+            _identiyService = identiyService;
         }
         public void OnGet()
         {
@@ -21,7 +21,7 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 
         public async Task<IActionResult> OnPostAsync(string email, string password)
         {
-            var user = await _userRepository.LoginAsync(email, password);
+            var user = await _identiyService.LoginAsync(email, password);
 
             if (user != null)
             {

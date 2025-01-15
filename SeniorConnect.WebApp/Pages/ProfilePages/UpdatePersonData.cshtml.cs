@@ -10,17 +10,13 @@ namespace SeniorConnect.WebApp.Pages.ProfilePages
 {
     public class UpdatePersonDataModel : PageModel
     {
-        //private readonly IUserRepository _userRepository;
         private readonly ProfileService _profileService;
-
-
 
         [BindProperty]
         public UserFormModel UserFormModel { get; set; }
 
-        public UpdatePersonDataModel(IUserRepository userRepository, ProfileService profileService)
+        public UpdatePersonDataModel( ProfileService profileService)
         {
-            //_userRepository = userRepository;
             _profileService = profileService;
         }
 
@@ -37,7 +33,6 @@ namespace SeniorConnect.WebApp.Pages.ProfilePages
 
                 await _profileService.UpdateProfileAsync(userEntity);
 
-                TempData["SuccessMessage"] = "User and address updated successfully!";
                 return RedirectToPage("Profile");
             }
             catch (Exception ex)
