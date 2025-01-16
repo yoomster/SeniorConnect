@@ -19,8 +19,7 @@ namespace SeniorConnect.DataAccesLibrary
             string query = @"
             INSERT INTO [dbo].[Users] 
             (FirstName, LastName, Email, Password, DateOfBirth, Gender, Origin, MaritalStatus, DateOfRegistration, StreetName, HouseNumber, Zipcode, City, Country)
-            VALUES(@FirstName, @LastName, @Email, @Password, @DateOfBirth, @Gender, @Origin, @MaritalStatus, @DateOfRegistration, @StreetName, @HouseNumber, @Zipcode, @City, @Country);
-            SELECT SCOPE_IDENTITY();"; // gets the new UserId
+            VALUES(@FirstName, @LastName, @Email, @Password, @DateOfBirth, @Gender, @Origin, @MaritalStatus, @DateOfRegistration, @StreetName, @HouseNumber, @Zipcode, @City, @Country);"; 
 
             using (var connection = await _dataAccess.OpenSqlConnection())
             using (var command = new SqlCommand(query, connection))
@@ -45,12 +44,8 @@ namespace SeniorConnect.DataAccesLibrary
 
         public async Task<User?> GetByEmailAsync(string email)
         {
-            string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
-                           [DateOfBirth], [Gender], [Origin], [MaritalStatus], 
-                           [DateOfRegistration], [StreetName], [HouseNumber], 
-                           [Zipcode], [City], [Country]
-                     FROM [dbo].[Users] 
-                     WHERE [Email] = @Email";
+            string query = @"SELECT * FROM [dbo].[Users] 
+                          WHERE [Email] = @Email";
 
             using (var connection = await _dataAccess.OpenSqlConnection())
             using (var command = new SqlCommand(query, connection))
@@ -91,11 +86,7 @@ namespace SeniorConnect.DataAccesLibrary
 
         public async Task<IEnumerable<User>> GetAllAsync()
         {
-            string query = @"SELECT [UserId], [FirstName], [LastName], [Email], [Password], 
-                           [DateOfBirth], [Gender], [Origin], [MaritalStatus], 
-                           [DateOfRegistration], [StreetName], [HouseNumber], 
-                           [Zipcode], [City], [Country]
-                    FROM [dbo].[Users]";
+            string query = @"SELECT * FROM [dbo].[Users]";
 
             var users = new List<User>();
 
@@ -173,10 +164,9 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
-        public async Task<bool> DeleteAccountAsync(int userId)
+        public async Task<bool> DeleteByIdAsync(int userId)
         {
-            string query = @"DELETE 
-                FROM [dbo].[Users] 
+            string query = @"DELETE FROM [dbo].[Users] 
                 WHERE [UserId] = @UserId";
 
             using (var connection = await _dataAccess.OpenSqlConnection())

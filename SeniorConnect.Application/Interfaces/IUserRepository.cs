@@ -12,7 +12,6 @@ public interface IUserRepository
 
     Task<bool> UpdateAccountAsync(User user);
 
-    Task<bool> DeleteAccountAsync(int userId);
+    Task<bool> DeleteByIdAsync(int userId);
 
-    //public Task<bool> IsEmailRegistered(string email);
 }

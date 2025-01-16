@@ -45,10 +45,7 @@ namespace SeniorConnect.DataAccesLibrary
 
         public async Task<IEnumerable<Activity>> GetAllAsync()
         {
-            string query = @"SELECT 
-                    [ActivityId], [Title], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], 
-                    [StreetName], [HouseNumber], [Zipcode], [City], [Country], [hostUserId] 
-                     FROM [dbo].[Activities]";
+            string query = @"SELECT * FROM [dbo].[Activities]";
 
             var activities = new List<Activity>();
 
@@ -81,10 +78,7 @@ namespace SeniorConnect.DataAccesLibrary
 
         public async Task<Activity?> GetActivityByIdAsync(int activityId)
         {
-            string query = @"SELECT                     
-                    [ActivityId], [Title], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], 
-                    [StreetName], [HouseNumber], [Zipcode], [City], [Country], [hostUserId] 
-                     FROM [dbo].[Activities]
+            string query = @"SELECT * FROM [dbo].[Activities]
                      WHERE [ActivityId] = @ActivityId";
 
             using (var connection = await _dataAccess.OpenSqlConnection())
@@ -155,7 +149,7 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
-        public async Task<bool> DeleteActivityAsync(int activityId)
+        public async Task<bool> DeleteByIdAsync(int activityId)
         {
             string query = @"DELETE FROM [dbo].[Activities] 
                      WHERE [ActivityId] = @ActivityId";
