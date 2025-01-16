@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SeniorConnect.Application.Services;
+using SeniorConnect.Domain;
 using System.Security.Claims;
 
 namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
@@ -18,7 +19,10 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
         }
         public void OnGet()
         {
-
+            if (User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("/ProfilePages/UserProfile");
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(string email, string password)

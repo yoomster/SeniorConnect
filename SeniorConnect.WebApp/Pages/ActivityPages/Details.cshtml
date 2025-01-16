@@ -12,5 +12,11 @@
         <p>Locatie: @Model.Activity.City</p>
         <p>Beschrijving: @Model.Activity.Description</p>
         <p>Maximaal aantal deelnemers: @Model.Activity.MaxParticipants</p>
+
+        <form method="post">
+            <input type="hidden" name="ActivityId" value="@Model.Activity.Id" />
+            <button type="submit" class="btn btn-primary">Aanmelden</button>
+        </form>
+
     </div>
 </main>
