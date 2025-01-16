@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SeniorConnect.Application.Services;
@@ -27,17 +29,16 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
             {
                 HttpContext.Session.SetInt32("UserId", user.Id);
 
-                // Create user claims
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.FirstName)
-                };
 
-                // Create claims identity and sign in
-                var claimsIdentity = new ClaimsIdentity(claims, "CookieAuthentication");
-                await HttpContext.SignInAsync("CookieAuthentication", new ClaimsPrincipal(claimsIdentity));
+                List<Claim> claims = new List<Claim>();
+                claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
+                claims.Add(new Claim("id", user.Id.ToString()));
 
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity));
+
+
+         
                 return RedirectToPage("/ActivityPages/ActivitiesCalendar");
             }
             else if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
@@ -47,6 +48,12 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
             }
 
             ModelState.AddModelError("", "Invalid username or password.");
+            return Page();
+        }
+
+        [Authorize]
+        public ActionResult Logout()
+        {
             return Page();
         }
     }

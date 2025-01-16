@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SeniorConnect.Application.Interfaces;
@@ -6,6 +7,8 @@ using SeniorConnect.Domain;
 
 namespace SeniorConnect.WebApp.Pages.ActivityPages
 {
+    [Authorize]
+
     public class ActivitiesCalendarModel : PageModel
     {
         private readonly ActivityService _activityService;
