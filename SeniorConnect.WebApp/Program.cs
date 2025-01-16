@@ -20,8 +20,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options =>
     {
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-        options.LoginPath = new PathString("/Pages/IdentityAccessManagement/Login");
-        options.AccessDeniedPath = new PathString("/Pages/Forbidden");
+        options.LoginPath = new PathString("/IdentityAccessManagement/Login");
+        options.AccessDeniedPath = new PathString("/Forbidden");
+
     }
 );
 builder.Services.AddDistributedMemoryCache();
