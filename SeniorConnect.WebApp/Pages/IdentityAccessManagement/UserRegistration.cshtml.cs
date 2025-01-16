@@ -19,6 +19,8 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
         [BindProperty]
         public UserFormModel UserFormModel { get; set; }
 
+        public string ErrorMessage { get; set; }
+
         public void OnGet()
         {
         }
@@ -34,15 +36,22 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
             {
                 var userEntity = UserFormModel.ToUserEntity();
                 await _userService.CreateAccount(userEntity);
+
                 return RedirectToPage("Login");
 
+            }
+            catch (ArgumentException ex)
+            {
+                ErrorMessage = ex.Message; 
             }
 
             catch (Exception ex)
             {
-                Console.WriteLine($"Error registering user: {ex.Message}");
-                return Page();
+                ErrorMessage = ex.Message;
             }
+
+            return Page();
+
         }
     }
 }
