@@ -2,7 +2,7 @@
 using SeniorConnect.Domain;
 
 namespace SeniorConnect.Application.Services;
-public class UserService
+public class UserService : IRegistrationValidator
 {
     private readonly IUserRepository _userRepository;
 
@@ -10,27 +10,61 @@ public class UserService
     {
         _userRepository = userRepository;
     }
+
+    public async Task<bool> CanRegister(User user)
+    {
+        bool output = true;
+        bool isEmailDuplicate = await IsEmailDuplicate(user.Email);
+        var minimumDateOfBirth = DateTime.Now.AddYears(-60).Date;
+
+        //check mail duplicate
+        if (isEmailDuplicate)
+        {
+            output = false;
+            throw new InvalidOperationException("Email is al geregistreerd.");
+        }
+        //check age 
+        else if (user.DateOfBirth > DateOnly.FromDateTime(minimumDateOfBirth))
+        {
+            output = false;
+            throw new ArgumentException("U moet minimaal 60 jaar oud zijn om bij ons in te schrijven.");
+        }
+
+        return output;
+    }
+
+    public async Task<bool> IsEmailDuplicate(string email)
+    {
+        var user = await _userRepository.GetByEmailAsync(email);
+
+        return user != null;
+    }
+
     public async Task CreateAccount(User user)
     {
-        var hashedPassword = PasswordHashing.HashPassword(user.Password);
+        
+        if (await CanRegister(user))
+        {
+            var hashedPassword = PasswordHashing.HashPassword(user.Password);
 
-        User newUser = new(
-                firstName: user.FirstName,
-                lastName: user.LastName,
-                email: user.Email,
-                password: hashedPassword,
-                dateOfBirth: user.DateOfBirth,
-                gender: user.Gender,
-                origin: user.Origin,
-                maritalStatus: user.MaritalStatus,
-                streetName: user.StreetName,
-                houseNumber: user.HouseNumber,
-                zipcode: user.Zipcode,
-                city: user.City,
-        country: user.Country
-            );
+            User newUser = new(
+                    firstName: user.FirstName,
+                    lastName: user.LastName,
+                    email: user.Email,
+                    password: hashedPassword,
+                    dateOfBirth: user.DateOfBirth,
+                    gender: user.Gender,
+                    origin: user.Origin,
+                    maritalStatus: user.MaritalStatus,
+                    streetName: user.StreetName,
+                    houseNumber: user.HouseNumber,
+                    zipcode: user.Zipcode,
+                    city: user.City,
+                    country: user.Country
+                );
 
-        await _userRepository.CreateUserAsync(newUser);
+            await _userRepository.CreateUserAsync(newUser); 
+        }
     }
 
     public async Task<IEnumerable<User>> GetAllAsync()
@@ -43,8 +77,9 @@ public class UserService
         return await _userRepository.GetByEmailAsync(email);
     }
 
-    public void DeleteAccount(int userId)
+    public async Task DeleteAccount(int userId)
     {
-        _userRepository.DeleteAccountAsync(userId);
+        await _userRepository.DeleteByIdAsync(userId);
     }
+
 }
