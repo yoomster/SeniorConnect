@@ -17,7 +17,7 @@ namespace SeniorConnect.Application.Services
             throw new NotImplementedException();
         }
 
-        public async Task CreateActivity(Activity activity, int loggedInUserId)
+        public async Task CreateActivity(Activity activity)
         {
             Activity newActivity = new(
                 title: activity.Title,
@@ -32,8 +32,6 @@ namespace SeniorConnect.Application.Services
                 city: activity.City,
                 country: activity.Country
                 );
-
-            newActivity.AssignHostUser(loggedInUserId);
 
             await _activityRepository.CreateActivityAsync(newActivity);
         }
@@ -62,8 +60,7 @@ namespace SeniorConnect.Application.Services
                 houseNumber: activity.HouseNumber,
                 zipcode: activity.Zipcode,
                 city: activity.City,
-                country: activity.Country,
-                hostUserId: activity.HostUserId);
+                country: activity.Country);
 
             await _activityRepository.UpdateActivityAsync(changedActivity);
         }

@@ -36,7 +36,6 @@ namespace SeniorConnect.DataAccesLibrary
                 command.Parameters.AddWithValue("@Zipcode", activity.Zipcode);
                 command.Parameters.AddWithValue("@City", activity.City);
                 command.Parameters.AddWithValue("@Country", activity.Country);
-                command.Parameters.AddWithValue("@HostUserId", activity.HostUserId);
 
 
                 var result = await command.ExecuteScalarAsync();
@@ -68,7 +67,6 @@ namespace SeniorConnect.DataAccesLibrary
                         zipcode: reader.GetString(9),
                         city: reader.GetString(10),
                         country: reader.GetString(11),
-                        hostUserId: reader.GetInt32(12)
                         ) );
                 }
             }
@@ -103,7 +101,6 @@ namespace SeniorConnect.DataAccesLibrary
                         zipcode: reader.GetString(9),
                         city: reader.GetString(10),
                         country: reader.GetString(11),
-                        hostUserId: reader.GetInt32(12)
                         );
                     }
                 }

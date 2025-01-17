@@ -42,8 +42,7 @@ public class Activity
         string houseNumber,
         string zipcode,
         string city,
-        string country,
-        int hostUserId)
+        string country)
     {
         Id = id;
         Title = title;
@@ -57,7 +56,6 @@ public class Activity
         Zipcode = zipcode;
         City = city;
         Country = country;
-        HostUserId = hostUserId;
     }
 
     private void ValidateInputs(DateOnly date, TimeOnly startTime, TimeOnly endTime, int maxParticipants)
@@ -87,10 +85,4 @@ public class Activity
     public  string Country { get; init; }
     public int HostUserId{ get; private set; }
 
-    public void AssignHostUser(int hostUserId)
-    {
-        //if (HostUserId != null)
-        //    throw new InvalidOperationException("HostUserId has already been assigned.");
-        HostUserId = hostUserId;
-    }
 }

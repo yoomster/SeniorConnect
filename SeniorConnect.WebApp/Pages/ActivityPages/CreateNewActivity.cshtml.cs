@@ -10,12 +10,10 @@ namespace SeniorConnect.WebApp.Pages.ActivityPages
     public class CreateNewActivityModel : PageModel
     {
         //private readonly IActivityRepository _activityRepository;
-        private readonly IUserRepository _userRepository;
         private readonly ActivityService _activityService;
-        public CreateNewActivityModel(IUserRepository userRepository, ActivityService activityService)
+        public CreateNewActivityModel(ActivityService activityService)
         {
             //_activityRepository = activityRepository;
-            _userRepository = userRepository;
             _activityService = activityService;
         }
 
@@ -41,7 +39,7 @@ namespace SeniorConnect.WebApp.Pages.ActivityPages
                 try
                 {
                     var activityEntity = ActivityFormModel.ToActivityEntity();
-                    await _activityService.CreateActivity(activityEntity, loggedInUserId.Value);
+                    await _activityService.CreateActivity(activityEntity);
 
 
                     TempData["SuccessMessage"] = "activity registered successfully!";
