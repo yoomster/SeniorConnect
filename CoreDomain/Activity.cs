@@ -85,7 +85,7 @@ public class Activity
     public  string Zipcode { get; init; }
     public  string City { get; init; }
     public  string Country { get; init; }
-    public int HostUserId{ get; private set; } 
+    public int HostUserId{ get; private set; }
 
     public void AssignHostUser(int hostUserId)
     {

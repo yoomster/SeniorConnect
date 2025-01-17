@@ -36,7 +36,7 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 
                 List<Claim> claims = new List<Claim>();
                 claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
-                claims.Add(new Claim("id", user.Id.ToString()));
+                claims.Add(new Claim("Id", user.Id.ToString()));
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity));
@@ -52,12 +52,6 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
             }
 
             ModelState.AddModelError("", "Invalid username or password.");
-            return Page();
-        }
-
-        [Authorize]
-        public ActionResult Logout()
-        {
             return Page();
         }
     }
