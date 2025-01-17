@@ -221,6 +221,12 @@ namespace SeniorConnect.DataAccesLibrary
             }
         }
 
+        public async Task<bool> IsEmailDuplicate(string email)
+        {
+            var user = await GetByEmailAsync(email);
+            return user != null;
+        }
+
         //public async Task<bool> IsEmailRegistered(string email)
         //{
         //    string query = @"SELECT COUNT(*) 
