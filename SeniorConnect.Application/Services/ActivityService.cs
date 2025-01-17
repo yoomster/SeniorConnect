@@ -3,13 +3,18 @@ using SeniorConnect.Domain;
 
 namespace SeniorConnect.Application.Services
 {
-    public class ActivityService
+    public class ActivityService : IRegistrationValidator
     {
         private readonly IActivityRepository _activityRepository;
 
         public ActivityService(IActivityRepository activityRepository)
         {
             _activityRepository = activityRepository;
+        }
+        public Task<bool> CanRegister(User user)
+        {
+            //check if user is not already signed up
+            throw new NotImplementedException();
         }
 
         public async Task CreateActivity(Activity activity, int loggedInUserId)
@@ -65,13 +70,15 @@ namespace SeniorConnect.Application.Services
 
         public async Task DeleteActivity(int activityId)
         {
-            await _activityRepository.DeleteActivityAsync(activityId);
+            await _activityRepository.DeleteByIdAsync(activityId);
         }
 
         public static List<User> GetParticipants(int activityId)
         {
             throw new NotImplementedException();
         }
+
+
 
         //An activity cannot contain more than the maximum number of participants
     }

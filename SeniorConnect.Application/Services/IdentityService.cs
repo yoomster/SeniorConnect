@@ -1,5 +1,6 @@
 ﻿using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Domain;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -14,11 +15,6 @@ namespace SeniorConnect.Application.Services
             _userRepository = userRepository;
         }
        
-        //public async Task<int> GetLoggedInUserId()
-        //{
-        //    await _userRepository.
-        //}
-
         public async Task<User?> LoginAsync(string email, string password)
         {
             bool isValidUser = await ValidateUserAsync(email, password);
@@ -42,7 +38,7 @@ namespace SeniorConnect.Application.Services
 
         public void Logout()
         {
-            //static ISession.Clear();
+
         }
 
 
