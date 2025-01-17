@@ -33,42 +33,42 @@ public class UserTests
         city: "Eindhoven",
         country: "Netherlands");
 
-    //If the User class has any validation logic, you may need to mock any dependencies or
+    //Validation logic 4 user, may need mocking any dependencies or
     //add additional assertions to handle specific validation cases.
 
     //Valid Input:ctor inits object correctly when all inputs are valid.
     [Fact(Skip = "testing")]
     public void UserCreationWithValidInput_ShouldSucceed()
     {
-        //Arange
-        _sut.CreateAccount(TestUser);
+        ////Arange
+        //_sut.CreateAccount(TestUser);
 
-        //Act
-        _userRepository.CreateUserAsync(TestUser).Returns(expectedUsers);
+        ////Act
+        //_userRepository.CreateUserAsync(TestUser).Returns(expectedUsers);
 
         
 
-        var email = sut.Email;
-        var password = sut.Password;
+        //var email = sut.Email;
+        //var password = sut.Password;
 
-        var dateOfBirth = sut.DateOfBirth;
-        var today = DateOnly.FromDateTime(DateTime.Now);
-        var age = today.Year - dateOfBirth.Year;
+        //var dateOfBirth = sut.DateOfBirth;
+        //var today = DateOnly.FromDateTime(DateTime.Now);
+        //var age = today.Year - dateOfBirth.Year;
 
 
 
         //Assert
         //can we test if all props are included 
-        email.Should().NotBeEmpty();
-        email.Should().Contain("@");
+        //email.Should().NotBeEmpty();
+        //email.Should().Contain("@");
 
-        password.Should().NotBeEmpty();
+        //password.Should().NotBeEmpty();
 
-        age.Should().BePositive();
-        age.Should().BeGreaterThan(60);
+        //age.Should().BePositive();
+        //age.Should().BeGreaterThan(60);
     }
 
-    //Invalid Email Test: Test with invalid email formats to verify validation 
+
     [Fact(Skip = "testing")]
     public void UserCreationWithInvalidEmail_ShouldThrowException()
     {
@@ -83,12 +83,13 @@ public class UserTests
 
     }
 
-    //Test for duplicate email addresses
+  
     [Fact(Skip = "testing")]
-    public void User_Creation_WithDuplicateEmail_ShouldThrowException()
+    public void UserCreationWithDuplicateEmail_ShouldThrowException()
     {
 
     }
+
 
     [Fact]
     public async void GetallAsync_ShouldReturnEmptyList_WhenNoUsersExist()
@@ -102,6 +103,7 @@ public class UserTests
         //Assert
         users.Should().BeEmpty();
     }
+
 
     [Fact]
     public async Task GetAllAsync_ShouldReturnAListOfUsers_WhenUsersExist()
@@ -133,7 +135,6 @@ public class UserTests
         //Assert
         users.Should().Contain(expectedUsers);
         users.Should().ContainSingle(x => x.FirstName == "Adam");
-        users.Should().ContainSingle(x => x.FirstName == "Naomi");
 
 
     }

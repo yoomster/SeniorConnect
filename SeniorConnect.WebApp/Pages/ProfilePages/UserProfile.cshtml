@@ -1,0 +1,49 @@
+﻿@page
+
+@model SeniorConnect.WebApp.Pages.ProfilePages.UserProfileModel
+@{
+}
+
+@{
+    ViewData["Title"] = "Mijn Profiel";
+}
+
+<header class="content-header">@ViewData["Title"]</header>
+<div class="profile-container">
+    <form method="post">
+        <div class="form-group">
+            <label for="FirstName">Voornaam:</label>
+            <input id="FirstName" name="FirstName" value="@Model.User.FirstName" readonly />
+        </div>
+        <div class="form-group">
+            <label for="LastName">Achternaam:</label>
+            <input id="LastName" name="LastName" value="@Model.User.LastName" readonly />
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input id="Email" name="Email" value="@Model.User.Email" readonly />
+        </div>
+        <div class="form-group">
+            <label for="StreetName">Straat:</label>
+            <input id="StreetName" name="StreetName" value="@Model.User.StreetName" />
+        </div>
+        <div class="form-group">
+            <label for="HouseNumber">Huisnummer:</label>
+            <input id="HouseNumber" name="HouseNumber" value="@Model.User.HouseNumber" />
+        </div>
+        <div class="form-group">
+            <label for="Zipcode">Postcode:</label>
+            <input id="Zipcode" name="Zipcode" value="@Model.User.Zipcode" />
+        </div>
+        <div class="form-group">
+            <label for="City">Woonplaats:</label>
+            <input id="City" name="City" value="@Model.User.City" />
+        </div>
+        <div class="form-group">
+            <label for="Country">Land:</label>
+            <input id="Country" name="Country" value="@Model.User.Country" />
+        </div>
+        <button type="submit" class="btn btn-primary">Opslaan</button>
+    </form>
+</div>
+

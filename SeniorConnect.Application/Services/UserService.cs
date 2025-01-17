@@ -67,12 +67,12 @@ public class UserService : IRegistrationValidator
         return await _userRepository.GetAllAsync();
     }
 
-    public async Task<User> GetInfoById(int id)
+    public async Task<User> GetById(int id)
     {
         return await _userRepository.GetByIdAsync(id);
     }
 
-    public async Task<User> GetInfoByEmail(string email)
+    public async Task<User> GetByEmail(string email)
     {
         return await _userRepository.GetByEmailAsync(email);
     }

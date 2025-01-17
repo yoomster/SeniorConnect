@@ -84,6 +84,48 @@ namespace SeniorConnect.DataAccesLibrary
             return null; // Return null if no user found
         }
 
+        public async Task<User?> GetByIdAsync(int id)
+        {
+            string query = @"SELECT * FROM [dbo].[Users] 
+                          WHERE [UserId] = @UserId";
+
+            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@UserId", id);
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        var user = new User(
+                            firstName: reader.GetString(1),
+                            lastName: reader.GetString(2),
+                            email: reader.GetString(3),
+                            password: reader.GetString(4),
+                            dateOfBirth: DateOnly.FromDateTime(reader.GetDateTime(5)),
+                            gender: reader.GetString(6)[0],
+                            origin: reader.GetString(7),
+                            maritalStatus: (MaritalEnum)reader.GetByte(8),
+                            streetName: reader.GetString(10),
+                            houseNumber: reader.GetString(11),
+                            zipcode: reader.GetString(12),
+                            city: reader.GetString(13),
+                            country: reader.GetString(14)
+                        )
+                        {
+                            Id = reader.GetInt32(0),
+                            DateOfRegistration = DateOnly.FromDateTime(reader.GetDateTime(9)),
+                        };
+
+                        return user;
+                    }
+                }
+            }
+            return null; // Return null if no user found
+        }
+
+
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             string query = @"SELECT * FROM [dbo].[Users]";

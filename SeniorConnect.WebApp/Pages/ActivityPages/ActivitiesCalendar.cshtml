@@ -7,10 +7,11 @@
 @{
     ViewData["Title"] = "Activiteiten Agenda";
 }
-<a href="/ActivityPages/CreateNewActivity" class="btn btn-primary mb-3">Nieuwe Activiteit Hosten</a>
 
 @if (Model.Activities != null && Model.Activities.Count() > 0)
 {
+    <a href="/ActivityPages/CreateNewActivity" class="btn btn-primary mb-3">Nieuwe Activiteit Hosten</a>
+
     <table class="table">
         <thead>
             <tr>

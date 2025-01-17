@@ -43,7 +43,7 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 
 
          
-                return RedirectToPage("/ActivityPages/ActivitiesCalendar");
+                return RedirectToPage("/Index");
             }
             else if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
