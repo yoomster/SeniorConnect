@@ -18,10 +18,10 @@ namespace SeniorConnect.WebApp.Pages.ProfilePages
         {
             Users = await _userService.GetAllAsync();
 
-            foreach (var user in Users)
-            {
-                Console.WriteLine($"User: {user.Id}, {user.FirstName} {user.LastName}");
-            }
+            //foreach (var user in Users)
+            //{
+            //    Console.WriteLine($"User: {user.Id}, {user.FirstName} {user.LastName}");
+            //}
         }
     }
 }

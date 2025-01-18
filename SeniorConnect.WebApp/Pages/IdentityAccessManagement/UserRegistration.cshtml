@@ -1,10 +1,25 @@
 ﻿@page
 @model SeniorConnect.WebApp.Pages.IdentityAccessManagement.UserRegistrationModel
+@using System.Linq
+
 @{
 }
+    @if (Model.DisplayMessages != null && Model.DisplayMessages.Any())
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var message in Model.DisplayMessages)
+                {
+                    <li>@message</li>
+                }
+            </ul>
+        </div>
+    }
+
 <section class="login-container">
     <h1>Registreer als nieuwe gebruiker</h1>
-    <form method="POST">
+    <form method="POST" asp-antiforgery="true" id="registrationForm">
+        <validation-summary class="validation-summary" asp-validation-summary="All"></validation-summary
         <div class="form-group">
             <label asp-for="UserFormModel.FirstName">Voornaam: </label>
             <input asp-for="UserFormModel.FirstName" class="form-control" />
@@ -95,12 +110,7 @@
         <button type="submit" class="btn">Registreer</button>
     </form>
 
-    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-    {
-        <div class="alert alert-danger">
-            @Model.ErrorMessage
-        </div>
-    }
+    <partial name="_ValidationScriptsPartial" />
 
 </section>
 

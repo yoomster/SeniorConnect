@@ -66,7 +66,7 @@ namespace SeniorConnect.DataAccesLibrary
                         houseNumber: reader.GetString(8),
                         zipcode: reader.GetString(9),
                         city: reader.GetString(10),
-                        country: reader.GetString(11),
+                        country: reader.GetString(11)
                         ) );
                 }
             }
@@ -100,7 +100,7 @@ namespace SeniorConnect.DataAccesLibrary
                         houseNumber: reader.GetString(8),
                         zipcode: reader.GetString(9),
                         city: reader.GetString(10),
-                        country: reader.GetString(11),
+                        country: reader.GetString(11)
                         );
                     }
                 }

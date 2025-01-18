@@ -2,44 +2,22 @@
 using SeniorConnect.Domain;
 
 namespace SeniorConnect.Application.Services;
-public class UserService : IRegistrationValidator
+public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IValidator _validator;
 
-    public UserService(IUserRepository userRepository)
+    public UserService(IUserRepository userRepository, IValidator validator)
     {
         _userRepository = userRepository;
+        _validator = validator;
     }
 
-    public async Task<bool> CanRegister(User user)
+    public async Task<ValidationResult> CreateAccount(User user)
     {
-        bool output = true;
-        bool isEmailDuplicate = await IsEmailDuplicate(user.Email);
-        var minimumDateOfBirth = DateTime.Now.AddYears(-60).Date;
+        var validationResult = await _validator.IsValid(user);
 
-        if (isEmailDuplicate)
-        {
-            output = false;
-            throw new InvalidOperationException("Email is al geregistreerd.");
-        }
-        else if (user.DateOfBirth > DateOnly.FromDateTime(minimumDateOfBirth))
-        {
-            output = false;
-            throw new ArgumentException("U moet minimaal 60 jaar oud zijn om bij ons in te schrijven.");
-        }
-        return output;
-    }
-
-    public async Task<bool> IsEmailDuplicate(string email)
-    {
-        var user = await _userRepository.GetByEmailAsync(email);
-        return user != null;
-    }
-
-    public async Task CreateAccount(User user)
-    {
-        
-        if (await CanRegister(user))
+        if (validationResult.IsSuccess)
         {
             var hashedPassword = PasswordHashing.HashPassword(user.Password);
 
@@ -60,6 +38,8 @@ public class UserService : IRegistrationValidator
                 );
             await _userRepository.CreateUserAsync(newUser); 
         }
+        return validationResult;
+
     }
 
     public async Task<IEnumerable<User>> GetAllAsync()

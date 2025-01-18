@@ -26,39 +26,38 @@ namespace SeniorConnect.WebApp.Models
         [DataType(DataType.Password)]
         public string Password { get; init; }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Bevestig uw wachtwoord")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Wachtwoorden komen niet overeen.")]
         public string ConfirmPassword { get; init; }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Geboortedatum is verplicht")]
         [DataType(DataType.Date)]
-        //[MinAge(60, ErrorMessage = "User must be at least 60 years old.")] // LOOK INTO 
         public DateOnly DateOfBirth { get; set; }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Selecteer uw geslacht")]
         public char Gender { get; set; }
-        
-        [Required(ErrorMessage = "Required field!")]
+
+        [Required(ErrorMessage = "Selecteer een optie")]
         public string Origin { get; set; }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Selecteer uw burgerlijke staat")]
         public MaritalEnum MaritalStatus { get; set; }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Straat is verplicht")]
         public string StreetName { get; set; }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Huisnummer is verplicht")]
         public string HouseNumber { get; set; }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Postcode is verplicht")]
         [RegularExpression(@"^\d{4}\s?[A-Z]{2}$", ErrorMessage = "Invalid Zipcode format.")]
         public string Zipcode { get; set; }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Stad is verplicht")]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "Required field!")]
+        [Required(ErrorMessage = "Land is verplicht")]
         public string Country { get; set; }
     }
 }

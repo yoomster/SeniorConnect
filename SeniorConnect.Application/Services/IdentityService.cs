@@ -36,9 +36,9 @@ namespace SeniorConnect.Application.Services
             return user.Password == hashedPassword;
         }
 
-        public void Logout()
+        public async Task<bool> Logout(int id)
         {
-
+            return true;
         }
 
 

@@ -3,6 +3,7 @@ using SeniorConnect.DataAccessLibrary;
 using SeniorConnect.Application.Services;
 using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Domain;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddInfrastructure(); 
 builder.Services.AddScoped<IdentityService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<IValidator, UserValidator>();
 //builder.Services.AddScoped<ProfileService>();
 builder.Services.AddScoped<ActivityService>();
 builder.Services.AddHttpContextAccessor();

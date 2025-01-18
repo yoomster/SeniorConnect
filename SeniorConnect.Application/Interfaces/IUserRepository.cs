@@ -16,4 +16,6 @@ public interface IUserRepository
 
     Task<bool> DeleteByIdAsync(int userId);
 
+    Task<bool> IsEmailDuplicate(string email);
+
 }
