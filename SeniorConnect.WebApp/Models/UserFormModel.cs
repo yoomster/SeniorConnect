@@ -51,7 +51,7 @@ namespace SeniorConnect.WebApp.Models
         public string HouseNumber { get; set; }
 
         [Required(ErrorMessage = "Postcode is verplicht")]
-        [RegularExpression(@"^\d{4}\s?[A-Z]{2}$", ErrorMessage = "Invalid Zipcode format.")]
+        [RegularExpression(@"^\d{4}\s?[A-Z]{2}$", ErrorMessage = "Postcode format incorrect.")]
         public string Zipcode { get; set; }
 
         [Required(ErrorMessage = "Stad is verplicht")]

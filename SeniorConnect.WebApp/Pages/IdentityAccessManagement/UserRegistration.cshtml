@@ -1,65 +1,59 @@
 ﻿@page
 @model SeniorConnect.WebApp.Pages.IdentityAccessManagement.UserRegistrationModel
-@using System.Linq
-
 @{
+    ViewData["Title"] = "Registreren";
 }
-    @if (Model.DisplayMessages != null && Model.DisplayMessages.Any())
-    {
-        <div class="alert alert-danger">
-            <ul>
-                @foreach (var message in Model.DisplayMessages)
-                {
-                    <li>@message</li>
-                }
-            </ul>
-        </div>
-    }
+<header class="content-header">@ViewData["Title"]</header>
 
-<section class="login-container">
-    <h1>Registreer als nieuwe gebruiker</h1>
-    <form method="POST" asp-antiforgery="true" id="registrationForm">
-        <validation-summary class="validation-summary" asp-validation-summary="All"></validation-summary
+<div class="registration-container">
+    <form method="post">
         <div class="form-group">
-            <label asp-for="UserFormModel.FirstName">Voornaam: </label>
+            <label asp-for="UserFormModel.FirstName">Voornaam</label>
             <input asp-for="UserFormModel.FirstName" class="form-control" />
-            <span asp-validation-for="UserFormModel.FirstName" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.FirstName" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.LastName">Achternaam: </label>
+            <label asp-for="UserFormModel.LastName">Achternaam</label>
             <input asp-for="UserFormModel.LastName" class="form-control" />
-            <span asp-validation-for="UserFormModel.LastName" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.LastName" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.Email">Email: </label>
+            <label asp-for="UserFormModel.Email"></label>
             <input asp-for="UserFormModel.Email" class="form-control" />
-            <span asp-validation-for="UserFormModel.Email" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.Email" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.Password">Wachtwoord: </label>
+            <label asp-for="UserFormModel.Password">Wachtwoord</label>
             <input asp-for="UserFormModel.Password" class="form-control" type="password" />
-            <span asp-validation-for="UserFormModel.Password" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.Password" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.ConfirmPassword">Herhaal wachtwoord: </label>
+            <label asp-for="UserFormModel.ConfirmPassword">Herhaal wachtwoord</label>
             <input asp-for="UserFormModel.ConfirmPassword" class="form-control" type="password" />
-            <span asp-validation-for="UserFormModel.ConfirmPassword" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.ConfirmPassword" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.DateOfBirth">Geboortedatum: </label>
+            <label asp-for="UserFormModel.DateOfBirth">Geboortedag</label>
             <input asp-for="UserFormModel.DateOfBirth" class="form-control" type="date" />
-            <span asp-validation-for="UserFormModel.DateOfBirth" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.DateOfBirth" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.Gender">Geslacht: </label>
+            <label asp-for="UserFormModel.Gender">Geslacht</label>
             <select asp-for="UserFormModel.Gender" class="form-control">
-                <option value="">Selecteer uw geslacht</option>
+                <option value="">Selecteer</option>
                 <option value="M">Man</option>
-                <option value="F">Vrouw</option>
-                <option value="N">Zeg ik liever niet</option>
+                <option value="V">Vrouw</option>
+                <option value="O">Overig</option>
             </select>
-            <span asp-validation-for="UserFormModel.Gender" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.Gender" class="text-danger"></span>
         </div>
+
         <div class="form-group">
             <label asp-for="UserFormModel.Origin">Hoe hoorde u van ons: </label>
             <select asp-for="UserFormModel.Origin" class="form-control">
@@ -71,46 +65,62 @@
             </select>
             <span asp-validation-for="UserFormModel.Origin" class="error-message"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.MaritalStatus">Burgerlijke staat: </label>
+            <label asp-for="UserFormModel.MaritalStatus">Burgelijke staat</label>
             <select asp-for="UserFormModel.MaritalStatus" class="form-control">
-                <option value="">Selecteer uw burgerlijke staat</option>
+                <option value="">Selecteer</option>
                 <option value="Single">Single</option>
                 <option value="Married">Getrouwd</option>
                 <option value="Divorced">Gescheiden</option>
-                <option value="Widowed">Weduwe</option>
+                <option value="Widowed">Weduwnaar/Weduwe</option>
             </select>
-            <span asp-validation-for="UserFormModel.MaritalStatus" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.MaritalStatus" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.StreetName">Straatnaam: </label>
+            <label asp-for="UserFormModel.StreetName">Straatnaam</label>
             <input asp-for="UserFormModel.StreetName" class="form-control" />
-            <span asp-validation-for="UserFormModel.StreetName" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.StreetName" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.HouseNumber">Huisnummer: </label>
+            <label asp-for="UserFormModel.HouseNumber">Huisnummer</label>
             <input asp-for="UserFormModel.HouseNumber" class="form-control" />
-            <span asp-validation-for="UserFormModel.HouseNumber" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.HouseNumber" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.Zipcode">Postcode: </label>
+            <label asp-for="UserFormModel.Zipcode">Postcode</label>
             <input asp-for="UserFormModel.Zipcode" class="form-control" />
-            <span asp-validation-for="UserFormModel.Zipcode" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.Zipcode" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.City">Stad: </label>
+            <label asp-for="UserFormModel.City">Stad</label>
             <input asp-for="UserFormModel.City" class="form-control" />
-            <span asp-validation-for="UserFormModel.City" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.City" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="UserFormModel.Country">Land: </label>
+            <label asp-for="UserFormModel.Country">Land</label>
             <input asp-for="UserFormModel.Country" class="form-control" />
-            <span asp-validation-for="UserFormModel.Country" class="error-message"></span>
+            <span asp-validation-for="UserFormModel.Country" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn">Registreer</button>
+
+        @if (Model.ErrorMessages != null && Model.ErrorMessages.Any())
+        {
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach (var errorMessage in Model.ErrorMessages)
+                    {
+                        <li>@errorMessage</li>
+                    }
+                </ul>
+            </div>
+        }
+
+
+        <button type="submit" class="btn btn-primary">Registreren</button>
     </form>
-
-    <partial name="_ValidationScriptsPartial" />
-
-</section>
-
+</div>

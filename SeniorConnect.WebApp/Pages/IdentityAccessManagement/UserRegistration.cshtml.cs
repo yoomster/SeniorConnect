@@ -15,13 +15,14 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
         public UserRegistrationModel(UserService userService)
         {
             _userService = userService;
-            DisplayMessages = new List<string>();
+            ErrorMessages = new List<string>();
         }
 
         [BindProperty]
         public UserFormModel UserFormModel { get; set; }
 
-        public List<string> DisplayMessages { get; set; }
+        public List<string> ErrorMessages { get; set; }
+
 
         public void OnGet()
         {
@@ -34,28 +35,36 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
                 return Page();
             }
 
+            //try
+            //{
+            //    var userEntity = UserFormModel.ToUserEntity();
+            //    var result = await _userService.CreateAccount(userEntity);
+
+            //    if (!result.IsSuccess)
+            //    {
+            //        ErrorMessages = result.Messages;
+            //        return Page(); 
+            //    }
+
+            //    return RedirectToPage("Login");
+                
+            //}
             try
             {
                 var userEntity = UserFormModel.ToUserEntity();
-                var result = await _userService.CreateAccount(userEntity);
+                var success = await _userService.CreateAccount(userEntity);
 
-                if (!result.IsSuccess)
+                if (success.IsSuccess)
                 {
-                    DisplayMessages = result.Messages;
-                    return Page(); 
+                    return RedirectToPage("/Index");
                 }
 
-                return RedirectToPage("Login");
-                
-            }
-            catch (ArgumentException ex)
-            {
-                DisplayMessages.Add(ex.Message); 
+                ErrorMessages = success.Messages;
             }
 
             catch (Exception ex)
             {
-                DisplayMessages.Add(ex.Message);
+                ErrorMessages.Add(ex.Message);
             }
 
             return Page();
