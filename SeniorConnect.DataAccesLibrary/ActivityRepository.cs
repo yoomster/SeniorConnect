@@ -22,7 +22,7 @@ namespace SeniorConnect.DataAccesLibrary
                 (@Title, @Description, @Date, @StartTime, @EndTime, @MaxParticipants, @StreetName, @HouseNumber, @Zipcode, @City, @Country);
                 SELECT CAST(SCOPE_IDENTITY() AS INT);"; //gets new ActivityId
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var connection = await _dataAccess.OpenSqlConnectionAsync())
             using (var command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Title", activity.Title);
@@ -48,7 +48,7 @@ namespace SeniorConnect.DataAccesLibrary
 
             var activities = new List<Activity>();
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var connection = await _dataAccess.OpenSqlConnectionAsync())
             using (var command = new SqlCommand(query, connection))
             using (var reader = await command.ExecuteReaderAsync())
             {
@@ -79,7 +79,7 @@ namespace SeniorConnect.DataAccesLibrary
             string query = @"SELECT * FROM [dbo].[Activities]
                      WHERE [ActivityId] = @ActivityId";
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var connection = await _dataAccess.OpenSqlConnectionAsync())
             using (var command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@ActivityId", activityId);
@@ -125,7 +125,7 @@ namespace SeniorConnect.DataAccesLibrary
                          [Country] = @Country 
                      WHERE [ActivityId] = @ActivityId";
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var connection = await _dataAccess.OpenSqlConnectionAsync())
             using (var command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@ActivityId", activity.Id);
@@ -151,7 +151,7 @@ namespace SeniorConnect.DataAccesLibrary
             string query = @"DELETE FROM [dbo].[Activities] 
                      WHERE [ActivityId] = @ActivityId";
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var connection = await _dataAccess.OpenSqlConnectionAsync())
             using (var command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@ActivityId", activityId);

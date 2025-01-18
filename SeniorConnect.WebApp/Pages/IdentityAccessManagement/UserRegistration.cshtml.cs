@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using SeniorConnect.Application.Services;
 using SeniorConnect.Domain;
 using SeniorConnect.WebApp.Mapping;
@@ -15,13 +16,12 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
         public UserRegistrationModel(UserService userService)
         {
             _userService = userService;
-            ErrorMessages = new List<string>();
         }
 
         [BindProperty]
         public UserFormModel UserFormModel { get; set; }
 
-        public List<string> ErrorMessages { get; set; }
+        public List<string> ErrorMessages { get; set; } = new List<string>();
 
 
         public void OnGet()
@@ -34,21 +34,6 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
             {
                 return Page();
             }
-
-            //try
-            //{
-            //    var userEntity = UserFormModel.ToUserEntity();
-            //    var result = await _userService.CreateAccount(userEntity);
-
-            //    if (!result.IsSuccess)
-            //    {
-            //        ErrorMessages = result.Messages;
-            //        return Page(); 
-            //    }
-
-            //    return RedirectToPage("Login");
-                
-            //}
             try
             {
                 var userEntity = UserFormModel.ToUserEntity();
@@ -62,11 +47,10 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
                 ErrorMessages = success.Messages;
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                ErrorMessages.Add(ex.Message);
+                ErrorMessages.Add("Oops! Er gaat iets mis aan onze kant. We gaan hier mee aan de slag!");
             }
-
             return Page();
 
         }

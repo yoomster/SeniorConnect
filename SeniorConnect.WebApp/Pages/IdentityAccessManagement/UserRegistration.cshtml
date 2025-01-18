@@ -48,7 +48,7 @@
             <select asp-for="UserFormModel.Gender" class="form-control">
                 <option value="">Selecteer</option>
                 <option value="M">Man</option>
-                <option value="V">Vrouw</option>
+                <option value="F">Vrouw</option>
                 <option value="O">Overig</option>
             </select>
             <span asp-validation-for="UserFormModel.Gender" class="text-danger"></span>
@@ -119,8 +119,6 @@
                 </ul>
             </div>
         }
-
-
         <button type="submit" class="btn btn-primary">Registreren</button>
     </form>
 </div>

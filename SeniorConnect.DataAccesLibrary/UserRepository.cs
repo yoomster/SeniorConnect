@@ -21,7 +21,7 @@ namespace SeniorConnect.DataAccesLibrary
             (FirstName, LastName, Email, Password, DateOfBirth, Gender, Origin, MaritalStatus, DateOfRegistration, StreetName, HouseNumber, Zipcode, City, Country)
             VALUES(@FirstName, @LastName, @Email, @Password, @DateOfBirth, @Gender, @Origin, @MaritalStatus, @DateOfRegistration, @StreetName, @HouseNumber, @Zipcode, @City, @Country);"; 
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var connection = await _dataAccess.OpenSqlConnectionAsync())
             using (var command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@FirstName", user.FirstName);
@@ -47,7 +47,7 @@ namespace SeniorConnect.DataAccesLibrary
             string query = @"SELECT * FROM [dbo].[Users] 
                           WHERE [Email] = @Email";
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var connection = await _dataAccess.OpenSqlConnectionAsync())
             using (var command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Email", email);
@@ -89,7 +89,7 @@ namespace SeniorConnect.DataAccesLibrary
             string query = @"SELECT * FROM [dbo].[Users] 
                           WHERE [UserId] = @UserId";
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var connection = await _dataAccess.OpenSqlConnectionAsync())
             using (var command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@UserId", id);
@@ -132,7 +132,7 @@ namespace SeniorConnect.DataAccesLibrary
 
             var users = new List<User>();
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var connection = await _dataAccess.OpenSqlConnectionAsync())
             using (var command = new SqlCommand(query, connection))
             using (var reader = await command.ExecuteReaderAsync())
             {
@@ -182,7 +182,7 @@ namespace SeniorConnect.DataAccesLibrary
                          [Country] = @Country
                      WHERE [UserId] = @UserId";
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var connection = await _dataAccess.OpenSqlConnectionAsync())
             using (var command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@UserId", user.Id);
@@ -211,7 +211,7 @@ namespace SeniorConnect.DataAccesLibrary
             string query = @"DELETE FROM [dbo].[Users] 
                 WHERE [UserId] = @UserId";
 
-            using (var connection = await _dataAccess.OpenSqlConnection())
+            using (var connection = await _dataAccess.OpenSqlConnectionAsync())
             using (var command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@UserId", userId);

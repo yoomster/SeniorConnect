@@ -18,20 +18,16 @@ public class User
        string country)
     {
         if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
-            throw new ArgumentException("Invalid email address.", nameof(email));
+            throw new ArgumentException("Email format is incorrect, moet @ bevatten.");
 
         if (string.IsNullOrWhiteSpace(password) || password.Length < 6)
-            throw new ArgumentException("Password must be at least 6 characters long.", nameof(password));
+            throw new ArgumentException("Wachtwoord is incorrect, deze moet minstens 6 characters bevatten.");
 
         if (dateOfBirth >= DateOnly.FromDateTime(DateTime.Now))
-            throw new ArgumentException("Date of birth must be in the past.", nameof(dateOfBirth));
-
-        var minimumDateOfBirth = DateTime.Now.AddYears(-60).Date;
-        if (dateOfBirth > DateOnly.FromDateTime(minimumDateOfBirth))
-            throw new ArgumentException("User must be at least 60 y/o.", nameof(dateOfBirth));
+            throw new ArgumentException("Geboortedatum moet in het verleden zijn.");
 
         if (!new[] { 'M', 'F', 'O' }.Contains(gender))
-            throw new ArgumentException("Gender must be 'M', 'F', or 'O'.", nameof(gender));
+            throw new ArgumentException("Uw geslacht moet 'M', 'F', of 'O' zijn.");
 
         FirstName = firstName;
         LastName = lastName;

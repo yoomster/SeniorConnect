@@ -13,7 +13,6 @@ builder.Services.AddInfrastructure();
 builder.Services.AddScoped<IdentityService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<IValidator, UserValidator>();
-//builder.Services.AddScoped<ProfileService>();
 builder.Services.AddScoped<ActivityService>();
 builder.Services.AddHttpContextAccessor();
 
@@ -46,6 +45,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+    app.UseDeveloperExceptionPage();
+
 }
 
 app.UseHttpsRedirection();
@@ -58,6 +59,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-app.UseDeveloperExceptionPage();
 app.Run();
 
