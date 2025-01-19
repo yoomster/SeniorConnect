@@ -11,4 +11,10 @@ internal static class PasswordHashing
         var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
         return Convert.ToBase64String(hashedBytes);
     }
+
+    public static bool VerifyPasswordHash(string password, string dbPassword)
+    {
+        var hashedPassword = HashPassword(password);
+        return dbPassword == hashedPassword;
+    }
 }
