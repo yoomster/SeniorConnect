@@ -5,22 +5,23 @@ namespace SeniorConnect.Application.Services;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
-    private readonly IValidator _validator;
+    private readonly CompositionValidator _compositionValidator;
 
-    public UserService(IUserRepository userRepository, IValidator validator)
+    public UserService(IUserRepository userRepository, CompositionValidator compValidator)
     {
         _userRepository = userRepository;
-        _validator = validator;
+        _compositionValidator = compValidator;
     }
 
     public async Task<ValidationResult> CreateAccount(User user)
     {
-        var validationResult = await _validator.IsValid(user);
+        var validationResult = await _compositionValidator.IsValid(user);
 
         if (validationResult.IsSuccess)
         {
             var hashedPassword = PasswordHashing.HashPassword(user.Password);
 
+            //Must be recreated bcause psswrd & init; ?
             User newUser = new(
                     firstName: user.FirstName,
                     lastName: user.LastName,
@@ -36,10 +37,11 @@ public class UserService : IUserService
                     city: user.City,
                     country: user.Country
                 );
-            await _userRepository.CreateUserAsync(newUser); 
+            await _userRepository.CreateUserAsync(newUser);
+            return new ValidationResult { IsSuccess = true };
         }
-        return validationResult;
 
+        return validationResult;
     }
 
     public async Task<IEnumerable<User>> GetAllAsync()
