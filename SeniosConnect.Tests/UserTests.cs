@@ -3,7 +3,6 @@ using SeniorConnect.Application.Services;
 using SeniorConnect.Application.Interfaces;
 using NSubstitute;
 using SeniorConnect.Domain;
-using System.Collections.Generic;
 
 namespace SeniorConnect.Tests;
 
@@ -14,13 +13,24 @@ public class UserTests
 
     public UserTests()
     {
-        _sut = new UserService(_userRepository);
+        var ageValidator = new AgeValidator();
+        var passwordValidator = new PasswordStrengthValidator();
+        var emailValidator = new EmailValidator(_userRepository);
+
+        var compositionValidator = new CompositionValidator(new List<IValidator>
+        {
+            ageValidator,
+            passwordValidator,
+            emailValidator
+        });
+
+        _sut = new UserService(_userRepository, compositionValidator);
     }
 
     //Arrange
-    User TestUser = new User(
+    User user = new User(
         firstName: "Adam",
-        lastName: "Akil",
+        lastName: "Man",
         email: "aa@example.com",
         password: "Password123",
         dateOfBirth: new DateOnly(1955, 8, 20),
@@ -33,61 +43,36 @@ public class UserTests
         city: "Eindhoven",
         country: "Netherlands");
 
-    //Validation logic 4 user, may need mocking any dependencies or
-    //add additional assertions to handle specific validation cases.
 
-    //Valid Input:ctor inits object correctly when all inputs are valid.
-    [Fact(Skip = "testing")]
-    public void UserCreationWithValidInput_ShouldSucceed()
+    [Fact]
+    public async void UserCreationWithValidEmail_ShouldReturnSuccess_WhenEmailValidatorSucceed()
     {
-        ////Arange
-        //_sut.CreateAccount(TestUser);
+        //Arrange
+        _userRepository.IsEmailDuplicate(Arg.Any<string>()).Returns(false);
 
-        ////Act
-        //_userRepository.CreateUserAsync(TestUser).Returns(expectedUsers);
+        //Act
+        var result = await _sut.CreateAccount(user);
 
-        
+        //Assert
+        result.IsSuccess.Should().BeTrue();
+        result.Messages.Should().BeEmpty();
+    }
 
-        //var email = sut.Email;
-        //var password = sut.Password;
 
-        //var dateOfBirth = sut.DateOfBirth;
-        //var today = DateOnly.FromDateTime(DateTime.Now);
-        //var age = today.Year - dateOfBirth.Year;
+    [Fact]
+    public async void UserCreationWithDuplicateEmail_ShouldReturnUserFriendlyErrorMessage_WhenEmailValidatorFails()
+    {
+        //Arrange
+        _userRepository.IsEmailDuplicate(Arg.Any<string>()).Returns(true);
 
+        //Act 
+        var result = await _sut.CreateAccount(user);
 
 
         //Assert
-        //can we test if all props are included 
-        //email.Should().NotBeEmpty();
-        //email.Should().Contain("@");
-
-        //password.Should().NotBeEmpty();
-
-        //age.Should().BePositive();
-        //age.Should().BeGreaterThan(60);
-    }
-
-
-    [Fact(Skip = "testing")]
-    public void UserCreationWithInvalidEmail_ShouldThrowException()
-    {
-        ////    var invalidEmail = sut.Email.Remove(6);
-
-        ////    //Act (should be a method instead?)
-        ////    Action result = () => (invalidEmail);
-
-        //    //Assert
-        //    result.Should().Throw<ArgumentException>()
-        //        .WithMessage("Invalid email address.");
-
-    }
-
-  
-    [Fact(Skip = "testing")]
-    public void UserCreationWithDuplicateEmail_ShouldThrowException()
-    {
-
+        result.IsSuccess.Should().BeFalse();
+        result.Messages.Should().NotBeEmpty();
+        result.Messages.Should().Contain("Validator: Het opgegeven e-mailadres wordt al gebruikt.");
     }
 
 
@@ -111,20 +96,7 @@ public class UserTests
         //Arrange
         var expectedUsers = new[]
         {
-            new User(
-            firstName: "Adam",
-            lastName: "Akil",
-            email: "aa@example.com",
-            password: "Password123",
-            dateOfBirth: new DateOnly(1955, 8, 20),
-            gender: 'M',
-            origin: "Social Media",
-            maritalStatus: MaritalEnum.Married,
-            streetName: "Main Street",
-            houseNumber: "104",
-            zipcode: "5616TZ",
-            city: "Eindhoven",
-            country: "Netherlands")
+            user,
         };
 
         _userRepository.GetAllAsync().Returns(expectedUsers);
