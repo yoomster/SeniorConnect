@@ -15,9 +15,9 @@ public class UserTests
     {
         var ageValidator = new AgeValidator();
         var passwordValidator = new PasswordStrengthValidator();
-        var emailValidator = new EmailValidator(_userRepository);
+        var emailValidator = new EmailDuplicateValidator(_userRepository);
 
-        var compositionValidator = new CompositionValidator(new List<IValidator>
+        var compositionValidator = new CompositionRegisterValidator(new List<IValidator>
         {
             ageValidator,
             passwordValidator,

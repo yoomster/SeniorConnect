@@ -3,11 +3,11 @@ using SeniorConnect.Domain;
 
 namespace SeniorConnect.Application.Services
 {
-    public class CompositionValidator : IValidator
+    public class CompositionRegisterValidator : IValidator
     {
         private readonly IEnumerable<IValidator> _validators;
 
-        public CompositionValidator(IEnumerable<IValidator> validators)
+        public CompositionRegisterValidator(IEnumerable<IValidator> validators)
         {
             _validators = validators;
         }

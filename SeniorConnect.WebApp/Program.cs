@@ -15,9 +15,9 @@ builder.Services.AddScoped<IdentityService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ActivityService>();
 builder.Services.AddScoped<IValidator, AgeValidator>();
-builder.Services.AddScoped<IValidator, EmailValidator>();
+builder.Services.AddScoped<IValidator, EmailDuplicateValidator>();
 builder.Services.AddScoped<IValidator, PasswordStrengthValidator>();
-builder.Services.AddScoped<CompositionValidator>();
+builder.Services.AddScoped<CompositionRegisterValidator>();
 
 builder.Services.AddHttpContextAccessor();
 

@@ -5,9 +5,9 @@ namespace SeniorConnect.Application.Services;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
-    private readonly CompositionValidator _compositionValidator;
+    private readonly CompositionRegisterValidator _compositionValidator;
 
-    public UserService(IUserRepository userRepository, CompositionValidator compValidator)
+    public UserService(IUserRepository userRepository, CompositionRegisterValidator compValidator)
     {
         _userRepository = userRepository;
         _compositionValidator = compValidator;

@@ -19,10 +19,10 @@ namespace SeniorConnect.Application.Services
         }
     }
 
-    public class EmailValidator : IValidator
+    public class EmailDuplicateValidator : IValidator
     {
         private readonly IUserRepository _userRepo;
-        public EmailValidator(IUserRepository userRepo)
+        public EmailDuplicateValidator(IUserRepository userRepo)
         {
             _userRepo = userRepo;            
         }
