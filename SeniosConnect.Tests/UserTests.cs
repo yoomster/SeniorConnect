@@ -3,6 +3,7 @@ using SeniorConnect.Application.Services;
 using SeniorConnect.Application.Interfaces;
 using NSubstitute;
 using SeniorConnect.Domain;
+using SeniorConnect.Application.Validators;
 
 namespace SeniorConnect.Tests;
 
