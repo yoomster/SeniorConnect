@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.SqlClient;
 using SeniorConnect.Application.Services;
 using SeniorConnect.Domain;
 using SeniorConnect.WebApp.Mapping;
 using SeniorConnect.WebApp.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 {
@@ -41,7 +39,7 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
 
                 if (success.IsSuccess)
                 {
-                    return RedirectToPage("/Index");
+                    return RedirectToPage("/IdentityAccessManagement/Login");
                 }
 
                 ErrorMessages = success.Messages;

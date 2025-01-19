@@ -22,7 +22,7 @@ namespace SeniorConnect.WebApp.Models
         public string Email { get; init; }
 
         [Required(ErrorMessage = "Wachtwoord is verplicht.")]
-        [MinLength(5, ErrorMessage = "Wachtwoord moet minstens 6 tekens bevatten.")]
+        [MinLength(1, ErrorMessage = "Wachtwoord moet minstens 6 tekens bevatten.")]
         [DataType(DataType.Password)]
         public string Password { get; init; }
 

@@ -20,7 +20,7 @@ public class User
         if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
             throw new ArgumentException("Email format is incorrect, moet @ bevatten.");
 
-        if (string.IsNullOrWhiteSpace(password) || password.Length < 6)
+        if (string.IsNullOrWhiteSpace(password))
             throw new ArgumentException("Wachtwoord is incorrect, deze moet minstens 6 characters bevatten.");
 
         if (dateOfBirth >= DateOnly.FromDateTime(DateTime.Now))

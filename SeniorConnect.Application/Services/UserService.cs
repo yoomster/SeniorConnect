@@ -21,7 +21,6 @@ public class UserService : IUserService
         {
             var hashedPassword = PasswordHashing.HashPassword(user.Password);
 
-            //Must be recreated bcause psswrd & init; ?
             User newUser = new(
                     firstName: user.FirstName,
                     lastName: user.LastName,
