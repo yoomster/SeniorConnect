@@ -1,5 +1,5 @@
 ﻿INSERT INTO [dbo].[Activities] 
-([Name], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], [StreetName], [HouseNumber], [Zipcode], [City], [Country])
+([Title], [Description], [Date], [StartTime], [EndTime], [MaxParticipants], [StreetName], [HouseNumber], [Zipcode], [City], [Country])
 VALUES
 ('Kunst en Cultuur Workshop', 'Een creatieve workshop waar senioren kunnen schilderen en beeldhouwen.', '2025-02-05', '10:00:00', '12:30:00', 15, 'Kunstlaan', 12, '5611AA', 'Eindhoven', 'Nederland'),
 ('Wandeling in het Park', 'Een begeleide wandeling door het stadspark, inclusief koffie en thee.', '2025-02-07', '14:00:00', '16:00:00', 20, 'Parkstraat', 5, '5615AB', 'Eindhoven', 'Nederland'),

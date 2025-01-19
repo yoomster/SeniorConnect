@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace SeniorConnect.Application.Services;
+namespace SeniorConnect.Application.Utilities;
 
 internal static class PasswordHashing
 {

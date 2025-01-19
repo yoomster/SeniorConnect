@@ -1,7 +1,8 @@
 ﻿using SeniorConnect.Application.Interfaces;
+using SeniorConnect.Application.Utilities;
 using SeniorConnect.Domain;
 
-namespace SeniorConnect.Application.Services
+namespace SeniorConnect.Application.Validators
 {
     public class AgeValidator : IValidator
     {
@@ -24,7 +25,7 @@ namespace SeniorConnect.Application.Services
         private readonly IUserRepository _userRepo;
         public EmailDuplicateValidator(IUserRepository userRepo)
         {
-            _userRepo = userRepo;            
+            _userRepo = userRepo;
         }
 
         public async Task<ValidationResult> IsValid(User user)

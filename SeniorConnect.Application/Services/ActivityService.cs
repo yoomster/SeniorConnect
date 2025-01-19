@@ -76,7 +76,5 @@ namespace SeniorConnect.Application.Services
         }
 
 
-
-        //An activity cannot contain more than the maximum number of participants
     }
 }

@@ -1,4 +1,6 @@
 ﻿using SeniorConnect.Application.Interfaces;
+using SeniorConnect.Application.Utilities;
+using SeniorConnect.Application.Validators;
 using SeniorConnect.Domain;
 
 namespace SeniorConnect.Application.Services;

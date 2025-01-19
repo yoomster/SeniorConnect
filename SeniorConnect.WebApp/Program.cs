@@ -5,6 +5,7 @@ using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Domain;
 using Microsoft.AspNetCore.Identity;
 using System.Reflection.PortableExecutable;
+using SeniorConnect.Application.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 

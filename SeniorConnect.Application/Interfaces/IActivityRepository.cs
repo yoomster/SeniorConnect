@@ -12,9 +12,4 @@ public interface IActivityRepository
     Task<bool> UpdateActivityAsync(Activity activity);
 
     Task<bool> DeleteByIdAsync(int activityId);
-
-    //Task<List<Activity>> GetActivitiesByDateAsync(DateOnly date);
-    //Task<List<Activity>> GetActivitiesByCityAsync(string city);
-    //Task<List<Activity>> GetActivitiesByHostAsync(int hostUserId);
-
 }

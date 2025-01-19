@@ -1,4 +1,4 @@
-﻿using SeniorConnect.Application.Services;
+﻿using SeniorConnect.Application.Utilities;
 using SeniorConnect.Domain;
 
 namespace SeniorConnect.Application.Interfaces

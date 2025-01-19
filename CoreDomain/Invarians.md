@@ -8,10 +8,6 @@
 ## Activity invariants
 - An activity cannot contain more than the maximum number of participants
 - A reservation cannot be canceled for free less than 24 hours before the session starts
-- An activity cannot find place at a location that's already booked for another activity
-
-## Location invariants
-- A location cannot have two or more overlapping activities
 
 
 ## Activity coordinator invariants
@@ -21,6 +17,3 @@
 ## Participant
 - A participant cannot reserve overlapping activities
 
-## Host
-- Host cannot delete account if there are hosting upcoming activities
-- Cannot host if it conflicts with another hosted activity
