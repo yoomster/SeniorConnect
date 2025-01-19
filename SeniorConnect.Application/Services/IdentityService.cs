@@ -1,8 +1,5 @@
 ﻿using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Domain;
-using System.Net.Http;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace SeniorConnect.Application.Services
 {
@@ -10,30 +7,44 @@ namespace SeniorConnect.Application.Services
     {
         private readonly IUserRepository _userRepository;
 
+
         public IdentityService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
-       
-        public async Task<User?> LoginAsync(string email, string password)
-        {
-            bool isValidUser = await ValidateUserAsync(email, password);
 
-            if (isValidUser)
-                return await _userRepository.GetByEmailAsync(email);
-            else 
-                return null;
-        }
-
-        public async Task<bool> ValidateUserAsync(string email, string password)
+        public async Task<User> LoginAsync(string email, string password)
         {
             var user = await _userRepository.GetByEmailAsync(email);
 
             if (user == null)
-                return false;
+            {
+                throw new UnauthorizedAccessException("Onjuiste inloggegevens");
+            }
+            var validPassword = PasswordHashing.VerifyPasswordHash(password, user.Password);
+            if (!validPassword)
+            {
+                throw new UnauthorizedAccessException("Onjuiste inloggegevens");
+            }
+            
+            return user;
+        }
 
-            var hashedPassword = PasswordHashing.HashPassword(password);
-            return user.Password == hashedPassword;
+
+
+        public async Task<bool> ValidateUserAsync(string email, string password)
+        {
+            bool result = true;
+
+            var user = await _userRepository.GetByEmailAsync(email);
+            var validPassword = PasswordHashing.VerifyPasswordHash(password, user.Password);
+
+            if (user == null || !validPassword)
+            {
+                result = false;
+            }
+
+            return result;
         }
 
         public async Task<bool> Logout(int id)
