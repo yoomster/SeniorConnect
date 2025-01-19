@@ -21,14 +21,14 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public string ErrorMessage { get; set; }
-
+        public List<string> ErrorMessages { get; set; } = new List<string>();
         private readonly IdentityService _identiyService;
 
         public LoginModel(IdentityService identiyService)
         {
             _identiyService = identiyService;
         }
+
         public void OnGet()
         {
             if (User.Identity.IsAuthenticated)
@@ -48,31 +48,28 @@ namespace SeniorConnect.WebApp.Pages.IdentityAccessManagement
             {
                 var user = await _identiyService.LoginAsync(email, password);
 
-                if (user != null)
-                {
-                    HttpContext.Session.SetInt32("UserId", user.Id);
+                HttpContext.Session.SetInt32("UserId", user.Id);
 
+                List<Claim> claims = new List<Claim>();
+                claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
+                claims.Add(new Claim("Id", user.Id.ToString()));
 
-                    List<Claim> claims = new List<Claim>();
-                    claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
-                    claims.Add(new Claim("Id", user.Id.ToString()));
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                await HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity)); 
 
-                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    await HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity)); 
-
-
-
-                    return RedirectToPage("/Index");
-                }
-
-                return Page();
+                return RedirectToPage("/Index");
+ 
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                ErrorMessages.Add(ex.Message);
             }
             catch (Exception)
             {
-                ErrorMessage = "Oops! Er gaat iets mis aan onze kant. We gaan hier mee aan de slag!";
+                ErrorMessages.Add("Oops! Er gaat iets mis aan onze kant. We gaan hier mee aan de slag!");
             }
             return Page();
 
-        }
+         }
     }
 }

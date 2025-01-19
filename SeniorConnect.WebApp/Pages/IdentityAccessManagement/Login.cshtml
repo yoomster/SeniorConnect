@@ -19,10 +19,15 @@
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
 
-        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        @if (Model.ErrorMessages != null && Model.ErrorMessages.Any())
         {
             <div class="alert alert-danger">
-                @Model.ErrorMessage
+                <ul>
+                    @foreach (var errorMessage in Model.ErrorMessages)
+                    {
+                        <li>@errorMessage</li>
+                    }
+                </ul>
             </div>
         }
 
