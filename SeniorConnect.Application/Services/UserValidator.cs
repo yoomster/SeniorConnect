@@ -1,10 +1,5 @@
 ﻿using SeniorConnect.Application.Interfaces;
 using SeniorConnect.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeniorConnect.Application.Services
 {
@@ -18,7 +13,7 @@ namespace SeniorConnect.Application.Services
             if (user.DateOfBirth > DateOnly.FromDateTime(minimumDateOfBirth))
             {
                 result.IsSuccess = false;
-                result.Messages.Add("U moet minimaal 60 jaar oud zijn om u in te schrijven.");
+                result.Messages.Add("Validator: U moet minimaal 60 jaar oud zijn om u in te schrijven.");
             }
             return result;
         }
@@ -39,7 +34,7 @@ namespace SeniorConnect.Application.Services
             if (await _userRepo.IsEmailDuplicate(user.Email))
             {
                 result.IsSuccess = false;
-                result.Messages.Add("Het opgegeven e-mailadres wordt al gebruikt.");
+                result.Messages.Add("Validator: Het opgegeven e-mailadres wordt al gebruikt.");
             }
 
             return result;
@@ -56,10 +51,12 @@ namespace SeniorConnect.Application.Services
             if (user.Password.Length < 6)
             {
                 result.IsSuccess = false;
-                result.Messages.Add("Wachtwoord moet min. 6 char lang zijn.");
+                result.Messages.Add("Validator: Wachtwoord moet min. 6 char lang zijn.");
             }
 
             return result;
         }
     }
 }
+
+
